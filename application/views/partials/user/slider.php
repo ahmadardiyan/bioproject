@@ -1,8 +1,3 @@
-
-<!--
-==================================================
-Slider Section Start
-================================================== -->
 <section id="hero-area">
 	<div class="container">
 		<div class="row">

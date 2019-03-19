@@ -27,11 +27,11 @@
 
 <body id="page-top">
 
-	<?php $this->load->view("admin/_partials/navbar.php") ?>
+	<?php $this->load->view("partials/admin/navbar.php") ?>
 
 	<div id="wrapper">
 
-		<?php $this->load->view("admin/_partials/sidebar.php") ?>
+		<?php $this->load->view("partials/admin/sidebar.php") ?>
 
 		<div id="content-wrapper">
 			

@@ -1,5 +1,3 @@
-	<?php  //$this->load->view("admin/_partials/breadcrumb.php") ?>
-
 	<!-- Icon Cards-->
 	<div class="row">
 		<div class="col-xl-3 col-sm-6 mb-3">

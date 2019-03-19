@@ -1,48 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    
-    <!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Bootstrap core CSS-->
-	<link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-	<!-- Template CSS Files
-        ================================================== -->
-	<!-- Bootstrap core CSS-->
-	<link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-	<!-- Twitter Bootstrs CSS -->
-	<link href="<?= base_url() ?>assets/bootstrap/bootstrap.min.css" rel=stylesheet>
-
-	<!-- Ionicons Fonts Css -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/ionicons/ionicons.min.css ">
-
-	<!-- animate css -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/animate-css/animate.css">
-
-	<!-- Hero area slider css-->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/slider/slider.css">
-
-	<!-- owl craousel css -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/owl-carousel/owl.carousel.css">
-
-	<link rel="stylesheet" href="<?= base_url() ?>assets/owl-carousel/owl.theme.css">
-
-	<!-- Fancybox -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/facncybox/jquery.fancybox.css">
-
-	<!-- template main css file -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css ">
-
-    <title><?=$judul?></title>
-
-</head>
-
-<body id="page-top">
 	
 <header id="top-bar" class="navbar-fixed-top animated-header">
 	<div class="container">
@@ -86,16 +41,29 @@
 			</div>
 		</nav>
 
-
-		</head>
 		<nav class="collapse navbar-collapse navbar-right" role="navigation">
 			<div class="main-menu">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="<?= base_url();?>login"> Sign in </a></li>
-
+					<li><a href="<?= base_url();?>logout"> Sign Out </a></li>
 				</ul>
 			</div>
 		</nav>
+
+		<!-- Profil Image/Logout -->
+		<!-- <ul class="navbar-nav collapse navbar-collapse navbar-right ml-auto">
+			<li class="nav-item dropdown no-arrow">
+				<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+				 aria-expanded="false">
+					<img src="<?=base_url()?>assets/images/profile/img3.png" alt="" class="rounded-circle">
+				</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+					<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+				</div>
+			</li>
+		</ul> -->
+		<!-- end Profil Image/Logout -->
+		
 		<!-- /main nav -->
 	</div>
 </header>

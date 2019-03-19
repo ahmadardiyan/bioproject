@@ -11,9 +11,9 @@ class Home extends CI_Controller
 	{
 		$data['judul'] = 'Bio Project'; //nanti bakalan jadi title di bagian head
 
-		$this->load->view('home/_partials/header',$data); 
+		$this->load->view('partials/user/header',$data); 
 		$this->load->view('home/homepage.php');
-		$this->load->view('home/_partials/footer');
+		$this->load->view('partials/user/footer');
 	}
 
 	public function about()

@@ -1,8 +1,3 @@
-<!--
-==================================================
-Footer Section Start
-================================================== 
--->
 <footer id="footer">
 	<div class="container">
 		<div class="col-md-8">
@@ -43,15 +38,10 @@ Footer Section Start
 			</ul>
 		</div>
 	</div>
-</footer> <!-- /#footer -->
+</footer>
 
-
-<?php // $this->load->view('templates/footer.php') ?>
-
-<!-- Template Javascript Files
-	================================================== -->
 <!-- jquery -->
-<script src="assets/jqurey/jquery.min.js"></script>
+<script src="assets/jquery/jquery.min.js"></script>
 <!-- Form Validation -->
 <script src="assets/form-validation/jquery.form.js"></script>
 <script src="assets/form-validation/jquery.validate.min.js"></script>
