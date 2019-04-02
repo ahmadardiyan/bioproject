@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 17 Mar 2019 pada 11.53
+-- Generation Time: 02 Apr 2019 pada 13.55
 -- Versi Server: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -82913,25 +82913,33 @@ INSERT INTO `kelurahan` (`id_kel`, `id_kec`, `nama_kel`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mahasiswa`
+-- Struktur dari tabel `member`
 --
 
-CREATE TABLE `mahasiswa` (
+CREATE TABLE `member` (
   `id_user` varchar(10) NOT NULL,
-  `nama_mahasiswa` int(30) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `tempat_lahir` int(4) NOT NULL,
+  `nama_member` varchar(30) NOT NULL,
+  `gender_member` varchar(10) NOT NULL,
+  `tempat_lahir` varchar(30) NOT NULL,
   `tanggal_lahir` date NOT NULL,
-  `alamat_mahasiswa` text NOT NULL,
+  `phone_member` varchar(15) NOT NULL,
+  `alamat` text NOT NULL,
   `id_kel` char(10) NOT NULL,
   `id_kec` char(7) NOT NULL,
   `id_kab` char(4) NOT NULL,
   `id_prov` char(2) NOT NULL,
-  `foto_profil` varchar(255) NOT NULL,
-  `deskripsi_mahasiswa` text NOT NULL,
+  `foto_member` varchar(255) NOT NULL,
+  `deskripsi_member` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modified_at` timestamp NULL DEFAULT NULL
+  `modified_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `member`
+--
+
+INSERT INTO `member` (`id_user`, `nama_member`, `gender_member`, `tempat_lahir`, `tanggal_lahir`, `phone_member`, `alamat`, `id_kel`, `id_kec`, `id_kab`, `id_prov`, `foto_member`, `deskripsi_member`, `created_at`, `modified_at`) VALUES
+('1', 'Ahmad Ardiyanto', 'Laki-laki', 'Magelang', '1996-12-22', '087834284756', 'Dusun Macanan RT 01/ RW 01', '', '5104030', '5104', '51', '5c9b387b16cb6.png', 'Aku hanyalah bukan adalah', '2019-03-27 08:59:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -82994,6 +83002,32 @@ CREATE TABLE `perusahaan` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `modified_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `portofolio`
+--
+
+CREATE TABLE `portofolio` (
+  `id_portofolio` varchar(13) NOT NULL,
+  `id_user` varchar(10) NOT NULL,
+  `judul` varchar(50) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `foto` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `portofolio`
+--
+
+INSERT INTO `portofolio` (`id_portofolio`, `id_user`, `judul`, `deskripsi`, `foto`, `created_at`, `modified_at`) VALUES
+('PRT1903280', '1', 'Ini Judul', 'dfsfds', '5c9c54eda63cb.jpg', '2019-03-28 05:00:29', NULL),
+('PRT1903280001', '1', 'fike2', 'revisi', '5c9f94acf2107.png', '2019-03-28 05:02:00', NULL),
+('PRT1903280002', '1', 'hahaha', '  hihihi', '5c9c5575c5aa3.jpg', '2019-03-28 05:02:45', NULL),
+('PRT1903300001', '1', 'baru', ' new   ', '5c9f95b0dedbe.jpg', '2019-03-30 16:13:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -83132,6 +83166,19 @@ ALTER TABLE `kecamatan`
 ALTER TABLE `kelurahan`
   ADD PRIMARY KEY (`id_kel`),
   ADD KEY `villages_district_id_index` (`id_kec`);
+
+--
+-- Indexes for table `member`
+--
+ALTER TABLE `member`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- Indexes for table `portofolio`
+--
+ALTER TABLE `portofolio`
+  ADD PRIMARY KEY (`id_portofolio`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `provinsi`
