@@ -9,7 +9,8 @@ class Home extends CI_Controller
 
 	public function index()
 	{
-		$data['judul'] = 'Bio Project'; //nanti bakalan jadi title di bagian head
+		$data['title'] = 'Bio Project'; //nanti bakalan jadi title di bagian head
+		$data['member']['foto_member'] = 'img3.png'; //sementara
 
 		$this->load->view('partials/user/header',$data); 
 		$this->load->view('home/homepage.php');

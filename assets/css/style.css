@@ -9,10 +9,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto Condensed", sans-serif;
 }
 
-h2 {
-  font-size: 26px;
-}
-
 p {
   font-family: "Roboto", sans-serif;
   line-height: 22px;
@@ -186,7 +182,7 @@ a:hover {
   margin-bottom: 0;
 }
 
-.navbar.navbar-default .navbar-toggle {
+.navbar .navbar-default .navbar-toggle {
   margin-top: 32px;
 }
 
@@ -673,7 +669,7 @@ figure figcaption p {
 }
 
 #blog-full-width {
-  padding: 40px 0 80px;
+  padding: 100px 0 20px;
 }
 
 article {
@@ -1211,7 +1207,7 @@ article {
 
 .team-member .team_designation {
   font-size: 13px;
-}
+} 
 
 .team-member h3 {
   color: #02bdd5;
@@ -1433,3 +1429,24 @@ cols    1     2      3      4      5
 px      68    160    252    344    436    */
 
 /*# sourceMappingURL=maps/style.css.map */
+
+/* CUSTOME CSS */
+.nav-profile{
+  /* height: 50px; */
+  margin-top : 50px;
+}
+
+/* portofolio */
+.detail-portofolio {
+	text-align: center;
+}
+
+.detail-portofolio h3 {
+	margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+	.detail-portofolio {
+		text-align: left;
+	}
+}

@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<!-- Bootstrap core CSS-->
-	<!-- <link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+	<link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Twitter Bootstrs CSS -->
 	<link rel=stylesheet href="<?= base_url() ?>assets/bootstrap/bootstrap.min.css">
@@ -33,9 +33,10 @@
 	<!-- template main css file -->
 	<link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css ">
 
-    <title><?=$judul?></title>
+    <title><?=$title?></title>
 
 </head>
 
 <body id="page-top">
+
 	<?php $this->load->view('partials/user/navbar')?>
