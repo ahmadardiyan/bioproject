@@ -16,9 +16,11 @@ $route['logout'] = 'auth/logout';
 $route['admin'] = 'admin/dashboard';
 
 //MEMBER
-// $route['profile/$1'] = 'member/profile/$1';
-$route['profile'] = 'member/profile';
-$route['update-profile'] = 'member/updateProfile';
+$route['member'] = 'member/index';
+$route['about'] = 'member/about';
+$route['update-profile'] = 'member/updateProfile'; //$1
+$route['update-skills'] = 'member/updateSkills'; //$1
+
 $route['create-portofolio'] = 'member/createPortofolio';
 $route['detail-portofolio/(:any)'] = 'member/detailPortofolio/$1';
 $route['edit-portofolio/(:any)'] = 'member/updatePortofolio/$1';

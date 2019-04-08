@@ -1430,6 +1430,8 @@ px      68    160    252    344    436    */
 
 /*# sourceMappingURL=maps/style.css.map */
 
+
+
 /* CUSTOME CSS */
 .nav-profile{
   /* height: 50px; */
@@ -1448,5 +1450,6 @@ px      68    160    252    344    436    */
 @media (min-width: 768px) {
 	.detail-portofolio {
 		text-align: left;
-	}
+  }
+  
 }

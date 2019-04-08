@@ -10,28 +10,42 @@ class Member extends CI_Controller
         $this->load->model('Member_model');
     }
 
-    // public function profile($id_member)
-    public function profile()
+    public function index($id_user = '1')
+    // public function index()
     {
 
         $data['title'] = 'Bio Project'; //nanti bakalan jadi title di bagian head
         // $data['member']= $this->Member_model->getAllDataMember('id_member',$id_member);
-        $data['member'] = $this->Member_model->getDataMember('id_user', '1');
-        $data['portofolio'] = $this->Member_model->getAllPortofolio('id_user', '1');
+        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
+        $data['portofolio'] = $this->Member_model->getAllPortofolio('id_user', $id_user);
         // var_dump($data['portofolio']);
         // die();
 
         $this->load->view('partials/user/header', $data);
-        $this->load->view('member/profile', $data);
+        $this->load->view('member/index', $data);
+        $this->load->view('partials/user/footer');
+    }
+
+    public function about($id_user = '1')
+    {
+
+        $data['title'] = 'Bio Project';
+        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
+        $data['skills'] = $this->Member_model->getSkillsMember('id_user', $id_user);
+        // var_dump($data);
+        // die();
+
+        $this->load->view('partials/user/header', $data);
+        $this->load->view('member/about', $data);
         $this->load->view('partials/user/footer');
     }
 
     // public function editProfile($id_user)
-    public function updateProfile()
+    public function updateProfile($id_user = '1')
     {
         $data['title'] = 'Bio Project';
 
-        $data['member'] = $this->Member_model->getDataMember('id_user', '1');
+        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
 
         $this->form_validation->set_rules('id_user', 'ID User', 'required');
         $this->form_validation->set_rules('nama_member', 'Nama', 'required');
@@ -81,15 +95,15 @@ class Member extends CI_Controller
             // var_dump($data);
             // die();
 
-            $this->Member_model->update('member', 'id_user', '1', $data);
-            redirect('profile');
+            $this->Member_model->update('member', 'id_user', $id_user, $data);
+            redirect('member');
         }
     }
 
-    public function createPortofolio()
+    public function createPortofolio($id_user = '1')
     {
         $data['title'] = 'Tambah Portofolio';
-        $data['member'] = $this->Member_model->getDataMember('id_user', '1');
+        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
 
         $this->form_validation->set_rules('id_user', 'ID User', 'required');
         $this->form_validation->set_rules('judul', 'Judul Portofolio', 'required');
@@ -117,14 +131,14 @@ class Member extends CI_Controller
 
             $data = [
                 "id_portofolio" => $idPortofolio,
-                "id_user" => '1',
+                "id_user" => $id_user,
                 "judul" => $this->input->post('judul', true),
                 "deskripsi" => $this->input->post('deskripsi', true),
                 "foto" => $foto,
             ];
             $this->Member_model->create('portofolio', $data);
             $this->session->set_flashdata('flash', 'Ditambahkan');
-            redirect('profile');
+            redirect('member');
         }
     }
 
@@ -139,18 +153,17 @@ class Member extends CI_Controller
         $this->form_validation->set_rules('id_portofolio', 'ID Portofolio', 'required');
         $this->form_validation->set_rules('judul', 'Judul Portofolio', 'required');
         $this->form_validation->set_rules('deskripsi', 'Deskripsi Portofolio', 'required');
-        
+
         if (!empty($_FILES["foto"]["name"])) {
             $this->form_validation->set_rules('foto', 'File', 'callback_uploadImage');
         }
-
 
         if ($this->form_validation->run() == false) {
             $this->load->view('partials/user/header', $data);
             $this->load->view('member/update_portofolio', $data);
             $this->load->view('partials/user/footer');
         } else {
-            
+
             if (!empty($_FILES["foto"]["name"])) {
                 $foto = $this->upload->data()['file_name'];
             } else {
@@ -162,9 +175,9 @@ class Member extends CI_Controller
                 "deskripsi" => $this->input->post('deskripsi', true),
                 "foto" => $foto,
             ];
-            $this->Member_model->update('portofolio','id_portofolio',$idPortofolio, $data);
+            $this->Member_model->update('portofolio', 'id_portofolio', $idPortofolio, $data);
             // $this->session->set_flashdata('flash', 'Diperbarui');
-            redirect('profile');
+            redirect('member');
         }
     }
 
@@ -183,9 +196,9 @@ class Member extends CI_Controller
 
     public function deletePortofolio($idPortofolio)
     {
-        $$data['portofolio'] = $this->Member_model->delete('portofolio','id_portofolio',$idPortofolio);
+        $$data['portofolio'] = $this->Member_model->delete('portofolio', 'id_portofolio', $idPortofolio);
         // $this->session->set_flashdata('flash', 'Dihapus');
-        redirect('profile');
+        redirect('member');
     }
 
     public function uploadImage()
@@ -205,6 +218,34 @@ class Member extends CI_Controller
             return false;
         } else {
             return true;
+        }
+    }
+
+    public function updateSkills($id_user = '1')
+    {
+        $data['title'] = 'Bio Project';
+        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
+        // $data = ['skills' => $this->input->post('skills', true) ];
+
+        // var_dump( $data['skills']);
+        $this->form_validation->set_rules('skill[]', 'skill', 'required');
+
+        if ($this->form_validation->run() === false) {
+            $this->load->view('partials/user/header', $data);
+            $this->load->view('member/update_skills', $data);
+            $this->load->view('partials/user/footer');
+        } else {
+            $skill = $this->input->post('skill');
+
+            foreach($skill as $row) :
+                $data = array(
+                    'id_daftar_keahlian' => $row,
+                    'id_user' => $id_user
+                );
+                $this->db->insert('keahlian',$data);
+            endforeach;
+
+            redirect('member');
         }
     }
 }

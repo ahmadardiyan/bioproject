@@ -1,25 +1,12 @@
 <div class="col-md-4">
-    <div class="sidebar">
+    <div class="sidebar" style="padding-top: 10px">
 
-        <!-- Search -->
-        <!-- <div class="search widget">
-                        <form action="" method="get" class="searchform" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"> <i class="ion-search"></i> </button>
-                                </span>
-                            </div>
-                        </form>
-                    </div> -->
-        <!-- End Search -->
-
-        <div class="author widget">
+        <div class="author widget" style="margin-bottom:20px">
             <img class="img-responsive" src="<?=base_url();?>assets/images/author/author-bg.jpg">
             <div class="author-body text-center">
                 <div class="author-img">
 
-                    <img src="<?=base_url();?>assets/images/profile/<?= $member['foto_member']; ?>">
+                    <img src="<?=base_url();?>assets/images/profile/<?= $member['foto']; ?>">
 
                     <!-- <img src="<?=base_url();?>assets/images/profile/img3.png"> -->
                 </div>
@@ -31,55 +18,26 @@
                         <?= $member['deskripsi_member']?>
                     </p>
                 </div>
+
+                <div class="text-center">
+                    <a class="btn btn-default" href="<?=base_url()?>update-profile">
+                        Edit Profile
+                    </a>
+                </div>
             </div>
         </div>
-        
-        <!-- <div class="categories widget">
-            <h3 class="widget-head">Categories</h3>
+
+        <div class="categories widget">
+            <!-- <h3 class="widget-head">Categories</h3> -->
             <ul>
                 <li>
-                    <a href="">Audio</a> <span class="badge">1</span>
+                    <a href="member">Portofolio</a> <span class="badge">5</span>
                 </li>
                 <li>
-                    <a href="">Gallery</a> <span class="badge">2</span>
-                </li>
-                <li>
-                    <a href="">Image</a> <span class="badge">4</span>
-                </li>
-                <li>
-                    <a href="">Standard</a> <span class="badge">2</span>
-                </li>
-                <li>
-                    <a href="">Status</a> <span class="badge">3</span>
+                    <a href="about">About</a>
                 </li>
             </ul>
         </div>
-
-        <div class="recent-post widget">
-            <h3>Recent Posts</h3>
-            <ul>
-                <li>
-                    <a href="#">Corporate meeting turns into a photoshooting.</a><br>
-                    <time>16 May, 2015</time>
-                </li>
-                <li>
-                    <a href="#">Statistics,analysis. The key to succes.</a><br>
-                    <time>15 May, 2015</time>
-                </li>
-                <li>
-                    <a href="#">Blog post without image, only text.</a><br>
-                    <time>14 May, 2015</time>
-                </li>
-                <li>
-                    <a href="#">Blog post with audio player. Share your creations.</a><br>
-                    <time>14 May, 2015</time>
-                </li>
-                <li>
-                    <a href="#">Blog post with classic Youtbube player.</a><br>
-                    <time>12 May, 2015</time>
-                </li>
-            </ul>
-        </div> -->
 
     </div>
 </div>

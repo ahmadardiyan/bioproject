@@ -5,12 +5,14 @@ class Home extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Member_model');
+
 	}
 
 	public function index()
 	{
 		$data['title'] = 'Bio Project'; //nanti bakalan jadi title di bagian head
-		$data['member']['foto_member'] = 'img3.png'; //sementara
+		$data['member'] = $this->Member_model->getDataMember('id_user', '1');
 
 		$this->load->view('partials/user/header',$data); 
 		$this->load->view('home/homepage.php');

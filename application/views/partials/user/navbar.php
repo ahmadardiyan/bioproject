@@ -38,6 +38,7 @@
 							</div>
 						</li>
 						<li><a href="#footer"> Contact</a></li>
+						<li><a href="#footer"> Jobs</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -47,19 +48,18 @@
 					<ul class="nav navbar-nav navbar-right">
 
 						<li><a href="<?= base_url();?>login"> Login </a></li>
-						<!-- <li><img src="<?=base_url()?>assets/images/profile/img3.png" class="img-circle" width="50px"></li> -->
 
 						<!-- Profil Image/Logout -->
 						<li class="nav-item dropdown no-arrow">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
 								data-toggle="dropdown" style="padding: 0px">
-								<img src="<?=base_url()?>assets/images/profile/<?= $member['foto_member'] ?>" alt="" class="img-circle"
+								<img src="<?=base_url()?>assets/images/profile/<?= $member['foto'] ?>" alt="" class="img-circle"
 									width="50px">
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-right">
 								<ul>
-									<li><a href="<?php base_url()?>profile">Profile</a></li>
+									<li><a href="<?=base_url()?>member">Profile</a></li>
 									<li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
 								</ul>
 							</div>
