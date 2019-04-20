@@ -1,12 +1,31 @@
-// <!-- Get Select Alamat -->
-
-// console.log("berhasil"); 
-
+// Data Member
+// function dataMember() {
 $(document).ready(function () {
+    url = 'member/get';
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function (result) {
+            // console.log(result.member.id_kab);
+
+            idProv  = result.member.id_prov;
+            idKab   = result.member.id_kab;
+            idKec   = result.member.id_kec;
+
+        }
+    });
+});
+// }
+
+
+// ALamat/Wilayah 
+$(document).ready(function () {
+
     $("#provinsi").append('<option value="">Pilih</option>');
     $("#kabupaten").html('');
     $("#kecamatan").html('');
-    $("#kelurahan").html('');
+    // $("#kelurahan").html('');
     $("#kabupaten").append('<option value="">Pilih</option>');
     $("#kecamatan").append('<option value="">Pilih</option>');
     url = 'general/provinsi';
@@ -15,14 +34,18 @@ $(document).ready(function () {
         type: 'GET',
         dataType: 'json',
         success: function (result) {
-            for (var i = 0; i < result.length; i++) {
-                // if (result[i].id_prov == <?=set_value('provinsi')?>) {
-                // 	$("#provinsi").append('<option value="' + result[i].id_prov + '" selected >' + result[i].nama_prov + '</option>');
-                // } else {
-                $("#provinsi").append('<option value="' + result[i].id_prov + '">' + result[i]
-                    .nama_prov + '</option>');
-                // }
-            }
+            result.forEach(function (data) {
+
+                if (data.id_prov == idProv) {
+                    $("#provinsi").append('<option value="' + data.id_prov + '" selected>' + data.nama_prov + '</option>');
+
+                    $("#provinsi").change();
+                } else {
+                    $("#provinsi").append('<option value="' + data.id_prov + '">' + data
+                        .nama_prov + '</option>');
+                }
+
+            });
         }
     });
 });
@@ -31,7 +54,7 @@ $("#provinsi").change(function () {
     var url = 'general/kabupaten/' + id_prov;
     $("#kabupaten").html('');
     $("#kecamatan").html('');
-    $("#kelurahan").html('');
+    // $("#kelurahan").html('');
     $("#kabupaten").append('<option value="">Pilih</option>');
     $("#kecamatan").append('<option value="">Pilih</option>');
     $.ajax({
@@ -39,11 +62,18 @@ $("#provinsi").change(function () {
         type: 'GET',
         dataType: 'json',
         success: function (result) {
-            for (var i = 0; i < result.length; i++) {
-                // if (result[i].id_kab == set_value)
-                $("#kabupaten").append('<option value="' + result[i].id_kab + '">' + result[i]
-                    .nama_kab + '</option>');
-            }
+            result.forEach(function (data) {
+
+                if (data.id_kab == idKab) {
+                    $("#kabupaten").append('<option value="' + data.id_kab + '" selected >' + data.nama_kab + '</option>');
+
+                    $("#kabupaten").change();
+                } else {
+                    $("#kabupaten").append('<option value="' + data.id_kab + '">' + data
+                        .nama_kab + '</option>');
+                }
+
+            });
         }
     });
 });
@@ -58,15 +88,21 @@ $("#kabupaten").change(function () {
         type: 'GET',
         dataType: 'json',
         success: function (result) {
-            for (var i = 0; i < result.length; i++)
-                $("#kecamatan").append('<option value="' + result[i].id_kec + '">' + result[i]
-                    .nama_kec + '</option>');
+            result.forEach(function (data) {
+
+                if (data.id_kec == idKec) {
+                    $("#kecamatan").append('<option value="' + data.id_kec + '" selected >' + data.nama_kec + '</option>');
+                } else {
+                    $("#kecamatan").append('<option value="' + data.id_kec + '">' + data
+                        .nama_kec + '</option>');
+                }
+
+            });
         }
     });
 });
 
-// <!-- Datepicker -->
-
+// <!-- Tanggal -->
 $(document).ready(function () {
     $('.tanggal').datepicker({
         format: "dd-mm-yyyy",
@@ -76,17 +112,36 @@ $(document).ready(function () {
     });
 });
 
+// kategori keahlian
 $(document).ready(function () {
-    url = 'general/skills';
+    $("#kategori-keahlian").append('<option value="">Pilih</option>');
+    url = 'general/kategori';
     $.ajax({
         url: url,
         type: 'GET',
         dataType: 'json',
         success: function (result) {
-            for (var i = 0; i < result.length; i++) {
-                // console.log(i);
-                $("#list-skills").append('<div class="col-md-6"><label class="checkbox-inline"><input type="checkbox" name="skill[]" value="'+ result[i].id_daftar_keahlian +'">'+ result[i].nama_keahlian +'</label><div>');
-            }
+            result.forEach(function (data) {
+                $("#kategori-keahlian").append('<option value="' + data.id_kategori + '">' + data.nama_kategori_keahlian + '</option>');
+            });
         }
+    });
+});
+
+// list keahlian
+$(document).ready(function () {
+    $("#kategori-keahlian").change(function () {
+        var id_kategori = $("#kategori-keahlian").val();
+        var url = 'general/list_keahlian/' + id_kategori;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                result.forEach(function (data) {
+                    $("#list-keahlian").append('<div class="col-md-6"><label class="checkbox-inline"><input type="checkbox" name="list-keahlian[]" value="' + data.id_list_keahlian + '">' + data.nama_keahlian + '</label><div>')
+                });
+            }
+        });
     });
 });

@@ -2,41 +2,44 @@
 <html lang="en">
 
 <head>
-    
-    <!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<!-- Bootstrap core CSS-->
-	<link href="<?= base_url() ?>assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title><?=$title?></title>
 
-	<!-- Twitter Bootstrs CSS -->
-	<link rel=stylesheet href="<?= base_url() ?>assets/bootstrap/bootstrap.min.css">
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 
-	<!-- Ionicons Fonts Css -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/ionicons/ionicons.min.css ">
+  <!-- Bootstrap -->
+  <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/bootstrap.min.css" />
 
-	<!-- animate css -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/animate-css/animate.css">
+  <!-- Owl Carousel -->
+  <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/owl.carousel.css" />
+  <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/owl.theme.default.css" />
 
-	<!-- Hero area slider css-->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/slider/slider.css">
+  <!-- Magnific Popup -->
+  <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/magnific-popup.css" />
 
-	<!-- owl craousel css -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/owl-carousel/owl.carousel.css">
+  <!-- Font Awesome Icon -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="<?= base_url() ?>assets/owl-carousel/owl.theme.css">
+  	<link rel="stylesheet" href="<?= base_url() ?>assets/css/font-awesome.min.css">
 
-	<!-- Fancybox -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/facncybox/jquery.fancybox.css">
 
-	<!-- template main css file -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css ">
+    <!-- Custom stylesheet -->
+  <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/style.css" />
 
-    <title><?=$title?></title>
-
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 </head>
 
-<body id="page-top">
+<body>
 
-	<?php $this->load->view('partials/user/navbar')?>
+  <?php $this->load->view('partials/user/navbar')?>

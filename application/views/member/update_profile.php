@@ -5,9 +5,17 @@
             <?php $this->load->view('partials/user/sidebar');?>
 
             <!-- edit profile -->
-            <div class="row">
-                <div class="col-md-7">
 
+            <div class="col-md-8" style="border:solid 1px #DEDEDE;margin-top:10px;">
+
+                <div class="row" style="margin:20px 5px;">
+
+                    <h1>Edit Profile</h1>
+
+                    <hr>
+                </div>
+
+                <div class="row" style="margin:20px 5px;">
                     <form action="" method="post" enctype="multipart/form-data">
 
                         <input type="hidden" name="id_user" value="<?=$member['id_user'];?>">
@@ -30,12 +38,8 @@
 
                         <div class="form-group">
                             <label for="gender_member">Jenis Kelamin</label> <br>
-                            <label class="radio-inline">
-                                <input type="radio" name="gender_member" id="inlineRadio1" value="Laki-laki"> Laki-laki
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="gender_member" id="inlineRadio2" value="Perempuan"> Perempuan
-                            </label>
+                            <input type="text" class="form-control" id="gender_member" name="gender_member"
+                                value="<?=$member['gender_member'];?>" readonly>
                             <small class="form-text text-danger"><?=form_error('gender_member')?></small>
                         </div>
 
@@ -68,34 +72,27 @@
                                 <?=form_error('alamat')?></small>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="row justify-content-center">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="provinsi">Provinsi</label>
-                                        <select class="form-control" name="provinsi" id="provinsi"></select>
-                                        <small class="form-text text-danger">
-                                            <?=form_error('provinsi')?></small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="kabupaten">Kabupaten</label>
-                                        <select class="form-control" name="kabupaten" id="kabupaten"></select>
-                                        <small class="form-text text-danger">
-                                            <?=form_error('kabupaten')?></small>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="kecamatan">Kecamatan</label>
-                                        <select class="form-control" name="kecamatan" id="kecamatan"></select>
-                                        <small class="form-text text-danger">
-                                            <?=form_error('kecamatan')?></small>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="provinsi">Provinsi</label>
+                            <select class="form-control" name="provinsi" id="provinsi"></select>
+                            <small class="form-text text-danger">
+                                <?=form_error('provinsi')?></small>
                         </div>
+
+                        <div class="form-group">
+                            <label for="kabupaten">Kabupaten/Kota</label>
+                            <select class="form-control" name="kabupaten" id="kabupaten"></select>
+                            <small class="form-text text-danger">
+                                <?=form_error('kabupaten')?></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kecamatan">Kecamatan</label>
+                            <select class="form-control" name="kecamatan" id="kecamatan"></select>
+                            <small class="form-text text-danger">
+                                <?=form_error('kecamatan')?></small>
+                        </div>
+
 
                         <div class="form-group">
                             <label for="foto">Foto Profile</label><br>
@@ -110,7 +107,6 @@
                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>

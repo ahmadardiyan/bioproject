@@ -1,28 +1,56 @@
-<section id="about">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-sm-6">
-				<div class="block wow fadeInLeft" data-wow-delay=".3s" data-wow-duration="500ms">
-					<h2>
-						ABOUT ME
-					</h2>
-					<p>
-						Hello, I’m a UI/UX Designer & Front End Developer from Victoria, Australia. I hold a master degree of Web Design
-						from the World University.And scrambled it to make a type specimen book. It has survived not only five centuries
-					</p>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, adipisci voluptatum repudiandae, natus impedit
-						repellat aut officia illum at assumenda iusto reiciendis placeat. Temporibus, vero.
-					</p>
-				</div>
+<!-- About -->
+<div id="about" class="section md-padding">
 
-			</div>
-			<div class="col-md-6 col-sm-6">
-				<div class="block wow fadeInRight" data-wow-delay=".3s" data-wow-duration="500ms">
-					<img src="assets/images/about/about.jpg" alt="">
-				</div>
-			</div>
-		</div>
-	</div>
-</section> <!-- /#about -->
+    <!-- Container -->
+    <div class="container">
 
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Section header -->
+            <div class="section-header text-center">
+                <h2 class="title">Welcome to Website</h2>
+            </div>
+            <!-- /Section header -->
+
+            <!-- about -->
+            <div class="col-md-4">
+                <div class="about">
+                    <i class="fa fa-cogs"></i>
+                    <h3>Fully Customizible</h3>
+                    <p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit amet.</p>
+                    <a href="#">Read more</a>
+                </div>
+            </div>
+            <!-- /about -->
+
+            <!-- about -->
+            <div class="col-md-4">
+                <div class="about">
+                    <i class="fa fa-magic"></i>
+                    <h3>Awesome Features</h3>
+                    <p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit amet.</p>
+                    <a href="#">Read more</a>
+                </div>
+            </div>
+            <!-- /about -->
+
+            <!-- about -->
+            <div class="col-md-4">
+                <div class="about">
+                    <i class="fa fa-mobile"></i>
+                    <h3>Fully Responsive</h3>
+                    <p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit amet.</p>
+                    <a href="#">Read more</a>
+                </div>
+            </div>
+            <!-- /about -->
+
+        </div>
+        <!-- /Row -->
+
+    </div>
+    <!-- /Container -->
+
+</div>
+<!-- /About -->

@@ -13,11 +13,17 @@
                     <h3>Skills</h3>
                     <hr>
                     <form action="" method="post">
-                        <div class="row">
 
-                            <div id="list-skills"></div>
-                            
+                        <!-- daftar keahlian (select) -->
+                        <div class="row">
+                            <select class="form-control" name="kategori-keahlian" id="kategori-keahlian"></select>
                         </div>
+
+                        <!-- checkbox subkeahlian -->
+                        <div class="row">
+                            <div id="list-keahlian"></div>
+                        </div>
+
                         <div class="row text-center">
                             <button type="submit" class="btn btn-primary text-center"
                                 style="margin-top:10px">Submit</button>

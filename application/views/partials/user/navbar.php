@@ -1,75 +1,55 @@
-	<nav id="top-bar" class="navbar-fixed-top animated-header">
-		<div class="container">
-			<div class="navbar-header">
-				<!-- responsive nav button -->
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<!-- /responsive nav button -->
+<!-- Nav -->
+<nav id="nav" class="navbar navbar-dark bg-dark">
+    <!-- <nav id="nav" class="navbar nav-transparent"> -->
+    <div class="container">
 
-				<!-- logo -->
-				<div class="navbar-brand">
-					<a href="home">
-						<label>BIO PROJECT</label>
-						<!-- <img src="assets/images/logo.png" alt=""> -->
-					</a>
-				</div>
-				<!-- /logo -->
+        <div class="navbar-header">
+            <!-- Logo -->
+            <div class="navbar-brand">
+                <a href="<?=base_url()?>home">
+                    <img class="logo" src="<?=base_url()?>assets/images/logo.png" alt="logo">
+                    <img class="logo-alt" src="<?=base_url()?>assets/images/logo-alt.png" alt="logo">
+                </a>
+            </div>
+            <!-- /Logo -->
 
-			</div>
-			<!-- main menu -->
-			<nav class="collapse navbar-collapse navbar-left" role="navigation">
-				<div class="main-menu">
-					<ul class="nav navbar-nav navbar-left">
-						<li><a href="#about">About </a></li>
-						<li><a href="#howitworks"> How It Works</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Categories <span
-									class="caret"></span></a>
-							<div class="dropdown-menu">
-								<ul>
-									<li><a href="#">Latest</a></li>
-									<li><a href="#">Most Populart</a></li>
-									<li><a href="#"> Most Viewed</a></li>
-								</ul>
-							</div>
-						</li>
-						<li><a href="#footer"> Contact</a></li>
-						<li><a href="#footer"> Jobs</a></li>
-					</ul>
-				</div>
-			</nav>
+            <!-- Collapse nav button -->
+            <div class="nav-collapse">
+                <span></span>
+            </div>
+            <!-- /Collapse nav button -->
+        </div>
 
-			<nav class="collapse navbar-collapse navbar-right" role="navigation">
-				<div class="main-menu">
-					<ul class="nav navbar-nav navbar-right">
+        <!--  Main navigation  -->
+        <ul class="main-nav nav navbar-nav navbar-right">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#service">Services</a></li>
+            <li><a href="#pricing">Prices</a></li>
+            <li><a href="#team">Team</a></li>
+            <li class="has-dropdown dropdown-arrow"><a href="#blog">Blog</a>
+                <ul class="dropdown">
+                    <li><a href="blog-single.html">blog post</a></li>
+                </ul>
+            </li>
+            <li><a href="#contact">Contact</a></li>
 
-						<li><a href="<?= base_url();?>login"> Login </a></li>
+            <li><a href="<?= base_url();?>login"> Login </a></li>
 
-						<!-- Profil Image/Logout -->
-						<li class="nav-item dropdown no-arrow">
-							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-								data-toggle="dropdown" style="padding: 0px">
-								<img src="<?=base_url()?>assets/images/profile/<?= $member['foto'] ?>" alt="" class="img-circle"
-									width="50px">
-							</a>
+            <li class="has-dropdown">
+                <a href="#" style="padding-top: 5px">
+                    <img src="<?=base_url()?>assets/images/profile/<?= $member['foto'] ?>" alt="" class="img-circle"
+                        width="40px">
+                </a>
+                <ul class="dropdown">
+                    <li><a href="<?=base_url()?>member">Profile</a></li>
+                    <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- /Main navigation -->
 
-							<div class="dropdown-menu dropdown-menu-right">
-								<ul>
-									<li><a href="<?=base_url()?>member">Profile</a></li>
-									<li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
-								</ul>
-							</div>
-
-						</li>
-						<!-- end Profil Image/Logout -->
-
-					</ul>
-				</div>
-			</nav>
-
-		</div>
-	</nav>
+    </div>
+</nav>
+<!-- /Nav -->

@@ -1,163 +1,93 @@
-(function($){
-    $.fn.scrollingTo = function( opts ) {
-        var defaults = {
-            animationTime : 1000,
-            easing : '',
-            callbackBeforeTransition : function(){},
-            callbackAfterTransition : function(){}
-        };
+(function($) {
+	"use strict"
 
-        var config = $.extend( {}, defaults, opts );
+	///////////////////////////
+	// Preloader
+	$(window).on('load', function() {
+		$("#preloader").delay(600).fadeOut();
+	});
 
-        $(this).click(function(e){
-            var eventVal = e;
-            e.preventDefault();
+	///////////////////////////
+	// Scrollspy
+	$('body').scrollspy({
+		target: '#nav',
+		offset: $(window).height() / 2
+	});
 
-            var $section = $(document).find( $(this).data('section') );
-            if ( $section.length < 1 ) {
-                return false;
-            };
+	///////////////////////////
+	// Smooth scroll
+	$("#nav .main-nav a[href^='#']").on('click', function(e) {
+		e.preventDefault();
+		var hash = this.hash;
+		$('html, body').animate({
+			scrollTop: $(this.hash).offset().top
+		}, 600);
+	});
 
-            if ( $('html, body').is(':animated') ) {
-                $('html, body').stop( true, true );
-            };
+	$('#back-to-top').on('click', function(){
+		$('body,html').animate({
+			scrollTop: 0
+		}, 600);
+	});
 
-            var scrollPos = $section.offset().top;
+	///////////////////////////
+	// Btn nav collapse
+	$('#nav .nav-collapse').on('click', function() {
+		$('#nav').toggleClass('open');
+	});
 
-            if ( $(window).scrollTop() == scrollPos ) {
-                return false;
-            };
+	///////////////////////////
+	// Mobile dropdown
+	$('.has-dropdown a').on('click', function() {
+		$(this).parent().toggleClass('open-drop');
+	});
 
-            config.callbackBeforeTransition(eventVal, $section);
+	///////////////////////////
+	// On Scroll
+	$(window).on('scroll', function() {
+		var wScroll = $(this).scrollTop();
 
-            $('html, body').animate({
-                'scrollTop' : (scrollPos+'px' )
-            }, config.animationTime, config.easing, function(){
-                config.callbackAfterTransition(eventVal, $section);
-            });
-        });
-    };
+		// Fixed nav
+		wScroll > 1 ? $('#nav').addClass('fixed-nav') : $('#nav').removeClass('fixed-nav');
 
-    /* ========================================================================= */
-    /*   Contact Form Validating
-    /* ========================================================================= */
+		// Back To Top Appear
+		wScroll > 700 ? $('#back-to-top').fadeIn() : $('#back-to-top').fadeOut();
+	});
 
-    $('#contact-form').validate({
-        rules: {
-            name: {
-                required: true, minlength: 4
-            }
-            , email: {
-                required: true, email: true
-            }
-            , subject: {
-                required: false,
-            }
-            , message: {
-                required: true,
-            }
-            ,
-        }
-        , messages: {
-            user_name: {
-                required: "Come on, you have a name don't you?", minlength: "Your name must consist of at least 2 characters"
-            }
-            , email: {
-                required: "Please put your email address",
-            }
-            , message: {
-                required: "Put some messages here?", minlength: "Your name must consist of at least 2 characters"
-            }
-            ,
-        }
-        , submitHandler: function(form) {
-            $(form).ajaxSubmit( {
-                type:"POST", data: $(form).serialize(), url:"sendmail.php", success: function() {
-                    $('#contact-form #success').fadeIn();
-                }
-                , error: function() {
-                    $('#contact-form #error').fadeIn();
-                }
-            }
-            );
-        }
-    });
+	///////////////////////////
+	// magnificPopup
+	$('.work').magnificPopup({
+		delegate: '.lightbox',
+		type: 'image'
+	});
 
+	///////////////////////////
+	// Owl Carousel
+	$('#about-slider').owlCarousel({
+		items:1,
+		loop:true,
+		margin:15,
+		nav: true,
+		navText : ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+		dots : true,
+		autoplay : true,
+		animateOut: 'fadeOut'
+	});
 
-}(jQuery));
+	$('#testimonial-slider').owlCarousel({
+		loop:true,
+		margin:15,
+		dots : true,
+		nav: false,
+		autoplay : true,
+		responsive:{
+			0: {
+				items:1
+			},
+			992:{
+				items:2
+			}
+		}
+	});
 
-
-
-jQuery(document).ready(function(){
-	"use strict";
-	new WOW().init();
-
-
-(function(){
- jQuery('.smooth-scroll').scrollingTo();
-}());
-
-});
-
-
-
-
-$(document).ready(function(){
-
-    $(window).scroll(function () {
-        if ($(window).scrollTop() > 50) {
-            $(".navbar-brand a").css("color","#fff");
-            $("#top-bar").removeClass("animated-header");
-        } else {
-            $(".navbar-brand a").css("color","inherit");
-            $("#top-bar").addClass("animated-header");
-        }
-    });
-
-    $("#clients-logo").owlCarousel({
- 
-        itemsCustom : false,
-        pagination : false,
-        items : 5,
-        autoplay: true,
-
-    });
-
-
-});
-
-
-
-// fancybox
-$(".fancybox").fancybox({
-    padding: 0,
-
-    openEffect : 'elastic',
-    openSpeed  : 450,
-
-    closeEffect : 'elastic',
-    closeSpeed  : 350,
-
-    closeClick : true,
-    helpers : {
-        title : { 
-            type: 'inside' 
-        },
-        overlay : {
-            css : {
-                'background' : 'rgba(0,0,0,0.8)'
-            }
-        }
-    }
-});
-
-
-
-
-
-
- 
-
-
-
-
+})(jQuery);

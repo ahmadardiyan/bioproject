@@ -8,44 +8,55 @@ class Member extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Member_model');
+        
     }
 
+    // index
     public function index($id_user = '1')
-    // public function index()
     {
 
-        $data['title'] = 'Bio Project'; //nanti bakalan jadi title di bagian head
-        // $data['member']= $this->Member_model->getAllDataMember('id_member',$id_member);
-        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
+        $data['title']      = 'Bio Project'; 
+        $data['member']     = $this->Member_model->getMember('id_user', $id_user);
         $data['portofolio'] = $this->Member_model->getAllPortofolio('id_user', $id_user);
-        // var_dump($data['portofolio']);
+        $data['skills']     = $this->Member_model->getSkillsMember('id_user', $id_user);
+
+        // var_dump( $data);
         // die();
 
         $this->load->view('partials/user/header', $data);
         $this->load->view('member/index', $data);
         $this->load->view('partials/user/footer');
+        
     }
 
+    // data member json
+    public function get($id_user = '1')
+    {
+        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
+        echo json_encode($data);
+    }
+
+    // 
     public function about($id_user = '1')
     {
 
         $data['title'] = 'Bio Project';
-        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
+        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
         $data['skills'] = $this->Member_model->getSkillsMember('id_user', $id_user);
-        // var_dump($data);
-        // die();
 
         $this->load->view('partials/user/header', $data);
         $this->load->view('member/about', $data);
         $this->load->view('partials/user/footer');
     }
 
-    // public function editProfile($id_user)
+    // memperbarui profile
     public function updateProfile($id_user = '1')
     {
         $data['title'] = 'Bio Project';
 
-        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
+        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
+        $data['skills']     = $this->Member_model->getSkillsMember('id_user', $id_user);
+
 
         $this->form_validation->set_rules('id_user', 'ID User', 'required');
         $this->form_validation->set_rules('nama_member', 'Nama', 'required');
@@ -61,6 +72,8 @@ class Member extends CI_Controller
 
         if (!empty($_FILES["foto"]["name"])) {
             $this->form_validation->set_rules('foto', 'Foto', 'callback_uploadImage');
+            // die();
+            // $this->form_validation->set_rules('foto', 'Foto', 'uploadImage[profile]');
         }
 
         if ($this->form_validation->run() == false) {
@@ -92,18 +105,18 @@ class Member extends CI_Controller
                 "foto" => $foto,
             ];
 
-            // var_dump($data);
-            // die();
-
             $this->Member_model->update('member', 'id_user', $id_user, $data);
             redirect('member');
         }
     }
 
+    // membuat portofolio
     public function createPortofolio($id_user = '1')
     {
-        $data['title'] = 'Tambah Portofolio';
-        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
+        $data['title']  = 'Tambah Portofolio';
+        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
+        $data['skills'] = $this->Member_model->getSkillsMember('id_user', $id_user);
+
 
         $this->form_validation->set_rules('id_user', 'ID User', 'required');
         $this->form_validation->set_rules('judul', 'Judul Portofolio', 'required');
@@ -142,13 +155,14 @@ class Member extends CI_Controller
         }
     }
 
+    // memperbarui portofolio
     public function updatePortofolio($idPortofolio)
     {
-        $data['title'] = 'Bio Project';
-        $data['member'] = $this->Member_model->getDataMember('id_user', '1');
+        $data['title']      = 'Bio Project';
+        $data['member']     = $this->Member_model->getMember('id_user', '1');
         $data['portofolio'] = $this->Member_model->getPortofolio('id_portofolio', $idPortofolio);
-        // var_dump($data);
-        // die();
+        $data['skills']     = $this->Member_model->getSkillsMember('id_user', $id_user);
+
 
         $this->form_validation->set_rules('id_portofolio', 'ID Portofolio', 'required');
         $this->form_validation->set_rules('judul', 'Judul Portofolio', 'required');
@@ -181,19 +195,21 @@ class Member extends CI_Controller
         }
     }
 
+    // melihat detail portofolio 
     public function detailPortofolio($idPortofolio)
     {
-        $data['title'] = 'Bio Project';
-        $data['member'] = $this->Member_model->getDataMember('id_user', '1');
+        $data['title']      = 'Bio Project';
+        $data['member']     = $this->Member_model->getMember('id_user', '1');
         $data['portofolio'] = $this->Member_model->getPortofolio('id_portofolio', $idPortofolio);
-        // var_dump($data['portofolio']);
-        // die();
+        $data['skills']     = $this->Member_model->getSkillsMember('id_user', $id_user);
+
 
         $this->load->view('partials/user/header', $data);
         $this->load->view('member/detail_portofolio', $data);
         $this->load->view('partials/user/footer');
     }
 
+    // menghapis portofolio
     public function deletePortofolio($idPortofolio)
     {
         $$data['portofolio'] = $this->Member_model->delete('portofolio', 'id_portofolio', $idPortofolio);
@@ -212,7 +228,7 @@ class Member extends CI_Controller
 
         $this->load->library('upload', $config);
 
-        if (!$this->upload->do_upload('foto')) {
+    if (!$this->upload->do_upload('foto')) {
             $error = $this->upload->display_errors();
             $this->form_validation->set_message('uploadImage', $error);
             return false;
@@ -221,13 +237,14 @@ class Member extends CI_Controller
         }
     }
 
+    // memperbarui skills
     public function updateSkills($id_user = '1')
     {
-        $data['title'] = 'Bio Project';
-        $data['member'] = $this->Member_model->getDataMember('id_user', $id_user);
-        // $data = ['skills' => $this->input->post('skills', true) ];
+        $data['title']  = 'Bio Project';
+        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
+        $data['skills'] = $this->Member_model->getSkillsMember('id_user', $id_user);
 
-        // var_dump( $data['skills']);
+       
         $this->form_validation->set_rules('skill[]', 'skill', 'required');
 
         if ($this->form_validation->run() === false) {
@@ -239,7 +256,7 @@ class Member extends CI_Controller
 
             foreach($skill as $row) :
                 $data = array(
-                    'id_daftar_keahlian' => $row,
+                    'id_keahlian' => $row,
                     'id_user' => $id_user
                 );
                 $this->db->insert('keahlian',$data);

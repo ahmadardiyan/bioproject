@@ -11,10 +11,7 @@ class Admin extends CI_Controller
     public function dashboard()
     {
         
-        $data['judul'] = "Dashboard Admin"; //nanti bakalan jadi title di bagian head
-        
-        $this->load->view('partials/admin/header',$data);
         $this->load->view('admin/dashboard');
-        $this->load->view('partials/admin/footer');
+       
     }
 }

@@ -27,9 +27,15 @@ class General extends CI_Controller
         echo json_encode($data);
     }
     
-    public function skills()
+    public function kategori()
     {
-        $data = $this->General_model->getAllData('daftar_keahlian');
+        $data = $this->General_model->getAllData('kategori_keahlian');
+        echo json_encode($data);
+    }
+
+    public function list_keahlian($id_kategori = null)
+    {
+        $data = $this->General_model->getAllDataWhere('list_keahlian','id_kategori', $id_kategori);
         echo json_encode($data);
     }
 
