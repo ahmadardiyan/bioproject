@@ -38,20 +38,35 @@
 
                 </div>
 
-                <!-- Skills -->
-                <div id="skills">
+                <!-- Keahlian -->
+                <div id="keahlian">
 
                     <h3>Skills</h3>
                     <hr>
-                    <a href="#" class="btn btn-primary" style="float:right; margin-top: -66px;"> Tambah Skills
+                    <a href="<?=base_url()?>update-keahlian" class="btn btn-primary"
+                        style="float:right; margin-top: -66px;"> Tambah Skills
                     </a>
-                    <div class="row text-center">
+                    <div class="row ">
 
-                        <?php if (!empty($skills)) : ?>
-                        <?php foreach ($skills as $skill) : ?>
+                        <div id="keahlian-member"></div>
 
-                        <div class="col">
-                            <p class="label label-default"><?=$skill['nama_keahlian'];?></p>
+                    </div>
+
+                </div>
+
+                <div id="sertifikat">
+                    <div class="content">
+                        <h3>Sertifikat</h3>
+                        <hr>
+                        <a href="<?=base_url()?>sertifikat" class="btn btn-primary"
+                            style="float:right; margin-top: -66px;"> Semua Sertifikat </a>
+
+                        <?php if (!empty($sertifikat)) :?>
+                        <?php foreach ($sertifikat as $s) : ?>
+
+                        <div class="list-sertifikat" style="margin-bottom:15px">
+                            <h4 style="margin-bottom:0px"><?= $s['nama_sertifikat']?></h4>
+                            <p><?= $s['tahun']?></p>
                         </div>
 
                         <?php endforeach;?>
@@ -62,22 +77,22 @@
                         <?php endif;?>
 
                     </div>
-
                 </div>
             </div>
+
 
             <!-- portofolio -->
             <div class="col-md-8 col-xs-12">
 
                 <div id="portofolio">
-                    <div class="row" style="margin:20px 5px;">
+                    <div class="row" style="margin:20px 5px 10px 5px;">
 
                         <h3>Portofolio</h3>
                         <a href="create-portofolio" class="btn btn-primary" style="float:right; margin-top: -50px;">
                             Tambah
                             Porfolio </a>
-
                         <hr>
+
                     </div>
 
                     <div class="row text-center">
@@ -88,12 +103,17 @@
                         <div class="col-md-4 col-xs-6">
                             <div class="thumbnail">
                                 <div class="caption text-center">
-                                    <div >
-                                        <img class="img-responsive img-portofolio" src="<?= base_url();?>assets/images/profile/<?= $p['foto'];?>"
-                                            style="height:190px;background-size: cover;text-align: center;	position: relative;" />
-                                    </div>
-                                    <h4 id="thumbnail-label"><a href="#" target="_blank"><?= $p['judul'];?></a></h4>
+
+                                    <img class="img-responsive img-portofolio"
+                                        src="<?= base_url();?>assets/images/profile/<?= $p['foto'];?>"
+                                        style="height:190px;" />
+
+                                    <h4 id="thumbnail-label"><a
+                                            href="<?=base_url()?>detail-portofolio/<?=$p['id_portofolio']?>"><?= $p['judul'];?></a>
+                                    </h4>
+
                                     <!-- <div class="thumbnail-description smaller"><?= $p['deskripsi'];?></div> -->
+
                                 </div>
                             </div>
                         </div>
@@ -106,33 +126,22 @@
 
                         <?php endif;?>
 
-                        <?php //foreach ($portofolio as $p) : ?>
-                        <!-- <div class="col-sm-4 col-xs-12">
-                            <figure class="wow fadeInLeft animated" data-wow-duration="500ms" data-wow-delay="600ms">
-                                <div class="img-wrapper">
-                                    <img src="<?= base_url();?>assets/images/profile/<?= $p['foto'];?>"
-                                        class="img-responsive" width="500px" height="500px">
-                                    <div class="overlay">
-                                        <div class="buttons">
-                                            <a rel="gallery" class="fancybox"
-                                                href="<?= base_url();?>assets/images/profile/<?= $p['foto'];?>">Demo</a>
-                                            <a target="_blank"
-                                                href="<?=base_url()?>detail-portofolio/<?= $p['id_portofolio']?>">Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <figcaption>
-                                    <h4><?= $p['judul'];?></h4>
-                                    <p><?= $p['deskripsi'];?> </p>
-                                </figcaption>
-                            </figure>
-                        </div> -->
-                        <?php //endforeach;?>
-
                     </div>
 
                     <!-- end portofolio -->
                 </div>
+
+                <div id="pengalaman-kerja">
+                    <div class="content">
+                        <h3>Pengalaman Kerja</h3>
+                        <a href="create-pengalaman-kerja" class="btn btn-primary"
+                            style="float:right; margin-top: -50px;">
+                            Tambah Pengalaman Kerja </a>
+                        <hr>
+
+                    </div>
+                </div>
+
             </div>
         </div>
 </section>

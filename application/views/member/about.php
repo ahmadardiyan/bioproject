@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
 
-            <?php $this->load->view('partials/user/sidebar');?>
+            <?php //$this->load->view('partials/user/sidebar');?>
 
             <!-- edit profile -->
             <div class="row">

@@ -1,5 +1,5 @@
 <!-- Nav -->
-<nav id="nav" class="navbar navbar-dark bg-dark">
+<nav id="nav" class="navbar">
     <!-- <nav id="nav" class="navbar nav-transparent"> -->
     <div class="container">
 

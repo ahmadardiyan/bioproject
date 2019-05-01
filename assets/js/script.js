@@ -1,5 +1,4 @@
-// Data Member
-// function dataMember() {
+//Get Data Member
 $(document).ready(function () {
     url = 'member/get';
     $.ajax({
@@ -7,28 +6,25 @@ $(document).ready(function () {
         type: 'GET',
         dataType: 'json',
         success: function (result) {
-            // console.log(result.member.id_kab);
 
-            idProv  = result.member.id_prov;
-            idKab   = result.member.id_kab;
-            idKec   = result.member.id_kec;
+            idProv = result.member.id_prov;
+            idKab = result.member.id_kab;
+            idKec = result.member.id_kec;
 
         }
     });
 });
-// }
 
 
-// ALamat/Wilayah 
+// Wilayah 
 $(document).ready(function () {
 
     $("#provinsi").append('<option value="">Pilih</option>');
     $("#kabupaten").html('');
     $("#kecamatan").html('');
-    // $("#kelurahan").html('');
     $("#kabupaten").append('<option value="">Pilih</option>');
     $("#kecamatan").append('<option value="">Pilih</option>');
-    url = 'general/provinsi';
+    url = 'wilayah/provinsi';
     $.ajax({
         url: url,
         type: 'GET',
@@ -49,12 +45,12 @@ $(document).ready(function () {
         }
     });
 });
+
 $("#provinsi").change(function () {
     var id_prov = $("#provinsi").val();
-    var url = 'general/kabupaten/' + id_prov;
+    var url = 'wilayah/kabupaten/' + id_prov;
     $("#kabupaten").html('');
     $("#kecamatan").html('');
-    // $("#kelurahan").html('');
     $("#kabupaten").append('<option value="">Pilih</option>');
     $("#kecamatan").append('<option value="">Pilih</option>');
     $.ajax({
@@ -77,11 +73,11 @@ $("#provinsi").change(function () {
         }
     });
 });
+
 $("#kabupaten").change(function () {
     var id_kab = $("#kabupaten").val();
-    var url = 'general/kecamatan/' + id_kab;
+    var url = 'wilayah/kecamatan/' + id_kab;
     $("#kecamatan").html('');
-    $("#kelurahan").html('');
     $("#kecamatan").append('<option value="">Pilih</option>');
     $.ajax({
         url: url,
@@ -102,7 +98,7 @@ $("#kabupaten").change(function () {
     });
 });
 
-// <!-- Tanggal -->
+// Tanggal
 $(document).ready(function () {
     $('.tanggal').datepicker({
         format: "dd-mm-yyyy",
@@ -112,10 +108,36 @@ $(document).ready(function () {
     });
 });
 
+// keahlian member
+$(document).ready(function () {
+
+    var url = 'keahlian/getKeahlianMember/1';
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function (result) {
+            keahlianMember = result;
+
+            // console.log(keahlianMember);
+
+            result.forEach(function (data) {
+
+
+                $("#keahlian-member").append('<p class="label label-default" style="margin-right:10px; display:inline-block">' + data.nama_keahlian + '</p>');
+
+                $("#select-keahlian-member").append('<div class="col-md-6 col-xs-6"><div class="checkbox-inline"><input type="checkbox" name="inputKeahlian" value="' + data.id_list_keahlian + '" id="inputKeahlian" style="margin-right:10px;" checked>' + data.nama_keahlian + '</div></div>');
+
+            });
+        }
+    });
+});
+
 // kategori keahlian
 $(document).ready(function () {
     $("#kategori-keahlian").append('<option value="">Pilih</option>');
-    url = 'general/kategori';
+
+    url = 'keahlian/kategoriKeahlian';
     $.ajax({
         url: url,
         type: 'GET',
@@ -129,19 +151,42 @@ $(document).ready(function () {
 });
 
 // list keahlian
-$(document).ready(function () {
-    $("#kategori-keahlian").change(function () {
-        var id_kategori = $("#kategori-keahlian").val();
-        var url = 'general/list_keahlian/' + id_kategori;
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: 'json',
-            success: function (result) {
-                result.forEach(function (data) {
-                    $("#list-keahlian").append('<div class="col-md-6"><label class="checkbox-inline"><input type="checkbox" name="list-keahlian[]" value="' + data.id_list_keahlian + '">' + data.nama_keahlian + '</label><div>')
+$("#kategori-keahlian").change(function () {
+
+    $("#list-keahlian").html('');
+    var id_kategori = $("#kategori-keahlian").val();
+    var url = 'keahlian/listKeahlian/' + id_kategori;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function (result) {
+            result.forEach(function (data) {
+                var x = false;
+
+                keahlianMember.forEach(function (keahlian) {
+
+                    if (data.id_keahlian == keahlian.id_keahlian) {
+                        x = true;
+                    }
+
                 });
-            }
-        });
+
+                if (x == true) {
+                    $("#list-keahlian").append('<div class="col-md-6 col-xs-6"><label class="checkbox-inline"><input type="checkbox" name="skill[]" class="skill" value="' + data.id_keahlian + '" style="margin-right:10px;" checked>' + data.nama_keahlian + '</label></div>')
+                } else {
+                    $("#list-keahlian").append('<div class="col-md-6 col-xs-6"><label class="checkbox-inline"><input type="checkbox" name="skill[]" class="skill" value="' + data.id_keahlian + '" style="margin-right:10px;">' + data.nama_keahlian + '</label></div>')
+                }
+
+            });
+        }
     });
+});
+
+$("#list-keahlian").change(function () {
+    console.log($(this));
+    // $(this).css("color","red");
+    $(this).css("color", "red");
+
+    $("#select-keahlian-member").append('<div class="col-md-6 col-xs-6"><label class="checkbox-inline"><input type="checkbox" name="skill[]" class="skill" value="" style="margin-right:10px;" checked onclick="checkedKeahlian()"> haha </label><div>')
 });

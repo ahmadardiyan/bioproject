@@ -44,12 +44,13 @@ Table OF Contents
 
 /* -- typography -- */
 
+html,
 body {
     font-family: 'Varela Round', sans-serif;
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
-    color: #868F9B;
+    background-color: #F7F7F7;
 }
 
 h1,
@@ -205,6 +206,10 @@ ol {
 }
 
 /* --  Input  -- */
+.form-control {
+    color: #10161A !important;
+}
+
 
 input[type="text"],
 input[type="email"],
@@ -1850,6 +1855,7 @@ header {
     margin: 20px 0px 40px 0px;
     padding: 20px;
     background-color: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
     /* border: 1px solid #dedede; */
 }
 
@@ -1871,17 +1877,18 @@ header {
     margin-right: 15px;
 }
 
-#skills {
+#keahlian {
     margin: 20px 0px 20px 0px;
     padding: 20px;
     background-color: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
-#skills .row {
+#keahlian .row {
     padding: 5px 15px 15px 15px;
 }
 
-#skills .row p {
+#keahlian .row p {
     font-size: 14px;
     font-weight: 150;
 }
@@ -1901,6 +1908,7 @@ header {
     margin: 10px 0px 40px 0px;
     padding: 20px;
     background-color: white;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
 .detail-portofolio {
@@ -1935,11 +1943,14 @@ header {
     align-content: center;
     display: block;
     margin: auto;
+    background-size: cover;
+    text-align: center;
+    position: relative;
 }
 
 @media (min-width: 768px) {
     #portofolio {
-        margin: 20px 0px 40px 0px;
+        margin: 20px 0px 20px 0px;
         padding: 20px;
         background-color: white;
     }
@@ -1948,4 +1959,140 @@ header {
         text-align: left;
     }
 
+}
+
+/* Update Profile */
+#update-profile {
+    padding-bottom: 30px;
+    background-color: #F1F1F1;
+}
+
+#update-profile .col-md-8 {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* create portofolio */
+#create-portofolio {
+    padding-bottom: 30px;
+    background-color: #F1F1F1;
+}
+
+#create-portofolio .upload-portofolio {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+
+}
+
+@media (min-width: 768px) {
+    #create-portofolio {
+        padding-bottom: 30px;
+        background-color: #F1F1F1;
+    }
+
+    #create-portofolio .upload-portofolio {
+        margin-top: 20px;
+        margin-bottom: 5px;
+        background-color: white;
+        padding: 20px
+    }
+
+}
+
+/* Update portofolio */
+#update-portofolio {
+    padding-bottom: 30px;
+    background-color: #F1F1F1;
+}
+
+#update-portofolio .upload-portofolio {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+
+}
+
+@media (min-width: 768px) {
+    #update-portofolio {
+        padding-bottom: 30px;
+        background-color: #F1F1F1;
+    }
+
+    #update-portofolio .upload-portofolio {
+        margin-top: 20px;
+        margin-bottom: 5px;
+        background-color: white;
+        padding: 20px
+    }
+}
+
+
+/* Detail Portofolio */
+#detail-portofolio .col-md-10 .row {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+#detail-portofolio .col-md-7 {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#detail-portofolio .col-md-7 h3 {
+    text-align: center;
+    margin-bottom: 0px;
+
+}
+
+#detail-portofolio .col-md-7 p {
+    margin: 30px 0px;
+    text-align: justify;
+}
+
+#detail-portofolio .col-md-7 small {
+    margin-top: 5px;
+    color: grey;
+}
+
+@media (min-width: 768px) {
+    #detail-portofolio .col-md-7 {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    #detail-portofolio .col-md-7 h3 {
+        text-align: left;
+        margin-bottom: 0px;
+    }
+
+    #detail-portofolio .col-md-7 small {
+        margin-top: 5px;
+        color: grey;
+    }
+}
+
+/* keahlian */
+.content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+#kategori-keahlian {
+    margin-bottom: 30px;
+}
+
+#list-keahlian {
+    margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+ #update-keahlian .col-md-4{
+    float: right;
+ }
 }

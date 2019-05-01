@@ -26,10 +26,10 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-  	<link rel="stylesheet" href="<?= base_url() ?>assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>assets/css/font-awesome.min.css">
 
 
-    <!-- Custom stylesheet -->
+  <!-- Custom stylesheet -->
   <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/style.css" />
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -43,3 +43,14 @@
 <body>
 
   <?php $this->load->view('partials/user/navbar')?>
+
+  <!-- FlashData Notifikasi Berhasil-->
+  <!-- <?php if ($this->session->flashdata('flash')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Pesanan <strong>berhasil</strong>
+    <?=$this->session->flashdata('flash');?>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <?php endif;?> -->

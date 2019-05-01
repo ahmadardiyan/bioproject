@@ -1,6 +1,6 @@
 <?php
 
-class General_model extends CI_Model{
+class Wilayah_model extends CI_Model{
 
     public function getAllData($table){
         $query = $this->db->get($table);

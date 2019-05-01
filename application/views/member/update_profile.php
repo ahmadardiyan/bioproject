@@ -1,16 +1,16 @@
-<section id="blog-full-width">
+<section id="update-profile">
     <div class="container">
         <div class="row">
 
-            <?php $this->load->view('partials/user/sidebar');?>
+            <?php //$this->load->view('partials/user/sidebar');?>
 
             <!-- edit profile -->
 
-            <div class="col-md-8" style="border:solid 1px #DEDEDE;margin-top:10px;">
+            <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1" style="margin-top:20px;background-color:white">
 
                 <div class="row" style="margin:20px 5px;">
 
-                    <h1>Edit Profile</h1>
+                    <h2>Edit Profile</h2>
 
                     <hr>
                 </div>

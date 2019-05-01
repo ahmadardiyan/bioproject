@@ -61,47 +61,47 @@
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
-	<i class="fas fa-angle-up"></i>
+    <i class="fas fa-angle-up"></i>
 </a>
 
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<a class="btn btn-primary" href="<?=base_url()?>login">Logout</a>
-			</div>
-		</div>
-	</div>
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="<?=base_url()?>login">Logout</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Logout Delete Confirmation -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
-				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
-			</div>
-			<div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan.</div>
-			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<a id="btn-delete" class="btn btn-danger" href="#">Delete</a>
-			</div>
-		</div>
-	</div>
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Data yang dihapus tidak akan bisa dikembalikan.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a id="btn-delete" class="btn btn-danger" href="#">Delete</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- jQuery Plugins -->
@@ -111,6 +111,11 @@
 <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.magnific-popup.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/main.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/script.js"></script>
+
+
+<!-- Datepicker -->
+<script src="<?= base_url() ?>assets/datepicker/bootstrap-datepicker.min.js"></script>
+
 
 </body>
 

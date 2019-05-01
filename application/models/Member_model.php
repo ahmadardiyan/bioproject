@@ -3,6 +3,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Member_model extends CI_Model
 {
+    // menampilkan data dari database
+    public function get($table)
+    {
+        $this->db->get($table);
+    }
+
+    // menampilkan data dengan ketentuan where dari database
+    public function getDataWhere($table, $key, $value)
+    {
+        $this->db->where($key, $value);
+        $query = $this->db->get($table);
+        return $query->row_array();
+    }
+
+    public function getAllDataWhere($table, $key, $value)
+    {
+        $this->db->where($key, $value);
+        $query = $this->db->get($table);
+        return $query->result_array();
+    }
+
     // menambahkan data ke database
     public function create($table, $data)
     {
@@ -40,8 +61,9 @@ class Member_model extends CI_Model
         $this->db->join('kecamatan', 'kecamatan.id_kec = member.id_kec');
         $this->db->join('kabupaten', 'kabupaten.id_kab = member.id_kab');
         $this->db->join('provinsi', 'provinsi.id_prov = member.id_prov');
-        // $this->db->join('keahlian', 'keahlian.id_list_keahlian = list_keahlian.id_list_keahlian');
-        $query = $this->db->get('member');
+        $this->db->from('member');
+
+        $query = $this->db->get();
         return $query->row_array();
     }
 
@@ -49,7 +71,7 @@ class Member_model extends CI_Model
     public function getSkillsMember($key, $value)
     {
         $this->db->where([$key => $value]);
-        $this->db->join('list_keahlian', 'list_keahlian.id_list_keahlian = keahlian.id_list_keahlian');
+        $this->db->join('list_keahlian', 'list_keahlian.id_keahlian = keahlian.id_keahlian');
         $query = $this->db->get('keahlian');
         return $query->result_array();
     }
