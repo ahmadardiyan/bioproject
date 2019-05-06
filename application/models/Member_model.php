@@ -68,7 +68,7 @@ class Member_model extends CI_Model
     }
 
     // mengambil data skill member
-    public function getSkillsMember($key, $value)
+    public function getKeahlian($key, $value)
     {
         $this->db->where([$key => $value]);
         $this->db->join('list_keahlian', 'list_keahlian.id_keahlian = keahlian.id_keahlian');

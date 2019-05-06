@@ -17,7 +17,7 @@ $route['admin'] = 'admin/dashboard';
 
 //MEMBER
 $route['member'] = 'member/index';
-$route['about'] = 'member/about';
+$route['detail-profile'] = 'member/detailProfile';
 $route['update-profile'] = 'member/updateProfile'; //$1
 
 $route['create-portofolio'] = 'member/createPortofolio';
@@ -27,9 +27,18 @@ $route['delete-portofolio/(:any)'] = 'member/deletePortofolio/$1';
 
 $route['update-keahlian'] = 'keahlian/updateKeahlian'; //$1
 
-$route['sertifikat'] = 'member/getSertifikat'; //$1
+$route['sertifikat'] = 'member/getAllSertifikat'; //$1
+$route['create-sertifikat'] = 'member/createSertifikat'; //$1
+$route['update-sertifikat'] = 'member/updateSertifikat'; //$1
+$route['delete-sertifikat/(:any)'] = 'member/deleteSertifikat/$1'; //$1
 
-$route['create-pengalaman-kerja'] = 'member/createPengalamanKerja'; //$1
+$route['pendidikan'] = 'member/getAllPendidikan'; //$1
+$route['create-pendidikan'] = 'member/createPendidikan'; //$1
+$route['update-pendidikan'] = 'member/updatePendidikan'; //$1
+$route['delete-pendidikan/(:any)'] = 'member/deletePendidikan/$1'; //$1
+
+
+$route['pengalaman-kerja'] = 'member/getAllPengalamanKerja'; //$1
 
 //COMPANY
 

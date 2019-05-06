@@ -11,10 +11,10 @@ class Keahlian extends CI_Controller
     }
 
     //menampilkan data skills
-    // public function getSkillsMember($id_user = null)
-    public function getKeahlianMember($id_user = null)
+    // public function getKeahlian($id_user = null)
+    public function getKeahlian($id_user = null)
     {
-        $data= $this->Member_model->getSkillsMember('id_user',$id_user);
+        $data = $this->Member_model->getKeahlian('id_user', $id_user);
         echo json_encode($data);
     }
 
@@ -26,7 +26,7 @@ class Keahlian extends CI_Controller
 
     public function listKeahlian($id_kategori = null)
     {
-        $data = $this->Keahlian_model->getAllDataWhere('list_keahlian','id_kategori', $id_kategori);
+        $data = $this->Keahlian_model->getAllDataWhere('list_keahlian', 'id_kategori', $id_kategori);
         echo json_encode($data);
     }
 
@@ -40,31 +40,74 @@ class Keahlian extends CI_Controller
     // public function updateSkills($id_user = '1')
     public function updateKeahlian($id_user = '1')
     {
-        $data['title']  = 'Bio Project';
+        $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
-     
-        $this->form_validation->set_rules('skill[]', 'skill', 'required');
+
+        $this->form_validation->set_rules('keahlian[]', 'keahlian', 'required');
 
         if ($this->form_validation->run() === false) {
             $this->load->view('partials/user/header', $data);
             $this->load->view('member/update_keahlian', $data);
             $this->load->view('partials/user/footer');
         } else {
-            $skill = $this->input->post('skill');
-            // var_dump($skill);
+            $formKeahlian = $this->input->post('keahlian');
+
+            $dbKeahlian = $this->Member_model->getKeahlian('id_user', $id_user);
+
+            if (empty($formKeahlian)) {
+                $this->db->where('id_user', $id_user)->delete('keahlian');
+            } else {
+
+                //tambah keahlian
+                foreach ($formKeahlian as $form):
+
+                    $x = false;
+                    foreach ($dbKeahlian as $db):
+
+                        if ($db['id_keahlian'] === $form) {
+
+                            $x = true;
+
+                        }
+
+                    endforeach;
+
+                    if ($x === false) {
+                        $data = array(
+                            'id_keahlian' => $form,
+                            'id_user' => $id_user,
+                        );
+                        $this->db->insert('keahlian', $data);
+                    }
+
+                endforeach;
+
+                //hapus keahlian
+                foreach ($dbKeahlian as $db):
+
+                    $x = false;
+                    foreach ($formKeahlian as $form):
+
+                        if ($db['id_keahlian'] === $form) {
+
+                            $x = true;
+
+                        }
+
+                    endforeach;
+
+                    if ($x === false) {
+
+                        // var_dump($db['id_keahlian']);
+
+                        $this->db->where('id', $db['id'])->delete('keahlian');
+                    }
+
+                endforeach;
+            }
+
             // die();
-
-            foreach($skill as $row) :
-                $data = array(
-                    'id_keahlian' => $row,
-                    'id_user' => $id_user
-                );
-                $this->db->insert('keahlian',$data);
-            endforeach;
-
             redirect('member');
         }
     }
 }
-
-?>

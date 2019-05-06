@@ -24,27 +24,29 @@
                     <!-- Contact member -->
                     <div class="contact-member">
 
-                        <p> <i class="fas fa-phone-square"></i> <?= $member['phone_member']?></p>
-
+                        <p><i class="fas fa-phone-square"></i> <?= $member['phone_member']?></p>
                         <p><i class="fas fa-envelope"></i> ahmadardiyanto23@gmail.com</p>
                         <p><i class="fas fa-map-marker-alt"></i> <?=$member['nama_kab']?></p>
                     </div>
 
                     <div class="text-center">
+                        <a class="btn btn-primary" href="<?=base_url()?>detail-profile">
+                            Detail Profile
+                        </a>
                         <a class="btn btn-default" href="<?=base_url()?>update-profile">
                             Edit Profile
                         </a>
-                    </div>
+                        </div>
 
                 </div>
 
                 <!-- Keahlian -->
                 <div id="keahlian">
 
-                    <h3>Skills</h3>
+                    <h3>Keahlian</h3>
                     <hr>
                     <a href="<?=base_url()?>update-keahlian" class="btn btn-primary"
-                        style="float:right; margin-top: -66px;"> Tambah Skills
+                        style="float:right; margin-top: -66px;"> Edit Keahlian
                     </a>
                     <div class="row ">
 
@@ -81,16 +83,15 @@
             </div>
 
 
-            <!-- portofolio -->
             <div class="col-md-8 col-xs-12">
 
+                <!-- portofolio -->
                 <div id="portofolio">
                     <div class="row" style="margin:20px 5px 10px 5px;">
 
                         <h3>Portofolio</h3>
                         <a href="create-portofolio" class="btn btn-primary" style="float:right; margin-top: -50px;">
-                            Tambah
-                            Porfolio </a>
+                            Tambah Porfolio </a>
                         <hr>
 
                     </div>
@@ -128,17 +129,50 @@
 
                     </div>
 
-                    <!-- end portofolio -->
+                </div>
+                <!-- end portofolio -->
+
+                <div id="pendidikan">
+                    <div class="content">
+                        <h3>Pendidikan</h3>
+                        <a href="pendidikan" class="btn btn-primary"
+                            style="float:right; margin-top: -50px;"> Semua Pendidikan </a>
+                        <hr>
+
+                        <?php if (!empty($pendidikan)) :?>
+                        <?php foreach ($pendidikan as $p) : ?>
+
+                        <div class="list-pendidikan" style="margin-bottom:15px">
+                            <h4 style="margin-bottom:0px"> <?= $p['nama_univ']?> <span style="font-weight:10">(<?= $p['gelar']?> <?= $p['prodi']?>)</span>
+                            </h4>
+                            <p> <?= $p['tahun_masuk']?> - <?= $p['tahun_selesai']?> </p>
+                        </div>
+
+                        <?php endforeach;?>
+                        <?php else : ?>
+
+                        <p>Not Found !</p>
+
+                        <?php endif;?>
+
+                    </div>
                 </div>
 
                 <div id="pengalaman-kerja">
                     <div class="content">
                         <h3>Pengalaman Kerja</h3>
-                        <a href="create-pengalaman-kerja" class="btn btn-primary"
-                            style="float:right; margin-top: -50px;">
-                            Tambah Pengalaman Kerja </a>
+                        <a href="pengalaman-kerja" class="btn btn-primary"
+                            style="float:right; margin-top: -50px;"> Semua Pengalaman Kerja </a>
                         <hr>
 
+                        <div class="list-pengalaman-kerja" style="margin-bottom:15px">
+                            <h4 style="margin-bottom:0px"> PT Cinta Sejati <span style="  font-weight:10">(Direktur)</span></h4>
+                            <p> Maret 2019 - Sekarang </p>
+                        </div>
+                        <div class="list-pengalaman-kerja" style="margin-bottom:15px">
+                            <h4 style="margin-bottom:0px"> PT Cinta Sejati <span style="  font-weight:10">(Direktur)</span></h4>
+                            <p> Maret 2019 - Sekarang </p>
+                        </div>
                     </div>
                 </div>
 

@@ -12,6 +12,12 @@ class Keahlian_model extends CI_Model{
         return $query->result_array();
     }
 
+    public function deleteDataWhere($table,$key,$value,$data)
+    {
+        $this->db->where($key, $value);
+        $this->db->delete($table);
+    }
+
 }
 
 ?>

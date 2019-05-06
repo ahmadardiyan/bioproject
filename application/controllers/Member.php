@@ -17,7 +17,8 @@ class Member extends CI_Controller
         $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
         $data['portofolio'] = $this->Member_model->getAllPortofolio('id_user', $id_user);
-        $data['sertifikat'] = $this->Member_model->getAllDataWhere('sertifikat','id_user',$id_user);
+        $data['sertifikat'] = $this->Member_model->getAllDataWhere('sertifikat', 'id_user', $id_user);
+        $data['pendidikan'] = $this->Member_model->getAllDataWhere('pendidikan', 'id_user', $id_user);
 
         $this->load->view('partials/user/header', $data);
         $this->load->view('member/index', $data);
@@ -32,14 +33,14 @@ class Member extends CI_Controller
     }
 
     //about member
-    public function about($id_user = '1')
+    public function detailProfile($id_user = '1')
     {
         $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
         // $data['skills'] = $this->Member_model->getSkillsMember('id_user', $id_user);
 
         $this->load->view('partials/user/header', $data);
-        $this->load->view('member/about', $data);
+        $this->load->view('member/detail_profile', $data);
         $this->load->view('partials/user/footer');
     }
 
@@ -198,28 +199,170 @@ class Member extends CI_Controller
     // menghapus portofolio
     public function deletePortofolio($idPortofolio)
     {
-        $$data['portofolio'] = $this->Member_model->delete('portofolio', 'id_portofolio', $idPortofolio);
+        $this->Member_model->delete('portofolio', 'id_portofolio', $idPortofolio);
         // $this->session->set_flashdata('flash', 'Dihapus');
         redirect('member');
     }
 
-    public function getSertifikat($id_user = '1')
+    public function getAllSertifikat($id_user = '1')
     {
         $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
-        $data['sertifikat'] = $this->Member_model->getAllDataWhere('sertifikat','id_user',$id_user);
-
-        // var_dump($data['sertifikat']);
-        // die();
+        $data['sertifikat'] = $this->Member_model->getAllDataWhere('sertifikat', 'id_user', $id_user);
 
         $this->load->view('partials/user/header', $data);
         $this->load->view('member/sertifikat', $data);
         $this->load->view('partials/user/footer');
     }
 
-    public function createPengalamanKerja($id_user = '1')
+    public function getSertifikat()
     {
-        echo "Halaman Create Pengalaman Kerja";
+        $id_sertifikat = $_POST['id_sertifikat'];
+        $data = $this->Member_model->getDataWhere('sertifikat', 'id_sertifikat', $id_sertifikat);
+
+        echo json_encode($data);
+    }
+
+    //Membuat sertifikat
+    public function createSertifikat($id_user = '1')
+    {
+        $this->form_validation->set_rules('nama_sertifikat', 'Nama Sertifikat', 'required');
+        $this->form_validation->set_rules('tahun', 'Tahun', 'required|numeric');
+
+        if ($this->form_validation->run() == false) {
+            redirect('sertifikat');
+        }
+
+        $data = [
+            "id_user" => $id_user,
+            "nama_sertifikat" => $this->input->post('nama_sertifikat', true),
+            "tahun" => $this->input->post('tahun', true),
+        ];
+
+        $this->Member_model->create('sertifikat', $data);
+        redirect('sertifikat');
+    }
+
+    // Memperbarui Data Sertifikat
+    public function updateSertifikat()
+    {
+        $this->form_validation->set_rules('nama_sertifikat', 'Nama Sertifikat', 'required');
+        $this->form_validation->set_rules('tahun', 'Tahun', 'required|numeric');
+
+        if ($this->form_validation->run() == false) {
+            redirect('sertifikat');
+        }
+
+        $idSertifikat = $this->input->post('id_sertifikat', true);
+        $data = [
+            "nama_sertifikat" => $this->input->post('nama_sertifikat', true),
+            "tahun" => $this->input->post('tahun', true),
+        ];
+
+        $this->Member_model->update('sertifikat', 'id_sertifikat', $idSertifikat, $data);
+        redirect('sertifikat');
+
+    }
+
+    // Menghapus Data Sertifikat
+    public function deleteSertifikat($idSertifikat)
+    {
+        $this->Member_model->delete('sertifikat', 'id_sertifikat', $idSertifikat);
+        redirect('sertifikat');
+    }
+
+    public function getPendidikan()
+    {
+        $id_pendidikan = $_POST['id_pendidikan'];
+        $data = $this->Member_model->getDataWhere('pendidikan', 'id_pendidikan', $id_pendidikan);
+
+        echo json_encode($data);
+    }
+
+
+    public function getAllPendidikan($id_user = '1')
+    {
+        $data['title'] = 'Bio Project';
+        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
+        $data['pendidikan'] = $this->Member_model->getAllDataWhere('pendidikan', 'id_user', $id_user);
+
+        // var_dump($data['pendidikan']);
+        // die();
+
+        $this->load->view('partials/user/header', $data);
+        $this->load->view('member/pendidikan', $data);
+        $this->load->view('partials/user/footer');
+    }
+
+    //Membuat Pendidikan
+    public function createPendidikan($id_user = '1')
+    {
+        $this->form_validation->set_rules('nama_univ', 'Nama Universitas', 'required');
+        $this->form_validation->set_rules('gelar', 'Gelar', 'required');
+        $this->form_validation->set_rules('prodi', 'Program Studi', 'required');
+        $this->form_validation->set_rules('tahun_masuk', 'Tahun Masuk', 'required|numeric');
+        $this->form_validation->set_rules('tahun_selesai', 'Tahun selesai', 'required|numeric');
+        
+        if ($this->form_validation->run() == false) {
+            redirect('pendidikan');
+        }
+
+        $data = [
+            "id_user" => $id_user,
+            "nama_univ" => $this->input->post('nama_univ', true),
+            "gelar" => $this->input->post('gelar', true),
+            "prodi" => $this->input->post('prodi', true),
+            "tahun_masuk" => $this->input->post('tahun_masuk', true),
+            "tahun_selesai" => $this->input->post('tahun_selesai', true)
+        ];
+
+        $this->Member_model->create('pendidikan', $data);
+        redirect('pendidikan');
+    }
+
+    // Memperbarui Data Pendidikan
+    public function updatePendidikan()
+    {
+        $this->form_validation->set_rules('nama_univ', 'Nama Universitas', 'required');
+        $this->form_validation->set_rules('gelar', 'Gelar', 'required');
+        $this->form_validation->set_rules('prodi', 'Program Studi', 'required');
+        $this->form_validation->set_rules('tahun_masuk', 'Tahun Masuk', 'required|numeric');
+        $this->form_validation->set_rules('tahun_selesai', 'Tahun selesai', 'required|numeric');
+        
+        if ($this->form_validation->run() == false) {
+            redirect('pendidikan');
+        }
+        // die();
+        $idPendidikan = $this->input->post('id_pendidikan', true);
+        $data = [
+            "nama_univ" => $this->input->post('nama_univ', true),
+            "gelar" => $this->input->post('gelar', true),
+            "prodi" => $this->input->post('prodi', true),
+            "tahun_masuk" => $this->input->post('tahun_masuk', true),
+            "tahun_selesai" => $this->input->post('tahun_selesai', true),
+        ];
+
+        $this->Member_model->update('pendidikan', 'id_pendidikan', $idPendidikan, $data);
+        redirect('pendidikan');
+
+    }
+
+    // Menghapus Data Pendidikan
+    public function deletePendidikan($idPendidikan)
+    {
+        $this->Member_model->delete('pendidikan', 'id_Pendidikan', $idPendidikan);
+        redirect('pendidikan');
+    }
+
+    public function getAllPengalamanKerja($id_user = '1')
+    {
+        $data['title'] = 'Bio Project';
+        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
+        $data['sertifikat'] = $this->Member_model->getAllDataWhere('sertifikat', 'id_user', $id_user);
+
+        $this->load->view('partials/user/header', $data);
+        $this->load->view('member/pengalaman_kerja', $data);
+        $this->load->view('partials/user/footer');
     }
 
     public function uploadImage()

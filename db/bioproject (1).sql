@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 20, 2019 at 04:25 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Host: localhost:3306
+-- Generation Time: 06 Mei 2019 pada 21.06
+-- Versi Server: 5.7.24-0ubuntu0.18.04.1
+-- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `industri`
+-- Struktur dari tabel `industri`
 --
 
 CREATE TABLE `industri` (
@@ -36,7 +34,7 @@ CREATE TABLE `industri` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jenis_perusahaan`
+-- Struktur dari tabel `jenis_perusahaan`
 --
 
 CREATE TABLE `jenis_perusahaan` (
@@ -47,7 +45,7 @@ CREATE TABLE `jenis_perusahaan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kabupaten`
+-- Struktur dari tabel `kabupaten`
 --
 
 CREATE TABLE `kabupaten` (
@@ -57,7 +55,7 @@ CREATE TABLE `kabupaten` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `kabupaten`
+-- Dumping data untuk tabel `kabupaten`
 --
 
 INSERT INTO `kabupaten` (`id_kab`, `id_prov`, `nama_kab`) VALUES
@@ -579,7 +577,7 @@ INSERT INTO `kabupaten` (`id_kab`, `id_prov`, `nama_kab`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori_keahlian`
+-- Struktur dari tabel `kategori_keahlian`
 --
 
 CREATE TABLE `kategori_keahlian` (
@@ -588,7 +586,7 @@ CREATE TABLE `kategori_keahlian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kategori_keahlian`
+-- Dumping data untuk tabel `kategori_keahlian`
 --
 
 INSERT INTO `kategori_keahlian` (`id_kategori`, `nama_kategori_keahlian`) VALUES
@@ -600,26 +598,27 @@ INSERT INTO `kategori_keahlian` (`id_kategori`, `nama_kategori_keahlian`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `keahlian`
+-- Struktur dari tabel `keahlian`
 --
 
 CREATE TABLE `keahlian` (
   `id` int(10) NOT NULL,
-  `id_list_keahlian` varchar(8) NOT NULL,
-  `id_user` varchar(10) NOT NULL
+  `id_user` varchar(10) NOT NULL,
+  `id_keahlian` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `keahlian`
+-- Dumping data untuk tabel `keahlian`
 --
 
-INSERT INTO `keahlian` (`id`, `id_list_keahlian`, `id_user`) VALUES
-(6, '1', '1');
+INSERT INTO `keahlian` (`id`, `id_user`, `id_keahlian`) VALUES
+(22, '1', '1'),
+(23, '1', '4');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kecamatan`
+-- Struktur dari tabel `kecamatan`
 --
 
 CREATE TABLE `kecamatan` (
@@ -629,7 +628,7 @@ CREATE TABLE `kecamatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `kecamatan`
+-- Dumping data untuk tabel `kecamatan`
 --
 
 INSERT INTO `kecamatan` (`id_kec`, `id_kab`, `nama_kec`) VALUES
@@ -7856,7 +7855,7 @@ INSERT INTO `kecamatan` (`id_kec`, `id_kab`, `nama_kec`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelurahan`
+-- Struktur dari tabel `kelurahan`
 --
 
 CREATE TABLE `kelurahan` (
@@ -7866,7 +7865,7 @@ CREATE TABLE `kelurahan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `kelurahan`
+-- Dumping data untuk tabel `kelurahan`
 --
 
 INSERT INTO `kelurahan` (`id_kel`, `id_kec`, `nama_kel`) VALUES
@@ -82932,20 +82931,20 @@ INSERT INTO `kelurahan` (`id_kel`, `id_kec`, `nama_kel`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `list_keahlian`
+-- Struktur dari tabel `list_keahlian`
 --
 
 CREATE TABLE `list_keahlian` (
-  `id_list_keahlian` varchar(8) NOT NULL,
+  `id_keahlian` varchar(8) NOT NULL,
   `nama_keahlian` varchar(30) NOT NULL,
   `id_kategori` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `list_keahlian`
+-- Dumping data untuk tabel `list_keahlian`
 --
 
-INSERT INTO `list_keahlian` (`id_list_keahlian`, `nama_keahlian`, `id_kategori`) VALUES
+INSERT INTO `list_keahlian` (`id_keahlian`, `nama_keahlian`, `id_kategori`) VALUES
 ('1', 'Frontend', '1'),
 ('2', 'Backend', '1'),
 ('3', 'ui design', '2'),
@@ -82954,7 +82953,7 @@ INSERT INTO `list_keahlian` (`id_list_keahlian`, `nama_keahlian`, `id_kategori`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `member`
+-- Struktur dari tabel `member`
 --
 
 CREATE TABLE `member` (
@@ -82976,40 +82975,48 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `member`
+-- Dumping data untuk tabel `member`
 --
 
 INSERT INTO `member` (`id_user`, `nama_member`, `gender_member`, `tempat_lahir`, `tanggal_lahir`, `phone_member`, `alamat`, `id_kel`, `id_kec`, `id_kab`, `id_prov`, `foto`, `deskripsi_member`, `created_at`, `modified_at`) VALUES
-('1', 'Ahmad Ardiyanto', 'Laki-laki', 'Magelang', '1996-12-22', '087834284756', ' Dusun Macanan RT 01/ RW 01         ', '', '3308040', '3308', '33', '5cb3610ea29b4.png', 'Aku hanyalah bukan adalah', '2019-04-19 08:17:35', NULL);
+('1', 'Ahmad Ardiyanto', 'Laki-laki', 'Magelang', '1996-10-19', '087834284756', 'Dusun Macanan RT 01/ RW 01        ', '', '3308040', '3308', '33', '5cbbcb5147933.png', 'Aku hanyalah bukan adalah', '2019-05-05 11:35:59', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pendidikan`
+-- Struktur dari tabel `pendidikan`
 --
 
 CREATE TABLE `pendidikan` (
-  `id_pendidikan` varchar(10) NOT NULL,
+  `id_pendidikan` int(10) NOT NULL,
   `id_user` varchar(10) NOT NULL,
-  `id_univ` varchar(5) NOT NULL,
+  `nama_univ` varchar(100) NOT NULL,
   `gelar` varchar(5) NOT NULL,
-  `id_program_studi` varchar(5) NOT NULL,
-  `tahun_mulai` year(4) NOT NULL,
+  `prodi` varchar(50) NOT NULL,
+  `tahun_masuk` year(4) NOT NULL,
   `tahun_selesai` year(4) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `modified_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `pendidikan`
+--
+
+INSERT INTO `pendidikan` (`id_pendidikan`, `id_user`, `nama_univ`, `gelar`, `prodi`, `tahun_masuk`, `tahun_selesai`, `created_at`, `modified_at`) VALUES
+(1, '1', 'UIN Sunan Kalijaga', 'S3', 'Teknik Informatika', 2016, 2019, '2019-05-06 11:46:29', NULL);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengalaman`
+-- Struktur dari tabel `pengalaman_kerja`
 --
 
-CREATE TABLE `pengalaman` (
-  `id_pengalaman` varchar(10) NOT NULL,
-  `jabatan_kerja` varchar(30) NOT NULL,
+CREATE TABLE `pengalaman_kerja` (
+  `id_pengalaman` int(10) NOT NULL,
+  `id_user` varchar(10) NOT NULL,
   `nama_perusahaan` varchar(100) NOT NULL,
+  `jabatan` varchar(30) NOT NULL,
   `lokasi` char(2) NOT NULL,
   `bulan_mulai` int(2) NOT NULL,
   `tahun_mulai` year(4) NOT NULL,
@@ -83022,7 +83029,7 @@ CREATE TABLE `pengalaman` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `perusahaan`
+-- Struktur dari tabel `perusahaan`
 --
 
 CREATE TABLE `perusahaan` (
@@ -83047,7 +83054,7 @@ CREATE TABLE `perusahaan` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `portofolio`
+-- Struktur dari tabel `portofolio`
 --
 
 CREATE TABLE `portofolio` (
@@ -83061,19 +83068,19 @@ CREATE TABLE `portofolio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `portofolio`
+-- Dumping data untuk tabel `portofolio`
 --
 
 INSERT INTO `portofolio` (`id_portofolio`, `id_user`, `judul`, `deskripsi`, `foto`, `created_at`, `modified_at`) VALUES
 ('PRT1903280', '1', 'Ini Judul', 'dfsfds', '5c9c54eda63cb.jpg', '2019-03-28 05:00:29', NULL),
-('PRT1903280001', '1', 'fike2', 'revisi', '5c9f94acf2107.png', '2019-03-28 05:02:00', NULL),
 ('PRT1904050001', '1', 'baru', 'ini', '5ca72670b0da2.png', '2019-04-05 09:57:04', NULL),
-('PRT1904180001', '1', 'portofolioku', ' ini portofolioku yang baru   ', '5cb86328efeb4.png', '2019-04-18 11:44:41', NULL);
+('PRT1904180001', '1', 'portofolioku', ' ini portofolioku yang baru   ', '5cb86328efeb4.png', '2019-04-18 11:44:41', NULL),
+('PRT1904210001', '1', 'coba', ' ini deskripsi ', '5cbb51546598c.jpg', '2019-04-20 17:05:24', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `program_studi`
+-- Struktur dari tabel `program_studi`
 --
 
 CREATE TABLE `program_studi` (
@@ -83084,7 +83091,7 @@ CREATE TABLE `program_studi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `provinsi`
+-- Struktur dari tabel `provinsi`
 --
 
 CREATE TABLE `provinsi` (
@@ -83093,7 +83100,7 @@ CREATE TABLE `provinsi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `provinsi`
+-- Dumping data untuk tabel `provinsi`
 --
 
 INSERT INTO `provinsi` (`id_prov`, `nama_prov`) VALUES
@@ -83135,7 +83142,34 @@ INSERT INTO `provinsi` (`id_prov`, `nama_prov`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `universitas`
+-- Struktur dari tabel `sertifikat`
+--
+
+CREATE TABLE `sertifikat` (
+  `id_sertifikat` int(10) NOT NULL,
+  `id_user` varchar(10) NOT NULL,
+  `nama_sertifikat` varchar(50) NOT NULL,
+  `tahun` year(4) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `sertifikat`
+--
+
+INSERT INTO `sertifikat` (`id_sertifikat`, `id_user`, `nama_sertifikat`, `tahun`, `created_at`, `modified_at`) VALUES
+(2, '1', 'Javasricpt', 2006, '2019-05-01 02:34:30', '2019-05-01 02:34:30'),
+(3, '1', 'MADE', 2018, '2019-05-01 02:34:30', '2019-05-01 02:34:30'),
+(4, '1', 'KADE', 2018, '2019-05-01 02:34:30', '2019-05-01 02:34:30'),
+(5, '2', 'HTML & CSS', 2016, '2019-05-01 02:34:30', '2019-05-01 02:34:30'),
+(6, '1', 'IAK', 2019, '2019-05-01 23:07:33', '2019-05-01 23:07:33'),
+(7, '1', 'Dev C', 2017, '2019-05-05 14:23:53', '2019-05-05 14:23:53');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `universitas`
 --
 
 CREATE TABLE `universitas` (
@@ -83147,18 +83181,26 @@ CREATE TABLE `universitas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
   `id_user` varchar(10) NOT NULL,
   `username` varchar(25) NOT NULL,
   `password` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
   `token` varchar(255) NOT NULL,
   `role` int(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `modified_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id_user`, `username`, `password`, `email`, `token`, `role`, `created_at`, `modified_at`) VALUES
+('1', 'ardiyan', '12345', 'ahmadardiyanto23@gmail.com', '', 1, '2019-04-20 16:03:59', NULL);
 
 --
 -- Indexes for dumped tables
@@ -83204,6 +83246,18 @@ ALTER TABLE `member`
   ADD PRIMARY KEY (`id_user`);
 
 --
+-- Indexes for table `pendidikan`
+--
+ALTER TABLE `pendidikan`
+  ADD PRIMARY KEY (`id_pendidikan`);
+
+--
+-- Indexes for table `pengalaman_kerja`
+--
+ALTER TABLE `pengalaman_kerja`
+  ADD PRIMARY KEY (`id_pengalaman`);
+
+--
 -- Indexes for table `perusahaan`
 --
 ALTER TABLE `perusahaan`
@@ -83223,6 +83277,12 @@ ALTER TABLE `provinsi`
   ADD PRIMARY KEY (`id_prov`);
 
 --
+-- Indexes for table `sertifikat`
+--
+ALTER TABLE `sertifikat`
+  ADD PRIMARY KEY (`id_sertifikat`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -83230,9 +83290,22 @@ ALTER TABLE `provinsi`
 -- AUTO_INCREMENT for table `keahlian`
 --
 ALTER TABLE `keahlian`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-COMMIT;
-
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT for table `pendidikan`
+--
+ALTER TABLE `pendidikan`
+  MODIFY `id_pendidikan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `pengalaman_kerja`
+--
+ALTER TABLE `pengalaman_kerja`
+  MODIFY `id_pengalaman` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `sertifikat`
+--
+ALTER TABLE `sertifikat`
+  MODIFY `id_sertifikat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -104,6 +104,100 @@
     </div>
 </div>
 
+<!-- Modal Sertifikat -->
+<div class="modal fade" id="modal-sertifikat" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Edit Sertifikat</h3>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" enctype="multipart/form-data">
+
+                    <input type="hidden" name="id_sertifikat" id="id-sertifikat">
+
+                    <div class="form-group">
+                        <label for="nama-sertifikat">Nama Sertifikat</label>
+                        <input type="text" class="form-control" id="nama-sertifikat" name="nama_sertifikat">
+                        <small class="form-text text-danger"><?=form_error('nama-sertifikat')?></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tahun">Tahun</label>
+                        <select class="form-control tahun" name="tahun" id="tahun"></select>
+                            <small class="form-text text-danger"><?=form_error('tahun')?></small>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Pendidikan -->
+<div class="modal fade" id="modal-pendidikan" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Edit Pendidikan</h3>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" enctype="multipart/form-data">
+
+                    <input type="hidden" name="id_pendidikan" id="id-pendidikan">
+
+                    <div class="form-group">
+                        <label for="nama-univ">Nama Universitas</label>
+                        <input type="text" class="form-control" id="nama-univ" name="nama_univ">
+                        <small class="form-text text-danger"><?=form_error('nama-univ')?></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gelar">Gelar</label>
+                        <input type="text" class="form-control" id="gelar" name="gelar">
+                        <small class="form-text text-danger"><?=form_error('gelar')?></small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="prodi">Program Studi</label>
+                        <input type="text" class="form-control" id="prodi" name="prodi">
+                        <small class="form-text text-danger"><?=form_error('prodi')?></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tahun-masuk">Tahun Masuk</label>
+                        <select class="form-control tahun" name="tahun_masuk" id="tahun-masuk"></select>
+                            <small class="form-text text-danger"><?=form_error('tahun-masuk')?></small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tahun-selesai">Tahun Selesai</label>
+                        <select class="form-control tahun" name="tahun_selesai" id="tahun-selesai"></select>
+                            <small class="form-text text-danger"><?=form_error('tahun-selesai')?></small>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
 <!-- jQuery Plugins -->
 <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.min.js"></script>

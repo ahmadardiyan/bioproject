@@ -15,8 +15,7 @@ $(document).ready(function () {
     });
 });
 
-
-// Wilayah 
+// Wilayah Provinsi
 $(document).ready(function () {
 
     $("#provinsi").append('<option value="">Pilih</option>');
@@ -46,6 +45,7 @@ $(document).ready(function () {
     });
 });
 
+// Wilayah Kabupaten
 $("#provinsi").change(function () {
     var id_prov = $("#provinsi").val();
     var url = 'wilayah/kabupaten/' + id_prov;
@@ -74,6 +74,7 @@ $("#provinsi").change(function () {
     });
 });
 
+// Wilayah Kecamatan
 $("#kabupaten").change(function () {
     var id_kab = $("#kabupaten").val();
     var url = 'wilayah/kecamatan/' + id_kab;
@@ -108,10 +109,20 @@ $(document).ready(function () {
     });
 });
 
-// keahlian member
+// Tahun
+$(document).ready(function () {
+    $('.tahun').append('<option value="">Pilih</option>');
+    var d = new Date();
+
+    for (var i = d.getFullYear(); i > d.getFullYear()-50; i--) {
+        $('.tahun').append('<option value="'+i+'">'+i+'</option>');
+    }
+});
+
+// Keahlian Member
 $(document).ready(function () {
 
-    var url = 'keahlian/getKeahlianMember/1';
+    var url = 'keahlian/getKeahlian/1';
     $.ajax({
         url: url,
         type: 'GET',
@@ -126,14 +137,14 @@ $(document).ready(function () {
 
                 $("#keahlian-member").append('<p class="label label-default" style="margin-right:10px; display:inline-block">' + data.nama_keahlian + '</p>');
 
-                $("#select-keahlian-member").append('<div class="col-md-6 col-xs-6"><div class="checkbox-inline"><input type="checkbox" name="inputKeahlian" value="' + data.id_list_keahlian + '" id="inputKeahlian" style="margin-right:10px;" checked>' + data.nama_keahlian + '</div></div>');
+                $("#checkbox-keahlian-member").append('<div id="list-keahlian-' + data.id_keahlian + '" class="col-md-6 col-xs-6"><div class="checkbox-inline"><input type="checkbox"  name="keahlian[]"  value="' + data.id_keahlian + '" id="keahlian-' + data.id_keahlian + '" style="margin-right:10px;" checked>' + data.nama_keahlian + '</div></div>');
 
             });
         }
     });
 });
 
-// kategori keahlian
+// Kategori Keahlian
 $(document).ready(function () {
     $("#kategori-keahlian").append('<option value="">Pilih</option>');
 
@@ -150,7 +161,7 @@ $(document).ready(function () {
     });
 });
 
-// list keahlian
+// List Keahlian
 $("#kategori-keahlian").change(function () {
 
     $("#list-keahlian").html('');
@@ -172,21 +183,115 @@ $("#kategori-keahlian").change(function () {
 
                 });
 
-                if (x == true) {
-                    $("#list-keahlian").append('<div class="col-md-6 col-xs-6"><label class="checkbox-inline"><input type="checkbox" name="skill[]" class="skill" value="' + data.id_keahlian + '" style="margin-right:10px;" checked>' + data.nama_keahlian + '</label></div>')
-                } else {
-                    $("#list-keahlian").append('<div class="col-md-6 col-xs-6"><label class="checkbox-inline"><input type="checkbox" name="skill[]" class="skill" value="' + data.id_keahlian + '" style="margin-right:10px;">' + data.nama_keahlian + '</label></div>')
-                }
+                $("#list-keahlian").append('<div class="col-md-6 col-xs-6"><label class="checkbox-inline"><input type="checkbox" class="skill" id="' + data.id_keahlian + '" value="' + data.id_keahlian + '" style="margin-right:10px;" onclick="tambahKeahlian(`' + data.id_keahlian + '`,`' + data.nama_keahlian + '`)" ' + (x == true ? "checked" : "") + '>' + data.nama_keahlian + '</label></div>')
 
             });
         }
     });
 });
 
-$("#list-keahlian").change(function () {
-    console.log($(this));
-    // $(this).css("color","red");
-    $(this).css("color", "red");
+// Tambah Keahlian
+function tambahKeahlian(id_keahlian, nama_keahlian) {
 
-    $("#select-keahlian-member").append('<div class="col-md-6 col-xs-6"><label class="checkbox-inline"><input type="checkbox" name="skill[]" class="skill" value="" style="margin-right:10px;" checked onclick="checkedKeahlian()"> haha </label><div>')
+    var status = $("#" + id_keahlian).is(":checked") ? "1" : "0";
+
+    if (status === '1') {
+
+        $("#checkbox-keahlian-member").append('<div id="list-keahlian-' + id_keahlian + '" class="col-md-6 col-xs-6"><label class="checkbox-inline"><input type="checkbox" class="skill"  name="keahlian[]"  id="' + nama_keahlian + '"  value="' + id_keahlian + '" style="margin-right:10px;" checked> ' + nama_keahlian + '</label><div>');
+
+    } else {
+
+        $("#list-keahlian-" + id_keahlian)[0].remove();
+    }
+
+}
+
+// Tambah Sertifikat
+$("#btn-create-sertifikat").on('click', function () {
+    $("#modal-sertifikat").modal();
+    $(".modal-title").html('Tambah Sertifikat');
+    $(".modal-body form").attr('action', 'create-sertifikat');
+    $('#nama-sertifikat').val('');
+    $('#tahun').val('');
+    $(".modal-footer button[type=submit]").html('Submit');
 });
+
+// Update Sertifikat
+$(".btn-update-sertifikat").on('click', function () {
+    $("#modal-sertifikat").modal();
+    $(".modal-title").html('Edit Sertifikat');
+    $(".modal-body form").attr('action', 'update-sertifikat');
+    $(".modal-footer button[type=submit]").html('Edit Data');
+
+    const id = $(this).data('id');
+    // console.log(id);
+
+    var url = 'member/getSertifikat';
+    $.ajax({
+        url: url,
+        data: {
+            id_sertifikat: id
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            $('#id-sertifikat').val(data.id_sertifikat);
+            $('#nama-sertifikat').val(data.nama_sertifikat);
+            $('#tahun').val(data.tahun);
+        }
+    });
+});
+
+// Tambah Pendidikan
+$("#btn-create-pendidikan").on('click', function () {
+    $("#modal-pendidikan").modal();
+    $(".modal-title").html('Tambah pendidikan');
+    $(".modal-body form").attr('action', 'create-pendidikan');
+    $('#nama-univ').val('');
+    $('#gelar').val('');
+    $('#prodi').val('');
+    $('#tahun-masuk').val('');
+    $('#tahun-selesai').val('');
+    $(".modal-footer button[type=submit]").html('Submit');
+});
+
+// Update Pendidikan
+$(".btn-update-pendidikan").on('click', function () {
+    $("#modal-pendidikan").modal();
+    $(".modal-title").html('Edit Pendidikan');
+    $(".modal-body form").attr('action', 'update-pendidikan');
+    $(".modal-footer button[type=submit]").html('Edit Data');
+
+    const id = $(this).data('id');
+
+    var url = 'member/getpendidikan';
+    $.ajax({
+        url: url,
+        data: {
+            id_pendidikan: id
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            $('#id-pendidikan').val(data.id_pendidikan);
+            $('#nama-univ').val(data.nama_univ);
+            $('#gelar').val(data.gelar);
+            $('#prodi').val(data.prodi);
+            $('#tahun-masuk').val(data.tahun_masuk);
+            $('#tahun-selesai').val(data.tahun_selesai);
+
+            console.log(data.tahun_masuk);
+            console.log(data.tahun_selesai);
+        }
+    });
+});
+
+// // Tambah Pengalaman
+// $("#btn-create-pengalaman").on('click', function () {
+//     $("#modal-pengalaman").modal();
+//     $(".modal-title").html('Tambah Pengalaman');
+//     $(".modal-body form").attr('action', 'create-pengalaman');
+//     // $('#nama-sertifikat').val('');
+//     // $('#tahun').val('');
+//     $(".modal-footer button[type=submit]").html('Submit');
+// });
