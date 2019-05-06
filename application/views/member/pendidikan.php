@@ -39,33 +39,6 @@
 
                     <?php endif;?>
 
-                    <!-- <?php if (!empty($pendidikan)) :?>
-                    <?php foreach ($pendidikan as $p) : ?>
-
-                    <div class="col-md-7 col-xs-7">
-                        <h4><?= $s['nama_sertifikat']?></h4>
-
-                    </div>
-                    <div class="col-md-2 col-xs-2">
-                        <p><?= $s['tahun']?></p>
-
-                    </div>
-                    <div class="col-md-3 col-xs-3">
-            
-                        <a class="btn btn-xs btn-primary btn-update-sertifikat" data-toggle="modal" data-target="btn-sertifikat" data-id="<?=$s['id_sertifikat']?>"> Edit </a>
-                        <a href="delete-sertifikat/<?=$s['id_sertifikat']?>" class="btn btn-xs btn-danger mb-2"
-                            onclick="return confirm('Anda yakin ingin menghapus data sertifikat <?= $s['nama_sertifikat']?> ?');"> Delete </a>
-                    </div>
-
-                    <hr>
-
-                    <?php endforeach;?>
-                    <?php else : ?>
-
-                    <p>Not Found !</p>
-
-                    <?php endif;?> -->
-
                 </div>
 
             </div>

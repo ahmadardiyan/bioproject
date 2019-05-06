@@ -19,6 +19,7 @@ class Member extends CI_Controller
         $data['portofolio'] = $this->Member_model->getAllPortofolio('id_user', $id_user);
         $data['sertifikat'] = $this->Member_model->getAllDataWhere('sertifikat', 'id_user', $id_user);
         $data['pendidikan'] = $this->Member_model->getAllDataWhere('pendidikan', 'id_user', $id_user);
+        $data['pengalaman_kerja'] = $this->Member_model->getAllDataWhere('pengalaman_kerja', 'id_user', $id_user);
 
         $this->load->view('partials/user/header', $data);
         $this->load->view('member/index', $data);
@@ -300,7 +301,7 @@ class Member extends CI_Controller
         $this->form_validation->set_rules('nama_univ', 'Nama Universitas', 'required');
         $this->form_validation->set_rules('gelar', 'Gelar', 'required');
         $this->form_validation->set_rules('prodi', 'Program Studi', 'required');
-        $this->form_validation->set_rules('tahun_masuk', 'Tahun Masuk', 'required|numeric');
+        $this->form_validation->set_rules('tahun_mulai', 'Tahun mulai', 'required|numeric');
         $this->form_validation->set_rules('tahun_selesai', 'Tahun selesai', 'required|numeric');
         
         if ($this->form_validation->run() == false) {
@@ -312,7 +313,7 @@ class Member extends CI_Controller
             "nama_univ" => $this->input->post('nama_univ', true),
             "gelar" => $this->input->post('gelar', true),
             "prodi" => $this->input->post('prodi', true),
-            "tahun_masuk" => $this->input->post('tahun_masuk', true),
+            "tahun_mulai" => $this->input->post('tahun_mulai', true),
             "tahun_selesai" => $this->input->post('tahun_selesai', true)
         ];
 
@@ -326,7 +327,7 @@ class Member extends CI_Controller
         $this->form_validation->set_rules('nama_univ', 'Nama Universitas', 'required');
         $this->form_validation->set_rules('gelar', 'Gelar', 'required');
         $this->form_validation->set_rules('prodi', 'Program Studi', 'required');
-        $this->form_validation->set_rules('tahun_masuk', 'Tahun Masuk', 'required|numeric');
+        $this->form_validation->set_rules('tahun_mulai', 'Tahun Mulai', 'required|numeric');
         $this->form_validation->set_rules('tahun_selesai', 'Tahun selesai', 'required|numeric');
         
         if ($this->form_validation->run() == false) {
@@ -338,7 +339,7 @@ class Member extends CI_Controller
             "nama_univ" => $this->input->post('nama_univ', true),
             "gelar" => $this->input->post('gelar', true),
             "prodi" => $this->input->post('prodi', true),
-            "tahun_masuk" => $this->input->post('tahun_masuk', true),
+            "tahun_mulai" => $this->input->post('tahun_mulai', true),
             "tahun_selesai" => $this->input->post('tahun_selesai', true),
         ];
 
@@ -350,20 +351,84 @@ class Member extends CI_Controller
     // Menghapus Data Pendidikan
     public function deletePendidikan($idPendidikan)
     {
-        $this->Member_model->delete('pendidikan', 'id_Pendidikan', $idPendidikan);
+        $this->Member_model->delete('pendidikan', 'id_pendidikan', $idPendidikan);
         redirect('pendidikan');
+    }
+
+    public function getPengalamanKerja()
+    {
+        $id_pengalaman = $_POST['id_pengalaman'];
+        $data = $this->Member_model->getDataWhere('pengalaman_kerja', 'id_pengalaman', $id_pengalaman);
+
+        echo json_encode($data);
     }
 
     public function getAllPengalamanKerja($id_user = '1')
     {
         $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
-        $data['sertifikat'] = $this->Member_model->getAllDataWhere('sertifikat', 'id_user', $id_user);
+        $data['pengalaman_kerja'] = $this->Member_model->getAllDataWhere('pengalaman_kerja', 'id_user', $id_user);
 
         $this->load->view('partials/user/header', $data);
         $this->load->view('member/pengalaman_kerja', $data);
         $this->load->view('partials/user/footer');
     }
+
+     //Membuat Pengalaman Kerja
+     public function createPengalamanKerja($id_user = '1')
+     {
+         $this->form_validation->set_rules('nama_perusahaan', 'Nama Perusahaan', 'required');
+         $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+         $this->form_validation->set_rules('tahun_mulai', 'Tahun mulai', 'required|numeric');
+         $this->form_validation->set_rules('tahun_selesai', 'Tahun selesai', 'required|numeric');
+         
+         if ($this->form_validation->run() == false) {
+             redirect('pengalaman-kerja');
+         }
+ 
+         $data = [
+             "id_user" => $id_user,
+             "nama_perusahaan" => $this->input->post('nama_perusahaan', true),
+             "jabatan" => $this->input->post('jabatan', true),
+             "tahun_mulai" => $this->input->post('tahun_mulai', true),
+             "tahun_selesai" => $this->input->post('tahun_selesai', true)
+         ];
+ 
+         $this->Member_model->create('pengalaman_kerja', $data);
+         redirect('pengalaman-kerja');
+     }
+ 
+     // Memperbarui Data Pengalaman Kerja
+     public function updatePengalamanKerja()
+     {
+         $this->form_validation->set_rules('nama_perusahaan', 'Nama Perusahaan', 'required');
+         $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
+         $this->form_validation->set_rules('tahun_mulai', 'Tahun mulai', 'required|numeric');
+         $this->form_validation->set_rules('tahun_selesai', 'Tahun selesai', 'required|numeric');
+         
+         if ($this->form_validation->run() == false) {
+             redirect('pengalaman-kerja');
+         }
+        //  die();
+         $idPengalaman = $this->input->post('id_pengalaman', true);
+         $data = [
+             "nama_perusahaan" => $this->input->post('nama_perusahaan', true),
+             "jabatan" => $this->input->post('jabatan', true),
+             "tahun_mulai" => $this->input->post('tahun_mulai', true),
+             "tahun_selesai" => $this->input->post('tahun_selesai', true)
+         ];
+ 
+         $this->Member_model->update('pengalaman_kerja', 'id_pengalaman', $idPengalaman, $data);
+         redirect('pengalaman-kerja');
+ 
+     }
+ 
+     // Menghapus Data Pengalaman Kerja
+     public function deletePengalamanKerja($idPengalaman)
+     {
+         $this->Member_model->delete('pengalaman_kerja', 'id_pengalaman', $idPengalaman);
+         redirect('pengalaman-kerja');
+     }
 
     public function uploadImage()
     {

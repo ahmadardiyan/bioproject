@@ -250,8 +250,8 @@ $("#btn-create-pendidikan").on('click', function () {
     $('#nama-univ').val('');
     $('#gelar').val('');
     $('#prodi').val('');
-    $('#tahun-masuk').val('');
-    $('#tahun-selesai').val('');
+    $('.tahun-mulai').val('');
+    $('.tahun-selesai').val('');
     $(".modal-footer button[type=submit]").html('Submit');
 });
 
@@ -277,21 +277,54 @@ $(".btn-update-pendidikan").on('click', function () {
             $('#nama-univ').val(data.nama_univ);
             $('#gelar').val(data.gelar);
             $('#prodi').val(data.prodi);
-            $('#tahun-masuk').val(data.tahun_masuk);
-            $('#tahun-selesai').val(data.tahun_selesai);
+            $('.tahun-mulai').val(data.tahun_mulai);
+            $('.tahun-selesai').val(data.tahun_selesai);
 
-            console.log(data.tahun_masuk);
+            console.log(data.tahun_mulai);
             console.log(data.tahun_selesai);
         }
     });
 });
 
-// // Tambah Pengalaman
-// $("#btn-create-pengalaman").on('click', function () {
-//     $("#modal-pengalaman").modal();
-//     $(".modal-title").html('Tambah Pengalaman');
-//     $(".modal-body form").attr('action', 'create-pengalaman');
-//     // $('#nama-sertifikat').val('');
-//     // $('#tahun').val('');
-//     $(".modal-footer button[type=submit]").html('Submit');
-// });
+// Tambah Pengalaman Kerja
+$("#btn-create-pengalaman-kerja").on('click', function () {
+    $("#modal-pengalaman-kerja").modal();
+    $(".modal-title").html('Tambah Pengalaman Kerja');
+    $(".modal-body form").attr('action', 'create-pengalaman-kerja');
+    $('#id-pengalaman').val("");
+    $('#nama-perusahaan').val("");
+    $('#jabatan').val("");
+    $('.tahun-mulai').val("");
+    $('.tahun-selesai').val("");
+    $(".modal-footer button[type=submit]").html('Submit');
+});
+
+// Update Pengalaman Kerja
+$(".btn-update-pengalaman-kerja").on('click', function () {
+    $("#modal-pengalaman-kerja").modal();
+    $(".modal-title").html('Edit Pengalaman Kerja');
+    $(".modal-body form").attr('action', 'update-pengalaman-kerja');
+    $(".modal-footer button[type=submit]").html('Edit Data');
+
+    const id = $(this).data('id');
+
+    var url = 'member/getPengalamanKerja';
+    $.ajax({
+        url: url,
+        data: {
+            id_pengalaman: id
+        },
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            $('#id-pengalaman').val(data.id_pengalaman);
+            $('#nama-perusahaan').val(data.nama_perusahaan);
+            $('#jabatan').val(data.jabatan);
+            $('.tahun-mulai').val(data.tahun_mulai);
+            $('.tahun-selesai').val(data.tahun_selesai);
+
+            console.log(data.tahun_mulai);
+            console.log(data.tahun_selesai);
+        }
+    });
+});

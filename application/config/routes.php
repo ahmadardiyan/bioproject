@@ -39,6 +39,9 @@ $route['delete-pendidikan/(:any)'] = 'member/deletePendidikan/$1'; //$1
 
 
 $route['pengalaman-kerja'] = 'member/getAllPengalamanKerja'; //$1
+$route['create-pengalaman-kerja'] = 'member/createPengalamanKerja'; //$1
+$route['update-pengalaman-kerja'] = 'member/updatePengalamanKerja'; //$1
+$route['delete-pengalaman-kerja/(:any)'] = 'member/deletePengalamanKerja/$1'; //$1
 
 //COMPANY
 

@@ -142,7 +142,7 @@
     </div>
 </div>
 
-<!-- Modal Pendidikan -->
+<!-- Modal pendidikan -->
 <div class="modal fade" id="modal-pendidikan" role="dialog">
     <div class="modal-dialog">
 
@@ -176,14 +176,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tahun-masuk">Tahun Masuk</label>
-                        <select class="form-control tahun" name="tahun_masuk" id="tahun-masuk"></select>
-                            <small class="form-text text-danger"><?=form_error('tahun-masuk')?></small>
+                        <label for="tahun-mulai">Tahun Mulai</label>
+                        <select class="form-control tahun tahun-mulai" name="tahun_mulai" id=""></select>
+                            <small class="form-text text-danger"><?=form_error('tahun-mulai')?></small>
                     </div>
                     
                     <div class="form-group">
                         <label for="tahun-selesai">Tahun Selesai</label>
-                        <select class="form-control tahun" name="tahun_selesai" id="tahun-selesai"></select>
+                        <select class="form-control tahun tahun-selesai" name="tahun_selesai" id=""></select>
                             <small class="form-text text-danger"><?=form_error('tahun-selesai')?></small>
                     </div>
 
@@ -197,6 +197,57 @@
 
     </div>
 </div>
+
+<!-- Modal Pengalaman Kerja -->
+<div class="modal fade" id="modal-pengalaman-kerja" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Edit Pengalaman Kerja</h3>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" enctype="multipart/form-data">
+
+                    <input type="hidden" name="id_pengalaman" id="id-pengalaman">
+
+                    <div class="form-group">
+                        <label for="nama-perusahaan">Nama Perusahaan</label>
+                        <input type="text" class="form-control" id="nama-perusahaan" name="nama_perusahaan">
+                        <small class="form-text text-danger"><?=form_error('nama-perusahaan')?></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jabatan">Jabatan</label>
+                        <input type="text" class="form-control" id="jabatan" name="jabatan">
+                        <small class="form-text text-danger"><?=form_error('jabatan')?></small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tahun-mulai">Tahun Mulai</label>
+                        <select class="form-control tahun tahun-mulai" name="tahun_mulai" id=""></select>
+                            <small class="form-text text-danger"><?=form_error('tahun-mulai')?></small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tahun-selesai">Tahun Selesai</label>
+                        <select class="form-control tahun tahun-selesai" name="tahun_selesai" id=""></select>
+                            <small class="form-text text-danger"><?=form_error('tahun-selesai')?></small>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
 
 <!-- jQuery Plugins -->
 <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.min.js"></script>

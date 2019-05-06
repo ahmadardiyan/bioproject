@@ -36,7 +36,7 @@
                         <a class="btn btn-default" href="<?=base_url()?>update-profile">
                             Edit Profile
                         </a>
-                        </div>
+                    </div>
 
                 </div>
 
@@ -135,17 +135,18 @@
                 <div id="pendidikan">
                     <div class="content">
                         <h3>Pendidikan</h3>
-                        <a href="pendidikan" class="btn btn-primary"
-                            style="float:right; margin-top: -50px;"> Semua Pendidikan </a>
+                        <a href="pendidikan" class="btn btn-primary" style="float:right; margin-top: -50px;"> Semua
+                            Pendidikan </a>
                         <hr>
 
                         <?php if (!empty($pendidikan)) :?>
                         <?php foreach ($pendidikan as $p) : ?>
 
                         <div class="list-pendidikan" style="margin-bottom:15px">
-                            <h4 style="margin-bottom:0px"> <?= $p['nama_univ']?> <span style="font-weight:10">(<?= $p['gelar']?> <?= $p['prodi']?>)</span>
+                            <h4 style="margin-bottom:0px"> <?= $p['nama_univ']?> <span
+                                    style="font-weight:10">(<?= $p['gelar']?> <?= $p['prodi']?>)</span>
                             </h4>
-                            <p> <?= $p['tahun_masuk']?> - <?= $p['tahun_selesai']?> </p>
+                            <p> <?= $p['tahun_mulai']?> - <?= $p['tahun_selesai']?> </p>
                         </div>
 
                         <?php endforeach;?>
@@ -161,18 +162,26 @@
                 <div id="pengalaman-kerja">
                     <div class="content">
                         <h3>Pengalaman Kerja</h3>
-                        <a href="pengalaman-kerja" class="btn btn-primary"
-                            style="float:right; margin-top: -50px;"> Semua Pengalaman Kerja </a>
+                        <a href="pengalaman-kerja" class="btn btn-primary" style="float:right; margin-top: -50px;">
+                            Semua Pengalaman Kerja </a>
                         <hr>
 
-                        <div class="list-pengalaman-kerja" style="margin-bottom:15px">
-                            <h4 style="margin-bottom:0px"> PT Cinta Sejati <span style="  font-weight:10">(Direktur)</span></h4>
-                            <p> Maret 2019 - Sekarang </p>
-                        </div>
-                        <div class="list-pengalaman-kerja" style="margin-bottom:15px">
-                            <h4 style="margin-bottom:0px"> PT Cinta Sejati <span style="  font-weight:10">(Direktur)</span></h4>
-                            <p> Maret 2019 - Sekarang </p>
-                        </div>
+                        <?php if (!empty($pengalaman_kerja)) :?>
+                        <?php foreach ($pengalaman_kerja as $p) : ?>
+
+                            <div class="list-pengalaman-kerja" style="margin-bottom:15px">
+                                <h4 style="margin-bottom:0px"> <?=$p['nama_perusahaan']?> <span
+                                        style="  font-weight:10">(<?=$p['jabatan']?>)</span>
+                                </h4>
+                                <p> <?=$p['tahun_mulai']?> - <?=$p['tahun_selesai']?> </p>
+                            </div>
+
+                        <?php endforeach;?>
+                        <?php else : ?>
+
+                        <p>Not Found !</p>
+
+                        <?php endif;?>
                     </div>
                 </div>
 
