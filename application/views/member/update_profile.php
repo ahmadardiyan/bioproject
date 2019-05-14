@@ -2,11 +2,10 @@
     <div class="container">
         <div class="row">
 
-            <?php //$this->load->view('partials/user/sidebar');?>
-
             <!-- edit profile -->
 
-            <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1" style="margin-top:20px;background-color:white">
+            <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1"
+                style="margin-top:20px;background-color:white">
 
                 <div class="row" style="margin:20px 5px;">
 
@@ -37,9 +36,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="gender_member">Jenis Kelamin</label> <br>
-                            <input type="text" class="form-control" id="gender_member" name="gender_member"
-                                value="<?=$member['gender_member'];?>" readonly>
+                            <label for="gender_member">Jenis Kelamin</label> 
+                            <div class="radio" style="margin-left:30px">
+                                <input  type="radio" name="gender_member" value="Laki-laki" <?= $member['gender_member'] == 'Laki-laki' ? 'checked' : false; ?>>Laki-laki
+                            </div>
+                            <div class="radio" style="margin-left:30px">
+                                <input  type="radio" name="gender_member" value="Perempuan" <?= $member['gender_member'] == 'Perempuan' ? 'checked' : false; ?>>Perempuan
+                            </div>
                             <small class="form-text text-danger"><?=form_error('gender_member')?></small>
                         </div>
 

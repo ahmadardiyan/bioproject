@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 06 Mei 2019 pada 21.06
+-- Generation Time: 13 Mei 2019 pada 19.27
 -- Versi Server: 5.7.24-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -19,28 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `bioproject`
 --
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `industri`
---
-
-CREATE TABLE `industri` (
-  `id_industri` varchar(5) NOT NULL,
-  `nama_industri` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `jenis_perusahaan`
---
-
-CREATE TABLE `jenis_perusahaan` (
-  `id_jenis_perusahaan` varchar(50) NOT NULL,
-  `nama_jenis_perusahaan` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -82953,6 +82931,65 @@ INSERT INTO `list_keahlian` (`id_keahlian`, `nama_keahlian`, `id_kategori`) VALU
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `list_lowongan_kerja`
+--
+
+CREATE TABLE `list_lowongan_kerja` (
+  `id_lowongan_kerja` varchar(10) NOT NULL,
+  `id_user` varchar(10) NOT NULL,
+  `judul` text NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `usia_min` int(3) NOT NULL,
+  `usia_maks` int(3) NOT NULL,
+  `id_prov` char(2) NOT NULL,
+  `id_kab` char(4) NOT NULL,
+  `tanggal_penutupan` date NOT NULL,
+  `tipe_kerja` varchar(20) NOT NULL,
+  `detail_lowongan_kerja` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `list_lowongan_kerja`
+--
+
+INSERT INTO `list_lowongan_kerja` (`id_lowongan_kerja`, `id_user`, `judul`, `gender`, `deskripsi`, `usia_min`, `usia_maks`, `id_prov`, `id_kab`, `tanggal_penutupan`, `tipe_kerja`, `detail_lowongan_kerja`, `created_at`, `modified_at`) VALUES
+('1905120001', '2', 'baru', 'Semua', 'a', 1, 2, '33', '3308', '2019-05-07', 'Full Time', '<p>aa</p>\r\n', '2019-05-12 05:49:43', NULL),
+('1905120002', '2', 'a', 'Perempuan', 'b', 1, 2, '33', '3308', '2019-05-13', 'Full Time', '<p>hahaha</p>\r\n', '2019-05-12 05:50:10', NULL),
+('1905120003', '2', 'Kerja', 'Semua', 'Kerja dong', 23, 86, '33', '3308', '2019-04-30', 'Freelanch', '<p>gagagag</p>\r\n', '2019-05-12 05:51:15', NULL),
+('1905120004', '2', 'Dead Wood', 'Laki-laki', 'Kerja dong', 35, 67, '33', '3308', '2019-05-21', 'Freelanch', '<p>OffWhite Co, a NYC based design team, is looking for a full-time Junior Graphic Designer who enjoys combining multiple elements (print, web, packaging; all aspects of visual and industrial forms) into the alchemy of successful design. Our studio vibe encourages collaborative creativity, innovative thinking, and unconventional solutions to meet our clients’ diverse goals.</p>\r\n\r\n<p> </p>\r\n\r\n<p>Ideal Candidate Profile:</p>\r\n\r\n<p>• Excellent communication skills, able to provide and receive feedback in a positive and constructive manner</p>\r\n\r\n<p>• Extensive experience in the core design Adobe programs, Photoshop, Illustrator, Indesign</p>\r\n\r\n<p>• Proactive problem solver</p>\r\n\r\n<p>• Illustration ability is a big plus</p>\r\n\r\n<p>• Precision in creating mockups and any other related tangible craftwork</p>\r\n\r\n<p>• Web design (using PSD or Sketch) and knowledge of HTML, CSS is valuable though not required</p>\r\n\r\n<p>• BFA/BA in Design or a related field</p>\r\n\r\n<p>• Able to take on specific design tasks to support multiple projects</p>\r\n\r\n<p>• Consistently curious with an open mind in expanding your skills and methodologies in your design process</p>\r\n\r\n<p> </p>\r\n\r\n<p>If you are looking for a place to grow, in a fun, energetic work environment, where everyday brings new challenges, we&#39;d like to meet you. Please only apply if you meet the minimum requirements.</p>\r\n', '2019-05-12 13:05:57', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `lowongan_kerja`
+--
+
+CREATE TABLE `lowongan_kerja` (
+  `id` int(10) NOT NULL,
+  `id_lowongan_kerja` varchar(10) NOT NULL,
+  `id_keahlian` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `lowongan_kerja`
+--
+
+INSERT INTO `lowongan_kerja` (`id`, `id_lowongan_kerja`, `id_keahlian`) VALUES
+(1, '1905120001', '1'),
+(2, '1905120001', '4'),
+(3, '1905120002', '1'),
+(4, '1905120002', '4'),
+(5, '1905120003', '1'),
+(6, '1905120003', '4'),
+(7, '1905120004', '1'),
+(8, '1905120004', '3');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `member`
 --
 
@@ -82979,7 +83016,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id_user`, `nama_member`, `gender_member`, `tempat_lahir`, `tanggal_lahir`, `phone_member`, `alamat`, `id_kel`, `id_kec`, `id_kab`, `id_prov`, `foto`, `deskripsi_member`, `created_at`, `modified_at`) VALUES
-('1', 'Ahmad Ardiyanto', 'Laki-laki', 'Magelang', '1996-10-19', '087834284756', 'Dusun Macanan RT 01/ RW 01        ', '', '3308040', '3308', '33', '5cbbcb5147933.png', 'Aku hanyalah bukan adalah', '2019-05-05 11:35:59', NULL);
+('1', 'Ahmad Ardiyanto', 'Laki-laki', 'Magelang', '1996-10-19', '087834284756', 'Dusun Macanan RT 01/ RW 01         ', '', '3308040', '3308', '33', '5cbbcb5147933.png', 'Aku hanyalah bukan adalah', '2019-05-12 03:04:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -82993,7 +83030,7 @@ CREATE TABLE `pendidikan` (
   `nama_univ` varchar(100) NOT NULL,
   `gelar` varchar(5) NOT NULL,
   `prodi` varchar(50) NOT NULL,
-  `tahun_masuk` year(4) NOT NULL,
+  `tahun_mulai` year(4) NOT NULL,
   `tahun_selesai` year(4) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `modified_at` timestamp NULL DEFAULT NULL
@@ -83003,7 +83040,7 @@ CREATE TABLE `pendidikan` (
 -- Dumping data untuk tabel `pendidikan`
 --
 
-INSERT INTO `pendidikan` (`id_pendidikan`, `id_user`, `nama_univ`, `gelar`, `prodi`, `tahun_masuk`, `tahun_selesai`, `created_at`, `modified_at`) VALUES
+INSERT INTO `pendidikan` (`id_pendidikan`, `id_user`, `nama_univ`, `gelar`, `prodi`, `tahun_mulai`, `tahun_selesai`, `created_at`, `modified_at`) VALUES
 (1, '1', 'UIN Sunan Kalijaga', 'S3', 'Teknik Informatika', 2016, 2019, '2019-05-06 11:46:29', NULL);
 
 -- --------------------------------------------------------
@@ -83025,6 +83062,13 @@ CREATE TABLE `pengalaman_kerja` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `modified_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pengalaman_kerja`
+--
+
+INSERT INTO `pengalaman_kerja` (`id_pengalaman`, `id_user`, `nama_perusahaan`, `jabatan`, `lokasi`, `bulan_mulai`, `tahun_mulai`, `bulan_selesai`, `tahun_selesai`, `created_at`, `modified_at`) VALUES
+(3, '1', 'PT Mencari Cinta Sejati', 'CEO', '', 0, 2009, 0, 2019, '2019-05-06 15:10:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -83076,17 +83120,6 @@ INSERT INTO `portofolio` (`id_portofolio`, `id_user`, `judul`, `deskripsi`, `fot
 ('PRT1904050001', '1', 'baru', 'ini', '5ca72670b0da2.png', '2019-04-05 09:57:04', NULL),
 ('PRT1904180001', '1', 'portofolioku', ' ini portofolioku yang baru   ', '5cb86328efeb4.png', '2019-04-18 11:44:41', NULL),
 ('PRT1904210001', '1', 'coba', ' ini deskripsi ', '5cbb51546598c.jpg', '2019-04-20 17:05:24', NULL);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `program_studi`
---
-
-CREATE TABLE `program_studi` (
-  `id_program_studi` varchar(5) NOT NULL,
-  `nama_program_studi` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -83169,18 +83202,6 @@ INSERT INTO `sertifikat` (`id_sertifikat`, `id_user`, `nama_sertifikat`, `tahun`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `universitas`
---
-
-CREATE TABLE `universitas` (
-  `id_universitas` varchar(5) NOT NULL,
-  `nama_universitas` varchar(50) NOT NULL,
-  `lokasi_universitas` char(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `users`
 --
 
@@ -83240,6 +83261,18 @@ ALTER TABLE `kelurahan`
   ADD KEY `villages_district_id_index` (`id_kec`);
 
 --
+-- Indexes for table `list_lowongan_kerja`
+--
+ALTER TABLE `list_lowongan_kerja`
+  ADD PRIMARY KEY (`id_lowongan_kerja`);
+
+--
+-- Indexes for table `lowongan_kerja`
+--
+ALTER TABLE `lowongan_kerja`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `member`
 --
 ALTER TABLE `member`
@@ -83292,15 +83325,20 @@ ALTER TABLE `sertifikat`
 ALTER TABLE `keahlian`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
+-- AUTO_INCREMENT for table `lowongan_kerja`
+--
+ALTER TABLE `lowongan_kerja`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
 -- AUTO_INCREMENT for table `pendidikan`
 --
 ALTER TABLE `pendidikan`
-  MODIFY `id_pendidikan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pendidikan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `pengalaman_kerja`
 --
 ALTER TABLE `pengalaman_kerja`
-  MODIFY `id_pengalaman` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengalaman` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `sertifikat`
 --

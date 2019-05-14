@@ -289,6 +289,9 @@ textarea:focus {
 /*------------------------------------*\
 	Logo
 \*------------------------------------*/
+nav {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2) !important;
+}
 
 .navbar-brand {
     padding: 0;
@@ -1923,7 +1926,7 @@ header {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
     transition: 0.3s;
     min-width: 40%;
-    border-radius: 5px;
+    border-radius: 0px !important;
 }
 
 .thumbnail-description {
@@ -2080,7 +2083,7 @@ header {
     margin-bottom: 20px;
     background-color: white;
     padding: 20px;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
 }
 
 #kategori-keahlian {
@@ -2092,7 +2095,7 @@ header {
 }
 
 @media (min-width: 768px) {
- #update-keahlian .col-md-4{
-    float: right;
- }
+    #update-keahlian .col-md-4 {
+        float: right;
+    }
 }

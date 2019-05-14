@@ -141,6 +141,7 @@ class Member extends CI_Controller
                 "deskripsi" => $this->input->post('deskripsi', true),
                 "foto" => $foto,
             ];
+            
             $this->Member_model->create('portofolio', $data);
             $this->session->set_flashdata('flash', 'Ditambahkan');
             redirect('member');
@@ -333,7 +334,7 @@ class Member extends CI_Controller
         if ($this->form_validation->run() == false) {
             redirect('pendidikan');
         }
-        // die();
+
         $idPendidikan = $this->input->post('id_pendidikan', true);
         $data = [
             "nama_univ" => $this->input->post('nama_univ', true),
@@ -345,7 +346,6 @@ class Member extends CI_Controller
 
         $this->Member_model->update('pendidikan', 'id_pendidikan', $idPendidikan, $data);
         redirect('pendidikan');
-
     }
 
     // Menghapus Data Pendidikan

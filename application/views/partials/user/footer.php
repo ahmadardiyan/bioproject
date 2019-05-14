@@ -249,6 +249,7 @@
 </div>
 
 
+
 <!-- jQuery Plugins -->
 <script type="text/javascript" src="<?=base_url()?>assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
@@ -260,6 +261,10 @@
 
 <!-- Datepicker -->
 <script src="<?= base_url() ?>assets/datepicker/bootstrap-datepicker.min.js"></script>
+
+<!-- CKeditor -->
+<script src="//cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
+<!-- <script type="text/javascript" src="<?= base_url() ?>assets/ckeditor/ckeditor.js"></script> -->
 
 
 </body>

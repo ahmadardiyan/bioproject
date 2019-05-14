@@ -1,6 +1,5 @@
 <!-- Nav -->
 <nav id="nav" class="navbar">
-    <!-- <nav id="nav" class="navbar nav-transparent"> -->
     <div class="container">
 
         <div class="navbar-header">
@@ -28,16 +27,17 @@
             <li><a href="#service">Services</a></li>
             <li><a href="#pricing">Prices</a></li>
             <li><a href="#team">Team</a></li>
-            <li class="has-dropdown dropdown-arrow"><a href="#blog">Blog</a>
+            <li class="has-dropdown dropdown-arrow"><a href="#blog">Cari</a>
                 <ul class="dropdown">
                     <li><a href="blog-single.html">blog post</a></li>
                 </ul>
             </li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="<?=base_url()?>cari-kerja">Cari Kerja</a></li>
 
             <li><a href="<?= base_url();?>login"> Login </a></li>
 
-            <li class="has-dropdown">
+            <!-- <li class="has-dropdown">
                 <a href="#" style="padding-top: 5px">
                     <img src="<?=base_url()?>assets/images/profile/<?= $member['foto'] ?>" alt="" class="img-circle"
                         width="40px">
@@ -46,7 +46,10 @@
                     <li><a href="<?=base_url()?>member">Profile</a></li>
                     <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
                 </ul>
-            </li>
+            </li> -->
+
+            
+
         </ul>
         <!-- /Main navigation -->
 

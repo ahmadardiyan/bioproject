@@ -328,3 +328,10 @@ $(".btn-update-pengalaman-kerja").on('click', function () {
         }
     });
 });
+
+$(document).ready(function () {
+    var ckeditor = CKEDITOR.replace('ckeditor',{height:'600px'});
+
+    CKEDITOR.disableAutoInline =true;
+    CKEDITOR.inline('editable');
+});

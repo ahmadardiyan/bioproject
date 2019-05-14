@@ -7,6 +7,9 @@ $route['translate_uri_dashes'] = FALSE;
 //HOME
 $route['default_controller'] = 'home/index'; //home/homepage
 
+//SEARCH
+$route['cari-kerja'] = 'search/cariKerja'; //home/homepage
+
 //AUTH
 $route['login'] = 'auth/login';
 $route['register'] = 'auth/register';
@@ -44,4 +47,7 @@ $route['update-pengalaman-kerja'] = 'member/updatePengalamanKerja'; //$1
 $route['delete-pengalaman-kerja/(:any)'] = 'member/deletePengalamanKerja/$1'; //$1
 
 //COMPANY
+$route['company'] = 'company/index';
 
+$route['create-lowongan-kerja'] = 'company/createLowonganKerja';
+$route['detail-lowongan-kerja/(:any)'] = 'company/detailLowonganKerja/$1';

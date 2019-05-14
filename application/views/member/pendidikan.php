@@ -18,7 +18,7 @@
                         <div class="list-pendidikan" style="margin-bottom:15px">
                             <h4 style="margin-bottom:0px"> <?= $p['nama_univ']?> <span style="font-weight:10">(<?= $p['gelar']?> <?= $p['prodi']?>)</span>
                             </h4>
-                            <p> <?= $p['tahun_masuk']?> - <?= $p['tahun_selesai']?> </p>
+                            <p> <?= $p['tahun_mulai']?> - <?= $p['tahun_selesai']?> </p>
                         </div>
                     </div>
 

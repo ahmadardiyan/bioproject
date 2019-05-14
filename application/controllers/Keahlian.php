@@ -67,7 +67,6 @@ class Keahlian extends CI_Controller
                         if ($db['id_keahlian'] === $form) {
 
                             $x = true;
-
                         }
 
                     endforeach;
@@ -98,15 +97,12 @@ class Keahlian extends CI_Controller
 
                     if ($x === false) {
 
-                        // var_dump($db['id_keahlian']);
-
                         $this->db->where('id', $db['id'])->delete('keahlian');
                     }
 
                 endforeach;
             }
 
-            // die();
             redirect('member');
         }
     }
