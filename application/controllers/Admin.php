@@ -11,7 +11,16 @@ class Admin extends CI_Controller
     public function dashboard()
     {
         
-        $this->load->view('admin/dashboard');
+        $data['title'] = "Dashboard Admin"; //nanti bakalan jadi title di bagian head
+
+        $data['user'] = $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $this->load->view('partials/admin/header', $data);
+        $this->load->view('partials/admin/sidebar', $data);
+        $this->load->view('partials/admin/topbar', $data);
+        $this->load->view('admin/dashboard', $data);
+        $this->load->view('partials/admin/footer');
        
     }
 }
