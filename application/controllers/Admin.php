@@ -73,21 +73,6 @@ class Admin extends CI_Controller
     }
 
     function simpan_member(){
-      $config['upload_path'] = './assets/images/profile/'; //path folder
-      $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
-      $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
-      $_FILES['filefoto']['name'];
-      $this->upload->do_upload('filefoto');
-      $config['image_library']='gd2';
-      $config['source_image']='./assets/images/profile'.$gbr['file_name'];
-      $config['create_thumb']= FALSE;
-      $config['maintain_ratio']= FALSE;
-      $config['quality']= '60%';
-      $config['width']= 300;
-      $config['height']= 300;
-      $config['new_image']= './assets/images/profile/'.$gbr['file_name'];
-      $this->load->library('image_lib', $config);
-      $this->image_lib->resize();
       $data = [
         // "id_user" => $this->input->post('id_member', true),
           "nama_member" => $this->input->post('nama_member', true),
@@ -97,20 +82,40 @@ class Admin extends CI_Controller
           "tanggal_lahir" => $this->input->post('tanggal_lahir', true),
           // "phone_member" => $this->input->post('phone_member', true),
           "alamat" => $this->input->post('alamat', true),
-          "id_prov" => $this->input->post('provinsi', true),
-          "id_kab" => $this->input->post('kabupaten', true),
-          "id_kec" => $this->input->post('kecamatan', true),
-          "foto" => $foto,
+          // "id_prov" => $this->input->post('provinsi', true),
+          // "id_kab" => $this->input->post('kabupaten', true),
+          // "id_kec" => $this->input->post('kecamatan', true),
+          // "foto" => $foto,
       ];
+      $upload_image = $_FILES['foto']['name'];
+
+      if ($upload_image) {
+          $config['allowed_types'] = 'gif|png|jpg';
+          $config['upload_path'] = './assets/images/profile/';
+
+          $this->load->library('upload', $config);
+
+          if ($this->upload->do_upload('image')) {
+              $new_image = $this->upload->data('file_name');
+              $this->db->set('foto', $new_image);
+          } else {
+              echo $this->upload->display_errors();
+          }
+      }
 
       // var_dump($data);
       // die();
 
       $this->Member_model->create('member', $data);
       redirect('admin/members');
-      $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
-      New Member Added</div>');
-      redirect('admin/members');
+            // $nama_member=$this->input->post('nama_member','gender_member','id_user');
+            // $this->Admin_model->save_member($id,$nama_member,$gender_member);
+            // $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+            // New Member added!</div>');
+            // redirect('admin/members');
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+            New Member Added</div>');
+            redirect('admin/members');
     }
     function update_member(){
             $id=$this->input->post('kode');
@@ -128,7 +133,22 @@ class Admin extends CI_Controller
                 // "foto" => $foto,
 
             ];
-            $this->Member_model->update('member', 'id_user', $id, $data);
+            $upload_image = $_FILES['foto']['name'];
+
+            if ($upload_image) {
+                $config['allowed_types'] = 'gif|png|jpg';
+                $config['upload_path'] = './assets/images/profile/';
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('image')) {
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->set('foto', $new_image);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+            $this->Member_model->update('member', 'id_user', $id, $data, $upload_image);
             // $this->Admin_model->edit_member($id,$nama_member);
             $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
             Member updated!</div>');
