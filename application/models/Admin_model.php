@@ -33,4 +33,25 @@ class Admin_model extends CI_Model{
       return $query->result_array();
   }
 
+  public function getAllCategory()
+  {
+      $this->db->from('kategori_keahlian');
+      $query = $this->db->get();
+      return $query->result_array();
+  }
+
+  public function getAllSkills()
+  {
+      $this->db->from('list_keahlian');
+      $query = $this->db->get();
+      return $query->result_array();
+  }
+
+  public function getAllProjects()
+  {
+      $this->db->from('project');
+      $query = $this->db->get();
+      return $query->result_array();
+  }
+
 }
