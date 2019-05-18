@@ -9,10 +9,10 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-      <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#newServiceModal">
+      <a href="" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#newSkillModal">
         <i class="fas fa-plus fa-sm text-white-50">
         </i>
-        Tambah Service
+        Tambah Skill
       </a>
     </div>
 
@@ -25,20 +25,17 @@
                   <table class="table table-bordered dataTable no-footer" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="font-size: 13px;">
                     <thead>
                       <tr role="row">
-                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="#: activate to sort column ascending" style="width: 10px;">
-                          #
+                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="No: activate to sort column ascending" style="width: 10px;">
+                          No
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="ID: activate to sort column ascending" style="width: 10px;">
                           ID
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Icon: activate to sort column ascending" style="width: 43px;">
-                          Icon
+                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Nama Keahlian: activate to sort column ascending" style="width: 43px;">
+                          Nama Keahlian
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Title: activate to sort column ascending" style="width: 74px;">
-                          Title
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Deskripsi: activate to sort column ascending" style="width: 48px;">
-                          Deskripsi
+                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Kategori Keahlian: activate to sort column ascending" style="width: 74px;">
+                          Kategori Keahlian
                         </th>
                         <th tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" style="width: 41px;">
                           Action
@@ -48,22 +45,20 @@
                     <tbody>
                       <?php
                         $no=0;
-                          foreach($service as $a):
+                          foreach($list_keahlian as $a):
                             $no++;
-                            $id=$a['id'];
-                            $icon=$a['icon'];
-                            $title=$a['title'];
-                            $deskripsi=$a['deskripsi'];
+                            $id=$a['id_keahlian'];
+                            $nama=$a['nama_keahlian'];
+                            $kategori=$a['id_kategori'];
                         ?>
                       <tr role="row" class="odd">
                         <td><?= $no;?></td>
                         <td><?= $id;?></td>
-                        <td><?= $icon;?></td>
-                        <td><?= $title?></td>
-                        <td><?= $deskripsi;?></td>
+                        <td><?= $nama;?></td>
+                        <td><?= $kategori?></td>
                         <td>
-                          <a class="btn btn-primary btn-sm" href="" data-toggle="modal" data-target="#UpdateService<?= $id;?>"><i class="fas fa-edit"></i></a>
-                          <a class="btn btn-danger btn-sm btn-hapus" href="" data-toggle="modal" data-target="#HapusService<?= $id;?>"><i class="fas fa-trash"></i></a>
+                          <a class="btn btn-primary btn-sm" href="" data-toggle="modal" data-target="#UpdateSkill<?= $id;?>"><i class="fas fa-edit"></i></a>
+                          <a class="btn btn-danger btn-sm btn-hapus" href="" data-toggle="modal" data-target="#HapusSkill<?= $id;?>"><i class="fas fa-trash"></i></a>
                         </td>
                       </tr>
                       <?php endforeach;?>
@@ -81,35 +76,29 @@
 <!-- End of Main Content -->
 
 <!-- Modal -->
-<!-- ============ MODAL ADD SERVICE =============== -->
-<div class="modal fade" id="newServiceModal" tabindex="-1" role="dialog" aria-labelledby="newServiceModal" aria-hidden="true">
+<!-- ============ MODAL ADD SKILL =============== -->
+<div class="modal fade" id="newSkillModal" tabindex="-1" role="dialog" aria-labelledby="newSkillModal" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newServiceModalLabel">Add New Service</h5>
+        <h5 class="modal-title" id="newModalModalLabel">Add New List Keahlian</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="<?= base_url().'admin/simpan_service'?>" enctype="multipart/form-data">
+      <form method="post" action="<?= base_url().'admin/simpan_skill'?>" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <div class="form-group row">
-              <label name="icon" class="col-sm-2 col-form-label">Icon</label>
+              <label name="nama_keahlian" class="col-sm-2 col-form-label">Nama Keahlian</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="icon" name="icon" placeholder="Icon" required>
+                <input type="text" class="form-control" id="nama_keahlian" name="nama_keahlian" placeholder="Nama Keahlian" required>
               </div>
             </div>
             <div class="form-group row">
-              <label name="title" class="col-sm-2 col-form-label">Title</label>
+              <label name="id_kategori" class="col-sm-2 col-form-label">Kategori</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label name="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
-              <div class="col-sm-10">
-                <textarea type="text" cols="30" rows="6" class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi" required></textarea>
+                <input type="text" class="form-control" id="id_kategori" name="id_kategori" placeholder="Kategori" required>
               </div>
             </div>
           </div>
@@ -125,43 +114,36 @@
 
 <?php
   $no=0;
-    foreach($service as $a):
+    foreach($list_keahlian as $a):
       $no++;
-      $id=$a['id'];
-      $icon=$a['icon'];
-      $title=$a['title'];
-      $deskripsi=$a['deskripsi'];
+      $id=$a['id_keahlian'];
+      $nama=$a['nama_keahlian'];
+      $kategori=$a['id_kategori'];
   ?>
 
-<!-- ============ MODAL UPDATE SERVICE=============== -->
-<div class="modal fade" id="UpdateService<?= $id;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+<!-- ============ MODAL UPDATE SKILL=============== -->
+<div class="modal fade" id="UpdateSkill <?= $id;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="UpdateService">Update Service</h5>
+        <h5 class="modal-title" id="UpdateSkill">Update List Keahlian</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="<?= base_url().'admin/update_service'?>" enctype="multipart/form-data">
+      <form method="post" action="<?= base_url().'admin/update_skill'?>" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <div class="form-group row">
-              <label name="icon" class="col-sm-2 col-form-label">Icon</label>
+              <label name="nama_keahlian" class="col-sm-2 col-form-label">Nama Keahlian</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="icon" name="icon" value="<?= $icon; ?>" placeholder="Icon" required>
+                <input type="text" class="form-control" id="nama_keahlian" name="nama_keahlian" value="<?= $nama; ?>" placeholder="Nama Keahlian" required>
               </div>
             </div>
             <div class="form-group row">
-              <label name="title" class="col-sm-2 col-form-label">Title</label>
+              <label name="id_kategori" class="col-sm-2 col-form-label">Kategori</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="title" name="title" value="<?= $title; ?>" placeholder="Title" required>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label name="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
-              <div class="col-sm-10">
-                <textarea type="text" cols="30" rows="6" class="form-control" id="deskripsi" name="deskripsi" value="<?= $deskripsi; ?>" placeholder="Deskripsi" required></textarea>
+                <input type="text" class="form-control" id="id_kategori" name="id_kategori" value="<?= $kategori; ?>" placeholder="Katgori" required>
               </div>
             </div>
           </div>
@@ -180,24 +162,24 @@
 
 <?php
   $no=0;
-    foreach($service as $a):
+    foreach($list_keahlian as $a):
       $no++;
-      $id=$a['id'];
-      $icon=$a['icon'];
-      $title=$a['title'];
-      $deskripsi=$a['deskripsi'];
+      $id=$a['id_keahlian'];
+      $nama=$a['nama_keahlian'];
+      $kategori=$a['id_kategori'];
   ?>
-	<!--Modal Hapus SERVICE-->
-        <div class="modal fade" id="HapusService<?= $id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+	<!--Modal Hapus SKILL-->
+        <div class="modal fade" id="HapusSkill<?= $id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="HapusService">Hapus Service</h5>
+                    <h5 class="modal-title" id="HapusSkill">Hapus Skill</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                    <form class="form-horizontal" action="<?= base_url().'admin/hapus_service'?>" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="<?= base_url().'admin/hapus_skill'?>" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
 							       <input type="hidden" name="kode" value="<?= $id;?>"/>
                           <p>Apakah Anda yakin mau menghapus service <b><?= $title;?></b> ?</p>

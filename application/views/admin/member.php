@@ -49,6 +49,12 @@
                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Kecamatan: activate to sort column ascending" style="width: 48px;">
                           Kecamatan
                         </th>
+                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Kabupaten: activate to sort column ascending" style="width: 48px;">
+                          Kabupaten
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Provinsi: activate to sort column ascending" style="width: 48px;">
+                          Provinsi
+                        </th>
                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Foto: activate to sort column ascending" style="width: 48px;">
                           Foto
                         </th>
@@ -75,22 +81,26 @@
                             $tanggal=$a['tanggal_lahir'];
                             $alamat=$a['alamat'];
                             $kec=$a['id_kec'];
+                            $kab=$a['id_kab'];
+                            $prov=$a['id_prov'];
                             $foto=$a['foto'];
                             $deskripsi=$a['deskripsi_member'];
                             $ms=$a['modified_at']
                         ?>
                       <tr role="row" class="odd">
                         <td><?= $no;?></td>
-                        <td><?= $a['id_user'];?></td>
-                        <td><?= $a['nama_member'];?></td>
-                        <td><?= $a['gender_member'];?></td>
-                        <td><?= $a['tempat_lahir'];?></td>
-                        <td><?= $a['tanggal_lahir'];?></td>
-                        <td><?= $a['alamat'];?></td>
-                        <td><?= $a['id_kec']; ?></td>
+                        <td><?= $id;?></td>
+                        <td><?= $nama;?></td>
+                        <td><?= $gender?></td>
+                        <td><?= $tempat;?></td>
+                        <td><?= $tanggal;?></td>
+                        <td><?= $alamat;?></td>
+                        <td><?= $kec; ?></td>
+                        <td><?= $kab; ?></td>
+                        <td><?= $prov; ?></td>
                         <td><img src="<?= base_url('assets/images/profile/').$foto;?>" class="img-profile rounded-circle" style="width:60px;"></td>
-                        <td><?= $a['deskripsi_member'];?></td>
-                        <td><?= $a['modified_at'];?></td>
+                        <td><?= $deskripsi;?></td>
+                        <td><?= $ms;?></td>
                         <td>
                           <a class="btn btn-primary btn-sm" href="" data-toggle="modal" data-target="#ModalUpdate<?= $id;?>"><i class="fas fa-edit"></i></a>
                           <a class="btn btn-danger btn-sm btn-hapus" href="" data-toggle="modal" data-target="#ModalHapus<?= $id;?>"><i class="fas fa-trash"></i></a>
@@ -113,7 +123,7 @@
 <!-- Modal -->
 <!-- ============ MODAL ADD MEMBER =============== -->
 <div class="modal fade" id="newMemberModal" tabindex="-1" role="dialog" aria-labelledby="newMemberModal" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="newMemberModalLabel">Add New Member</h5>
@@ -151,13 +161,31 @@
             <div class="form-group row">
               <label name="deskripsi_member" class="col-sm-2 col-form-label">Deskripsi Member</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="deskripsi_member" name="deskripsi_member" placeholder="Deskripsi Member" required>
+                <textarea type="text" cols="30" rows="6" class="form-control" id="deskripsi_member" name="deskripsi_member" placeholder="Deskripsi Member" required></textarea>
               </div>
             </div>
             <div class="form-group row">
               <label name="alamat" class="col-sm-2 col-form-label">Alamat Member</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat Member" required>
+                <textarea type="text" cols="20" rows="3" class="form-control" id="alamat" name="alamat" placeholder="Alamat Member" required></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label name="kecamatan" class="col-sm-2 col-form-label">Kecamatan</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label name="kabupaten" class="col-sm-2 col-form-label">Kabupaten</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="kabupaten" name="kabupaten"  placeholder="Kabupaten">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label name="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" required>
               </div>
             </div>
             <div class="form-group row">
@@ -199,12 +227,14 @@
       $deskripsi=$a['deskripsi_member'];
       $alamat=$a['alamat'];
       $kec=$a['id_kec'];
+      $kab=$a['id_kab'];
+      $prov=$a['id_prov'];
       $foto=$a['foto'];
 ?>
 
 <!-- ============ MODAL UPDATE MEMBER=============== -->
 <div class="modal fade" id="ModalUpdate<?= $id;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalUpdate">Update Member</h5>
@@ -242,19 +272,31 @@
             <div class="form-group row">
               <label name="deskripsi_member" class="col-sm-2 col-form-label">Deskripsi Member</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="deskripsi_member" name="deskripsi_member" value="<?= $deskripsi; ?>" placeholder="Deskripsi Member" required>
+                <textarea type="text" cols="30" rows="6" class="form-control" id="deskripsi_member" name="deskripsi_member" placeholder="Deskripsi Member" required><?= $deskripsi; ?></textarea>
               </div>
             </div>
             <div class="form-group row">
               <label name="alamat" class="col-sm-2 col-form-label">Alamat Member</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $alamat; ?>" placeholder="Alamat Member" required>
+                <textarea type="text" cols="20" rows="3" class="form-control" id="alamat" name="alamat" placeholder="Alamat Member" required><?= $alamat; ?></textarea>
               </div>
             </div>
             <div class="form-group row">
               <label name="kecamatan" class="col-sm-2 col-form-label">Kecamatan</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="<?= $kec; ?>" placeholder="Alamat Member" required>
+                <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="<?= $kec; ?>" placeholder="Kecamatan">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label name="kabupaten" class="col-sm-2 col-form-label">Kabupaten</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="kabupaten" name="kabupaten" value="<?= $kab; ?>" placeholder="Kabupaten">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label name="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="provinsi" name="provinsi" value="<?= $prov; ?>" placeholder="Provinsi" required>
               </div>
             </div>
             <div class="form-group row">
@@ -298,11 +340,14 @@
         $tanggal=$a['tanggal_lahir'];
         $deskripsi=$a['deskripsi_member'];
         $alamat=$a['alamat'];
+        $kec=$a['id_kec'];
+        $kab=$a['id_kab'];
+        $prov=$a['id_prov'];
         $foto=$a['foto'];
   ?>
-	<!--Modal Hapus Post-->
-        <div class="modal fade" id="ModalHapus<?php echo $id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
+	<!--Modal Hapus Member-->
+        <div class="modal fade" id="ModalHapus<?= $id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog ">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="ModalHapus">Hapus Member</h5>
@@ -324,8 +369,3 @@
             </div>
         </div>
 	<?php endforeach;?>
-  <script>
-  $(document).ready( function () {
-      $('#myTable').DataTable();
-  } );
-  </script>
