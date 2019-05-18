@@ -253,7 +253,7 @@ class Admin extends CI_Controller
     }
 
     public function porotofolios(){
-        $data['title'] = 'Data Service';
+        $data['title'] = 'Data Portofolios';
         $data['portofolio'] = $this->Admin_model->getAllPortofolio();
         $data['user'] = $this->db->get_where('user',['email' =>
         $this->session->userdata('email')])->row_array();
@@ -266,5 +266,159 @@ class Admin extends CI_Controller
         $this->load->view('admin/portofolio', $data);
         $this->load->view('partials/admin/footer');
 
+    }
+
+    public function categories()
+    {
+        $data['title'] = 'Data Kategori Keahlian';
+        $data['kategori_keahlian'] = $this->Admin_model->getAllCategory();
+        $data['user'] = $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // var_dump($data['member']);
+        // die();
+        $this->load->view('partials/admin/header', $data);
+        $this->load->view('partials/admin/sidebar', $data);
+        $this->load->view('partials/admin/topbar', $data);
+        $this->load->view('admin/category', $data);
+        $this->load->view('partials/admin/footer');
+    }
+
+    public function simpan_category()
+    {
+        $data = [
+            "nama_kategori_keahlian" => $this->input->post('nama_kategori_keahlian', true)
+        ];
+        // var_dump($data);
+        // die();
+        $this->Admin_model->create('kategori_keahlian', $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        New Kategori Keahlian Added</div>');
+        redirect('admin/categories');
+    }
+
+    public function update_category()
+    {
+        $id=$this->input->post('kode');
+        $data = [
+            "nama_kategori_keahlian" => $this->input->post('nama_kategori_keahlian', true)
+        ];
+        $this->Admin_model->update('kategori_keahlian', 'id_kategori', $id, $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        Kategori Keahlian updated!</div>');
+        redirect('admin/categories');
+    }
+
+    public function hapus_category()
+    {
+        $id=$this->input->post('kode');
+        $this->Admin_model->delete('kategori_keahlian', 'id_kategori', $id);
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
+        Kategori Keahlian deleted!</div>');
+        redirect('admin/categories');
+    }
+
+    public function skills()
+    {
+        $data['title'] = 'Data List Keahlian';
+        $data['list_keahlian'] = $this->Admin_model->getAllSkills();
+        $data['user'] = $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // var_dump($data['member']);
+        // die();
+        $this->load->view('partials/admin/header', $data);
+        $this->load->view('partials/admin/sidebar', $data);
+        $this->load->view('partials/admin/topbar', $data);
+        $this->load->view('admin/skill', $data);
+        $this->load->view('partials/admin/footer');
+    }
+
+    public function simpan_skill()
+    {
+        $data = [
+            "nama_keahlian" => $this->input->post('nama_keahlian', true),
+            "id_kategori" => $this->input->post('id_kategori', true)
+        ];
+        // var_dump($data);
+        // die();
+        $this->Admin_model->create('list_keahlian', $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        New List Keahlian Added</div>');
+        redirect('admin/skills');
+    }
+
+    public function update_skill()
+    {
+        $id=$this->input->post('kode');
+        $data = [
+            "nama_keahlian" => $this->input->post('nama_keahlian', true),
+            "id_kategori" => $this->input->post('id_kategori', true)
+        ];
+        $this->Admin_model->update('list_keahlian', 'id_keahlian', $id, $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        List Keahlian updated!</div>');
+        redirect('admin/skills');
+    }
+
+    public function hapus_skill()
+    {
+        $id=$this->input->post('kode');
+        $this->Admin_model->delete('list_keahlian', 'id_keahlian', $id);
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
+        List Keahlian deleted!</div>');
+        redirect('admin/skills');
+    }
+
+    public function projects()
+    {
+        $data['title'] = 'Data List Keahlian';
+        $data['project'] = $this->Admin_model->getAllProjects();
+        $data['user'] = $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // var_dump($data['member']);
+        // die();
+        $this->load->view('partials/admin/header', $data);
+        $this->load->view('partials/admin/sidebar', $data);
+        $this->load->view('partials/admin/topbar', $data);
+        $this->load->view('admin/project', $data);
+        $this->load->view('partials/admin/footer');
+    }
+
+    public function simpan_project()
+    {
+        $data = [
+            "id_project" => $this->input->post('id_project', true),
+            "id_keahlian" => $this->input->post('id_keahlian', true)
+        ];
+        // var_dump($data);
+        // die();
+        $this->Admin_model->create('project', $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        New Project Added</div>');
+        redirect('admin/projects');
+    }
+
+    public function update_project()
+    {
+        $i_d=$this->input->post('kode');
+        $data = [
+            "id_project" => $this->input->post('id_project', true),
+            "id_keahlian" => $this->input->post('id_keahlian', true)
+        ];
+        $this->Admin_model->update('project', 'id_project', $i_d, $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        Project updated!</div>');
+        redirect('admin/projects');
+    }
+
+    public function hapus_project()
+    {
+        $i_d=$this->input->post('kode');
+        $this->Admin_model->delete('project', 'id_project', $i_d);
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
+        Project deleted!</div>');
+        redirect('admin/projects');
     }
 }
