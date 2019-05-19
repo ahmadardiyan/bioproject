@@ -44,13 +44,26 @@
 
   <?php $this->load->view('partials/user/navbar')?>
 
-  <!-- FlashData Notifikasi Berhasil-->
-  <!-- <?php if ($this->session->flashdata('flash')): ?>
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    Pesanan <strong>berhasil</strong>
-    <?=$this->session->flashdata('flash');?>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+  <div class="container">
+    <!-- FlashData Notifikasi Berhasil-->
+    <?php if ($this->session->flashdata('flash-message')): ?>
+    <div class="alert alert-success alert-dismissible show" role="alert" style="margin-top:15px; margin-bottom:-2px">
+      Pesanan <strong>berhasil</strong>
+      <?=$this->session->flashdata('flash-message');?>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <?php endif;?>
+
+    <!-- FlashData Notifikasi Gagal Cari-->
+    <?php if ($this->session->flashdata('cari-pesanan')): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <?=$this->session->flashdata('cari-pesanan');?> <strong>kosong</strong>!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <?php endif;?>
+
   </div>
-  <?php endif;?> -->

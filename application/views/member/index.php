@@ -101,24 +101,24 @@
                         <?php if (!empty($portofolio)) :?>
                         <?php foreach ($portofolio as $p) : ?>
 
-                        <div class="col-md-4 col-xs-6">
-                            <div class="thumbnail">
-                                <div class="caption text-center">
+                        <a href="<?=base_url()?>detail-portofolio/<?=$p['id_portofolio']?>">
+                            <div class="col-md-4 col-xs-6">
+                                <div class="thumbnail">
+                                    <div class="caption text-center">
 
-                                    <img class="img-responsive img-portofolio"
-                                        src="<?= base_url();?>assets/images/profile/<?= $p['foto'];?>"
-                                        style="height:190px;" />
+                                        <img class="img-responsive img-portofolio"
+                                            src="<?= base_url();?>assets/images/profile/<?= $p['foto'];?>"
+                                            style="height:190px;" />
 
-                                    <h4 id="thumbnail-label"><a
-                                            href="<?=base_url()?>detail-portofolio/<?=$p['id_portofolio']?>"><?= $p['judul'];?></a>
-                                    </h4>
+                                        <h4 id="thumbnail-label"><?= $p['judul'];?>
+                                        </h4>
 
-                                    <!-- <div class="thumbnail-description smaller"><?= $p['deskripsi'];?></div> -->
+                                        <!-- <div class="thumbnail-description smaller"><?= $p['deskripsi'];?></div> -->
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        </a>
 
                         <?php endforeach;?>
                         <?php else : ?>
@@ -169,12 +169,12 @@
                         <?php if (!empty($pengalaman_kerja)) :?>
                         <?php foreach ($pengalaman_kerja as $p) : ?>
 
-                            <div class="list-pengalaman-kerja" style="margin-bottom:15px">
-                                <h4 style="margin-bottom:0px"> <?=$p['nama_perusahaan']?> <span
-                                        style="  font-weight:10">(<?=$p['jabatan']?>)</span>
-                                </h4>
-                                <p> <?=$p['tahun_mulai']?> - <?=$p['tahun_selesai']?> </p>
-                            </div>
+                        <div class="list-pengalaman-kerja" style="margin-bottom:15px">
+                            <h4 style="margin-bottom:0px"> <?=$p['nama_perusahaan']?> <span
+                                    style="  font-weight:10">(<?=$p['jabatan']?>)</span>
+                            </h4>
+                            <p> <?=$p['tahun_mulai']?> - <?=$p['tahun_selesai']?> </p>
+                        </div>
 
                         <?php endforeach;?>
                         <?php else : ?>
@@ -186,6 +186,6 @@
                 </div>
 
             </div>
-            
+
         </div>
 </section>

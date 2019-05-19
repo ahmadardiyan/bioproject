@@ -1,11 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller 
+class Home extends CI_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('Member_model');
+		$this->load->model('Home_model');
 
 	}
 
@@ -13,11 +14,13 @@ class Home extends CI_Controller
 	{
 		$data['title'] = 'Bio Project'; //nanti bakalan jadi title di bagian head
 		$data['member'] = $this->Member_model->getMember('id_user', '1');
+		$data['service'] = $this->Home_model->getAllService();
 
-		$this->load->view('partials/user/header',$data); 
+		$this->load->view('partials/user/header',$data);
 		$this->load->view('home/homepage.php');
 		$this->load->view('partials/user/footer');
 	}
+
 
 }
  ?>

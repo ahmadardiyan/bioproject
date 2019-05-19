@@ -1,171 +1,128 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends CI_Controller
-{
-
-    public function __construct()
-    {
+class Auth extends CI_Controller {
+    public function __construct(){
         parent::__construct();
-        $this->load->model('Auth_model');
-        $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
-        $this->load->library('session');
-        $this->load->library('email');
-        //get all users
-        $this->data['users'] = $this->Auth_model->getAllUsers();
     }
+
     public function index()
     {
-        $this->load->view('auth/register', $this->data);
-    }
-
-    public function login()
-    {
-        $this->load->view('auth/login');
-    }
-
-    public function register()
-    {
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|max_length[30]');
-        $this->form_validation->set_rules('password_confirm', 'Confirm Password', 'required|matches[password]');
-
+        if ($this->session->userdata('email')) {
+            redirect('user');
+        }
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
         if ($this->form_validation->run() == false) {
-            $this->load->view('auth/register', $this->data);
+            $data['title']='Login Page';
+            $this->load->view('partials/auth/auth_header', $data);
+            $this->load->view('auth/login');
+            $this->load->view('partials/auth/auth_footer');
         } else {
-            //get user inputs
-            $first_name = $this->input->post('first_name');
-            $last_name = $this->input->post('last_name');
-            $email = $this->input->post('email');
-            $password = $this->input->post('password');
-
-            //generate simple random code
-            $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $code = substr(str_shuffle($set), 0, 12);
-
-            //insert user to users table and get id
-            $user['first_name'] = $first_name;
-            $user['last_name'] = $last_name;
-            $user['email'] = $email;
-            $user['password'] = $password;
-            $user['code'] = $code;
-            $user['active'] = false;
-            $id = $this->Auth_model->insert($user);
-
-            //set up email
-            $config = array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.gmail.com',
-                'smtp_port' => 465,
-                'smtp_user' => 'eriztaalifad@gmail.com', // change it to yours
-                'smtp_pass' => '$%sembilan900$%', // change it to yours
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'wordwrap' => true,
-            );
-
-            $message = "
-								<html>
-								<head>
-									<title>Verification Code</title>
-								</head>
-								<body>
-									<h2>Thank you for Registering.</h2>
-									<p>Your Account:</p>
-									<p>Email: " . $email . "</p>
-									<p>Password: " . $password . "</p>
-									<p>Please click the link below to activate your account.</p>
-									<h4><a href='" . base_url() . "user/activate/" . $id . "/" . $code . "'>Activate My Account</a></h4>
-								</body>
-								</html>
-								";
-
-            $this->email->initialize($config);
-            $this->email->set_newline("\r\n");
-            $this->email->from($config['smtp_user']);
-            $this->email->to($email);
-            $this->email->subject('Please Verify Your Email');
-            $this->email->message($message);
-
-            //sending email
-            if ($this->email->send()) {
-                $this->session->set_flashdata('message', 'Activation code sent to email');
-            } else {
-                $this->session->set_flashdata('message', $this->email->print_debugger());
-
-            }
-
-            redirect('auth/register'); //habis ini di redirect ke login coy!
+          // ketika sukses
+          $this->_login();
         }
-
     }
 
-    public function activate()
-    {
-        $id = $this->uri->segment(3);
-        $code = $this->uri->segment(4);
-
-        //fetch user details
-        $user = $this->Auth_model->getUser($id);
-
-        //if code matches
-        if ($user['code'] == $code) {
-            //update user active status
-            $data['active'] = true;
-            $query = $this->Auth_model->activate($data, $id);
-
-            if ($query) {
-                $this->session->set_flashdata('message', 'User activated successfully');
-            } else {
-                $this->session->set_flashdata('message', 'Something went wrong in activating account');
-            }
-        } else {
-            $this->session->set_flashdata('message', 'Cannot activate account. Code didnt match');
-        }
-        redirect('auth/login');
-
-    }
-
-    public function checkLogin()
+    private function _login()
     {
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|max_length[15]');
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('auth/login');
-        } else {
-            $res = $this->Auth_model->checkUser($email, $password);
-            if (!empty($res)) {
-                if ($res[0]['active'] == '1') {
-                    $user['users'] = $res[0]['first_name'];
-                    $this->setSession($res[0]['id'], $res[0]['first_name']);
-                    $this->load->view('auth/profile', $user);
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+
+        // jika usernya aktif
+        if ($user) {
+            if ($user['is_active'] == 1) {
+                //cek PASSWORD
+                if (password_verify($password, $user['password'])) {
+                    $data = [
+                        'email' => $user['email'],
+                        'role_id' => $user['role_id']
+                    ];
+                    $this->session->set_userdata($data);
+                    if ($user['role_id'] == 1) {
+                        redirect('admin');
+                    } else if ($user['role_id'] == 2 ){
+                        redirect('company');
+                    } else {
+                        redirect('member');
+                    }
                 } else {
-                    $this->session->set_flashdata('message', 'Verify your email address first to login...');
-                    redirect('auth/login');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                    Wrong password!</div>');
+                    redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('message', 'email/password not found');
-                redirect('auth/login');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                This email has not been activated.</div>');
+                redirect('auth');
             }
+
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Email is not registered.</div>');
+            redirect('auth');
         }
     }
 
-    public function setSession($userId, $userName)
+    public function registration()
     {
-        $userSession = array('userId' => $userId,
-            'userName' => $userName,
-            'loggedIn' => true);
-        $this->session->set_userdata($userSession);
+        if ($this->session->userdata('email')) {
+            redirect('user');
+        }
+        $this->form_validation->set_rules('firstname', 'First Name', 'required|trim');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'required|trim');
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]',[
+          'is_unique' => 'this email has already registered!'
+        ]);
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]',[
+          'matches' => 'Password dont match!',
+          'min_length' => 'Password too short!'
+        ]);
+        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
+
+        if($this->form_validation->run() == false){
+            $data['title'] = 'User Registration';
+            $this->load->view('partials/auth/auth_header', $data);
+            $this->load->view('auth/registration');
+            $this->load->view('partials/auth/auth_footer');
+        }
+        else {
+            $data = [
+                'firstname' => htmlspecialchars($this->input->post('firstname', true)),//untuk menghindari xss
+                'lastname' => htmlspecialchars($this->input->post('lastname', true)),
+                'email' => htmlspecialchars($this->input->post('email')),
+                'image' => 'default.jpg',
+                'password' => password_hash($this->input->post('password1'),
+                PASSWORD_DEFAULT),
+                'role_id' => 2,
+                'is_active' => 1,
+                'date_created' => time()
+            ];
+
+            $this->db->insert('user', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Congratulation! Your account has been created. Please login</div>');
+            redirect('auth');
+        }
+
     }
 
     public function logout()
     {
-        $this->session->sess_destroy();
-        redirect('auth/login', 'refresh');
+        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('role_id');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success"
+        role="alert">You have been logged out!</div>');
+        redirect('auth/index');
     }
+
+    public function blocked()
+    {
+          $this->load->view('auth/blocked');
+    }
+
 }

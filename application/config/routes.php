@@ -23,28 +23,31 @@ $route['member'] = 'member/index';
 $route['detail-profile'] = 'member/detailProfile';
 $route['update-profile'] = 'member/updateProfile'; //$1
 
-$route['create-portofolio'] = 'member/createPortofolio';
-$route['detail-portofolio/(:any)'] = 'member/detailPortofolio/$1';
-$route['edit-portofolio/(:any)'] = 'member/updatePortofolio/$1';
-$route['delete-portofolio/(:any)'] = 'member/deletePortofolio/$1';
+//PORTOFOLIO
+$route['create-portofolio'] = 'portofolio/createPortofolio';
+$route['detail-portofolio/(:any)'] = 'portofolio/getPortofolio/$1';
+$route['edit-portofolio/(:any)'] = 'portofolio/updatePortofolio/$1';
+$route['delete-portofolio/(:any)'] = 'portofolio/deletePortofolio/$1';
 
 $route['update-keahlian'] = 'keahlian/updateKeahlian'; //$1
 
-$route['sertifikat'] = 'member/getAllSertifikat'; //$1
-$route['create-sertifikat'] = 'member/createSertifikat'; //$1
-$route['update-sertifikat'] = 'member/updateSertifikat'; //$1
-$route['delete-sertifikat/(:any)'] = 'member/deleteSertifikat/$1'; //$1
+//SERTIFIKAT
+$route['sertifikat'] = 'sertifikat/getAllSertifikat'; //$1
+$route['create-sertifikat'] = 'sertifikat/createSertifikat'; //$1
+$route['update-sertifikat'] = 'sertifikat/updateSertifikat'; //$1
+$route['delete-sertifikat/(:any)'] = 'sertifikat/deleteSertifikat/$1'; //$1
 
-$route['pendidikan'] = 'member/getAllPendidikan'; //$1
-$route['create-pendidikan'] = 'member/createPendidikan'; //$1
-$route['update-pendidikan'] = 'member/updatePendidikan'; //$1
-$route['delete-pendidikan/(:any)'] = 'member/deletePendidikan/$1'; //$1
+//PENDIDIKAN
+$route['pendidikan'] = 'pendidikan/getAllPendidikan'; //$1
+$route['create-pendidikan'] = 'pendidikan/createPendidikan'; //$1
+$route['update-pendidikan'] = 'pendidikan/updatePendidikan'; //$1
+$route['delete-pendidikan/(:any)'] = 'pendidikan/deletePendidikan/$1'; //$1
 
-
-$route['pengalaman-kerja'] = 'member/getAllPengalamanKerja'; //$1
-$route['create-pengalaman-kerja'] = 'member/createPengalamanKerja'; //$1
-$route['update-pengalaman-kerja'] = 'member/updatePengalamanKerja'; //$1
-$route['delete-pengalaman-kerja/(:any)'] = 'member/deletePengalamanKerja/$1'; //$1
+// PENGALAMAN KERJA
+$route['pengalaman-kerja'] = 'Pengalaman_kerja/getAllPengalamanKerja'; //$1
+$route['create-pengalaman-kerja'] = 'Pengalaman_kerja/createPengalamanKerja'; //$1
+$route['update-pengalaman-kerja'] = 'Pengalaman_kerja/updatePengalamanKerja'; //$1
+$route['delete-pengalaman-kerja/(:any)'] = 'Pengalaman_kerja/deletePengalamanKerja/$1'; //$1
 
 //COMPANY
 $route['company'] = 'company/index';

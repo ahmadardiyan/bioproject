@@ -2,9 +2,9 @@
 
 // uploadImage : function untuk upload image
 // $path : lokasi penyimpanan image/foto
-function uploadImage($path = null)
+function uploadImage($path = 'profile')
 {
-    $config['upload_path'] = 'assets/img/' . $path;
+    $config['upload_path'] = 'assets/images/' . $path;
     $config['allowed_types'] = 'jpeg|jpg|png';
     $config['max_size'] = 1024 * 2; // 2MB
     // $config['max_width']            = 1024;

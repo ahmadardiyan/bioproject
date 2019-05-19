@@ -226,7 +226,7 @@ $(".btn-update-sertifikat").on('click', function () {
     const id = $(this).data('id');
     // console.log(id);
 
-    var url = 'member/getSertifikat';
+    var url = 'sertifikat/getSertifikat';
     $.ajax({
         url: url,
         data: {
@@ -235,6 +235,7 @@ $(".btn-update-sertifikat").on('click', function () {
         type: 'POST',
         dataType: 'json',
         success: function (data) {
+            console.log
             $('#id-sertifikat').val(data.id_sertifikat);
             $('#nama-sertifikat').val(data.nama_sertifikat);
             $('#tahun').val(data.tahun);
@@ -264,7 +265,7 @@ $(".btn-update-pendidikan").on('click', function () {
 
     const id = $(this).data('id');
 
-    var url = 'member/getpendidikan';
+    var url = 'pendidikan/getpendidikan';
     $.ajax({
         url: url,
         data: {
@@ -308,7 +309,7 @@ $(".btn-update-pengalaman-kerja").on('click', function () {
 
     const id = $(this).data('id');
 
-    var url = 'member/getPengalamanKerja';
+    var url = 'Pengalaman_kerja/getPengalamanKerja';
     $.ajax({
         url: url,
         data: {

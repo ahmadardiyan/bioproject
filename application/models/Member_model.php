@@ -76,18 +76,18 @@ class Member_model extends CI_Model
         return $query->result_array();
     }
 
-    // mengambil semua data portofolio secara desc
-    public function getAllPortofolio($key, $value)
-    {
-        $this->db->order_by('created_at', 'DESC');
-        $query = $this->db->get_where('portofolio', [$key => $value]);
-        return $query->result_array();
-    }
+    // // mengambil semua data portofolio secara desc
+    // public function getAllPortofolio($key, $value)
+    // {
+    //     $this->db->order_by('created_at', 'DESC');
+    //     $query = $this->db->get_where('portofolio', [$key => $value]);
+    //     return $query->result_array();
+    // }
 
-    // mengambil sebuah data portofolio
-    public function getPortofolio($key, $value)
-    {
-        $query = $this->db->get_where('portofolio', [$key => $value]);
-        return $query->row_array();
-    }
+    // // mengambil sebuah data portofolio
+    // public function getPortofolio($key, $value)
+    // {
+    //     $query = $this->db->get_where('portofolio', [$key => $value]);
+    //     return $query->row_array();
+    // }
 }
