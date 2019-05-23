@@ -1,37 +1,71 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php 
 
-class Auth_model extends CI_Model {
+class Auth_model extends CI_Model
+{
 
-		function __construct(){
-				parent::__construct();
-				$this->load->database();
+	public function insert_data(){
+		$this->load->helper('string');//mengaktifkan helper string
+		$_SESSION['token'] = random_string('alnum',16);
+
+		$data = [
+			'email'    => $this->input->post('email'),
+			'username'    => $this->input->post('username'),
+			'password' => password_hash($this->input->post('password'),PASSWORD_DEFAULT),
+			'token'    => $_SESSION['token'],
+			'level'	   => $this->input->post('level')
+		];
+
+		$this->db->insert('users',$data);
+	}
+	
+	public function get_user($key,$value){
+		$query = $this->db->get_where('users',[$key => $value]);
+
+		if (!empty($query->row_array())) {
+			return $query->row_array();
+		}
+		return false;
+	}
+
+	public function update_role($id_user,$role){
+		$data = ['role'=>$role];
+		$this->db->where('id_user',$id_user);
+		$this->db->update('users',$data);
+	}
+
+	public function is_login(){
+		if (!isset($_SESSION['login'])) {
+			return false;
 		}
 
-		public function getAllUsers(){
-				$query = $this->db->get('users');
-				return $query->result();
+		return true;
+	}
+
+	public function checkPassword($email,$password){
+		$hash = $this->Auth_model->get_user('email',$email)['password'];
+
+		if (password_verify($password,$hash)) {
+			return true;
 		}
 
-		public function insert($user){
-				$this->db->insert('users', $user);
-				return $this->db->insert_id();
-		}
+		return false;
+	}
 
-		public function getUser($id){
-				$query = $this->db->get_where('users',array('id'=>$id));
-				return $query->row_array();
-		}
+	public function updatePassword($id_user){
+		$data = [ 
+			'password' => password_hash($this->input->post('password'),PASSWORD_DEFAULT)
+			// 'password' => $this->input->post('password')
+		];
 
-		public function activate($data, $id){
-				$this->db->where('users.id', $id);
-				return $this->db->update('users', $data);
-		}
+		$this->db->where('id_user', $id_user);
+		$this->db->update('users', $data);
+	}
 
-		public function checkUser($email,$password)
-		{
-				$sql = "SELECT active , id , first_name FROM users where email = ? and password = ? ";
-				$data = $this->db->query($sql, array($email,$password));
-				return ($data->result_array()) ;
-		}
+	public function createID($tabel,$data)
+	{
+		$this->db->insert($tabel,$data);
+	}
+
 }
+
+?>

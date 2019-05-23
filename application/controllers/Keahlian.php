@@ -12,8 +12,9 @@ class Keahlian extends CI_Controller
 
     //menampilkan data skills
     // public function getKeahlian($id_user = null)
-    public function getKeahlian($id_user = null)
+    public function getKeahlian()
     {
+        $id_user = $_SESSION['id_user'];
         $data = $this->Member_model->getKeahlian('id_user', $id_user);
         echo json_encode($data);
     }
@@ -37,9 +38,9 @@ class Keahlian extends CI_Controller
     }
 
     // memperbarui skills
-    // public function updateSkills($id_user = '1')
-    public function updateKeahlian($id_user = '1')
+    public function updateKeahlian()
     {
+        $id_user = $_SESSION['id_user'];
         $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
 

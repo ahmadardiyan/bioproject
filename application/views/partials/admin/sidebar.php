@@ -34,7 +34,6 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Custom Homepage:</h6>
         <a class="collapse-item" href="<?= base_url('admin/services'); ?>"><i class="fas fa-fw fa-hands"></i> Service</a>
-        <a class="collapse-item" href="<?= base_url('admin/portofolio'); ?>"><i class="fas fa-fw fa-file-invoice"></i> Portofolio</a>
       </div>
     </div>
   </li>
@@ -47,19 +46,6 @@
     User
   </div>
 
-  <!-- Nav Item - My Profile -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="<?= base_url('user/index') ?>" data-toggle="collapse" data-target="#collapseMyProfile" aria-expanded="true" aria-controls="collapseMyProfile">
-      <i class="fas fa-fw fa-user-alt"></i>
-      <span>My Profile</span></a>
-      <div id="collapseMyProfile" class="collapse" aria-labelledby="headingMyProfile" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Profile:</h6>
-          <a class="collapse-item" href="<?= base_url('user/edit_profile'); ?>"><i class="fas fa-fw fa-pen"></i> Edit My Profile</a>
-        </div>
-      </div>
-  </li>
-
   <!-- Nav Item - Project Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProject" aria-expanded="true" aria-controls="collapseProject">
@@ -70,7 +56,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Custom Project:</h6>
         <a class="collapse-item" href="<?= base_url('admin/projects'); ?>"><i class="fas fa-fw fa-project-diagram"></i> Data Project</a>
-        <a class="collapse-item" href="<?= base_url('admin/list_project'); ?>"><i class="fas fa-fw fa-tasks"></i> List of Project</a>
+        <a class="collapse-item" href="<?= base_url('admin/list_projects'); ?>"><i class="fas fa-fw fa-tasks"></i> List of Project</a>
       </div>
     </div>
   </li>
@@ -88,7 +74,7 @@
         <a class="collapse-item" href="<?= base_url('admin/portofolios'); ?>"><i class="fas fa-fw fa-file-invoice"></i> Portofolio</a>
         <a class="collapse-item" href="<?= base_url('admin/educations'); ?>"><i class="fas fa-fw fa-graduation-cap"></i> Pendidikan</a>
         <a class="collapse-item" href="<?= base_url('admin/certificates'); ?>"><i class="fas fa-fw fa-certificate"></i> Sertifikat</a>
-        <a class="collapse-item" href="<?= base_url('admin/pengalaman_kerja'); ?>"><i class="fas fa-fw fa-briefcase"></i> Pengalaman Kerja</a>
+        <a class="collapse-item" href="<?= base_url('admin/pengalaman_kerjas'); ?>"><i class="fas fa-fw fa-briefcase"></i> Pengalaman Kerja</a>
       </div>
     </div>
   </li>

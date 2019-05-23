@@ -5,31 +5,34 @@
                 <div id="bio-company">
                     <div class="content">
                         <!-- Foto Profile -->
-                        <img class="img-responsive img-profile" src="<?=base_url();?>assets/images/profile/company.png">
+                        <!-- <img class="img-responsive img-profile" src="<?=base_url();?>assets/images/profile/company.png"> -->
+                        
+                        <img class="img-responsive img-profile"
+                        src="<?=base_url();?>assets/images/profile/<?= $company['logo_perusahaan']; ?>">
 
                         <!-- Bio -->
                         <div class="member-bio text-center">
                             <h3>
-                                Perusahaan XYZ
+                            <?= $company['nama_perusahaan']?>
                             </h3>
                             <p>
-                                sebuah start up bergerak dibidang jasa kuliner
+                            <?= $company['deskripsi_perusahaan']?>
                             </p>
                         </div>
                         <hr>
                         <!-- Contact member -->
                         <div class="contact-member">
 
-                            <p><i class="fas fa-phone-square"></i> (021)123456789 </p>
+                            <p><i class="fas fa-phone-square"></i>  <?= $company['phone']?></p>
                             <p><i class="fas fa-envelope"></i> companyxyz@xyz.com</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Yogyakarta </p>
+                            <p><i class="fas fa-map-marker-alt"></i>  <?= $company['nama_kab']?> </p>
                         </div>
 
                         <div class="text-center">
-                            <a class="btn btn-primary" href="#">
+                            <a class="btn btn-primary" href="<?=base_url()?>detail-profile-company">
                                 Detail Profile
                             </a>
-                            <a class="btn btn-default" href="#">
+                            <a class="btn btn-default" href="<?=base_url()?>update-profile-company">
                                 Edit Profile
                             </a>
                         </div>

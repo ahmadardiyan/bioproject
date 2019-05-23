@@ -6,7 +6,7 @@
 
                 <div class="row" style="margin:20px 5px;">
 
-                    <h2>Tambah Lowongan Kerja</h2>
+                    <h2>Edit Lowongan Kerja</h2>
 
                     <hr>
                 </div>
@@ -16,20 +16,20 @@
 
                         <div class="form-group">
                             <label for="judul">Judul Lowongan Kerja</label>
-                            <input type="text" class="form-control" id="judul" name="judul" value="<?=set_value('judul')?>">
+                            <input type="text" class="form-control" id="judul" name="judul" value="<?= $loker['judul']?>">
                             <small class="form-text text-danger"><?=form_error('judul')?></small>
                         </div>
                         
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi Lowongan Kerja</label>
-                            <textarea class="form-control" id="deskripsi" name="deskripsi" cols="30" rows="3" <?=set_value('deskripsi')?>></textarea>
+                            <textarea class="form-control" id="deskripsi" name="deskripsi" cols="30" rows="3"><?= $loker['deskripsi']?></textarea>
                             <small class="form-text text-danger">
                                 <?=form_error('deskripsi')?></small>
                         </div>
 
                         <div class="form-group">
                             <label for="provinsi">Provinsi</label>
-                            <select class="form-control" name="provinsi" id="provinsi" ></select>
+                            <select class="form-control" name="provinsi" id="provinsi"></select>
                             <small class="form-text text-danger">
                                 <?=form_error('provinsi')?></small>
                         </div>
@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label for="tanggal_penutupan">Penutupan Pendaftaran</label>
                             <input type="text" class="form-control tanggal mb-2" name="tanggal_penutupan"
-                                id="tanggal_penutupan" value="<?=set_value('tanggal_penutupan')?>">
+                                id="tanggal_penutupan" value="<?= date('d-m-Y' , strtotime($loker['tanggal_penutupan']));?>">
                             <small class="form-text text-danger"><?=form_error('tanggal_penutupan')?></small>
                         </div>
 
@@ -106,7 +106,7 @@
 
                         <div class="form-group">
                             <label for="detail_lowongan_kerja">Detail Lowongan Pekerjaan</label>
-                            <textarea class="form-control" id="ckeditor" name="detail_lowongan_kerja" value=<?=set_value('detail_lowongan_kerja')?>></textarea>
+                            <textarea class="form-control" id="ckeditor" name="detail_lowongan_kerja"><?= $loker['detail_lowongan_kerja']?></textarea>
                             <small class="form-text text-danger">
                                 <?=form_error('detail_lowongan_kerja')?></small>
                         </div>

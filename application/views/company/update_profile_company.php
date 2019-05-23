@@ -21,7 +21,7 @@
 
                 <div class="row" style="margin:20px 5px;">
 
-                    <h2>Edit Profile</h2>
+                    <h2>Profile Company</h2>
 
                     <hr>
                 </div>
@@ -29,60 +29,43 @@
                 <div class="row" style="margin:20px 5px;">
                     <form action="" method="post" enctype="multipart/form-data">
 
-                        <input type="hidden" name="id_user" value="<?=$member['id_user'];?>">
-                        <input type="hidden" name="foto_lama" value="<?=$member['foto'];?>">
+                        <input type="hidden" name="id_user" value="<?=$company['id_user'];?>">
+                        <input type="hidden" name="foto_lama" value="<?=$company['logo_perusahaan'];?>">
 
                         <div class="form-group">
-                            <label for="nama_member">Nama</label>
-                            <input type="text" class="form-control" id="nama_member" name="nama_member"
-                                value="<?=$member['nama_member'];?>">
-                            <small class="form-text text-danger"><?=form_error('nama_member')?></small>
+                            <label for="nama_perusahaan">Nama Perusahaan</label>
+                            <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan"
+                                value="<?=$company['nama_perusahaan'];?>">
+                            <small class="form-text text-danger"><?=form_error('nama_perusahaan')?></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="deskripsi_member">Tentang Saya</label>
-                            <textarea class="form-control" id="deskripsi_member" name="deskripsi_member" cols="30"
-                                rows="3"><?=$member['deskripsi_member'];?></textarea>
+                            <label for="deskripsi">Tentang Perusahaan</label>
+                            <textarea class="form-control" id="deskripsi" name="deskripsi" cols="30"
+                                rows="3"><?=$company['deskripsi_perusahaan'];?></textarea>
                             <small class="form-text text-danger">
-                                <?=form_error('deskripsi_member')?></small>
+                                <?=form_error('deskripsi')?></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="gender_member">Jenis Kelamin</label> 
-                            <div class="radio" style="margin-left:30px">
-                                <input  type="radio" name="gender_member" value="Laki-laki" <?= $member['gender_member'] == 'Laki-laki' ? 'checked' : false; ?>>Laki-laki
-                            </div>
-                            <div class="radio" style="margin-left:30px">
-                                <input  type="radio" name="gender_member" value="Perempuan" <?= $member['gender_member'] == 'Perempuan' ? 'checked' : false; ?>>Perempuan
-                            </div>
-                            <small class="form-text text-danger"><?=form_error('gender_member')?></small>
+                            <label for="website">Website</label>
+                            <textarea class="form-control" id="website" name="website" cols="30"
+                                rows="3"><?=$company['website_perusahaan'];?></textarea>
+                            <small class="form-text text-danger">
+                                <?=form_error('website')?></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="tempat_lahir">Tempat Lahir</label>
-                            <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
-                                value="<?=$member['tempat_lahir'];?>">
-                            <small class="form-text text-danger"><?=form_error('tempat_lahir')?></small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tanggal_lahir">Tanggal Lahir</label>
-                            <input type="text" class="form-control tanggal mb-2" name="tanggal_lahir" id="tanggal_lahir"
-                                value="<?= date('d-m-Y' , strtotime($member['tanggal_lahir']));?>">
-                            <small class="form-text text-danger"><?=form_error('tanggal_lahir')?></small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone_member">Telphone</label>
-                            <input type="text" class="form-control" id="phone_member" name="phone_member"
-                                value="<?=$member['phone_member'];?>">
-                            <small class="form-text text-danger"><?=form_error('phone_member')?></small>
+                            <label for="phone">Telphone</label>
+                            <input type="text" class="form-control" id="phone" name="phone"
+                                value="<?=$company['phone'];?>">
+                            <small class="form-text text-danger"><?=form_error('phone')?></small>
                         </div>
 
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
                             <textarea class="form-control" id="alamat" name="alamat" cols="30"
-                                rows="3"> <?=$member['alamat'];?> </textarea>
+                                rows="3"> <?=$company['alamat_perusahaan'];?> </textarea>
                             <small class="form-text text-danger">
                                 <?=form_error('alamat')?></small>
                         </div>
@@ -110,8 +93,8 @@
 
 
                         <div class="form-group">
-                            <label for="foto">Foto Profile</label><br>
-                            <img class="img-thumbnail" src="<?=base_url();?>assets/images/profile/<?=$member['foto']?>"
+                            <label for="foto">Logo Perusahaan</label><br>
+                            <img class="img-thumbnail" src="<?=base_url();?>assets/images/profile/<?=$company['logo_perusahaan']?>"
                                 width="100px" height="100px">
                             <input type="file" class="form-control-file" id="foto" name="foto">
                             <small class="form-text text-danger">

@@ -67,6 +67,16 @@ class Member_model extends CI_Model
         return $query->row_array();
     }
 
+    public function getAllMember()
+    {
+        $this->db->join('kecamatan', 'kecamatan.id_kec = member.id_kec');
+        $this->db->join('kabupaten', 'kabupaten.id_kab = member.id_kab');
+        $this->db->join('provinsi', 'provinsi.id_prov = member.id_prov');
+        $this->db->from('member');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     // mengambil data skill member
     public function getKeahlian($key, $value)
     {
@@ -76,18 +86,30 @@ class Member_model extends CI_Model
         return $query->result_array();
     }
 
-    // // mengambil semua data portofolio secara desc
-    // public function getAllPortofolio($key, $value)
-    // {
-    //     $this->db->order_by('created_at', 'DESC');
-    //     $query = $this->db->get_where('portofolio', [$key => $value]);
-    //     return $query->result_array();
-    // }
+    // mengambil semua data portofolio secara desc
+    public function getAllPortofolio($key, $value)
+    {
+        $this->db->order_by('created_at', 'DESC');
+        $query = $this->db->get_where('portofolio', [$key => $value]);
+        return $query->result_array();
+    }
 
-    // // mengambil sebuah data portofolio
-    // public function getPortofolio($key, $value)
-    // {
-    //     $query = $this->db->get_where('portofolio', [$key => $value]);
-    //     return $query->row_array();
-    // }
+    // mengambil sebuah data portofolio
+    public function getPortofolio($key, $value)
+    {
+        $query = $this->db->get_where('portofolio', [$key => $value]);
+        return $query->row_array();
+    }
+
+    public function getUser($tabel,$key, $value)
+    {
+        $this->db->where([$key => $value]);
+        // $this->db->join('kecamatan', 'kecamatan.id_kec = '.$tabel.'. id_kec');
+        // $this->db->join('kabupaten', 'kabupaten.id_kab = '.$tabel.'.id_kab');
+        // $this->db->join('provinsi', 'provinsi.id_prov = '.$tabel.'.id_prov');
+        $this->db->from($tabel);
+
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

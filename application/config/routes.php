@@ -11,9 +11,12 @@ $route['default_controller'] = 'home/index'; //home/homepage
 $route['cari-kerja'] = 'search/cariKerja'; //home/homepage
 
 //AUTH
-$route['login'] = 'auth/login';
-$route['register'] = 'auth/register';
-$route['logout'] = 'auth/logout';
+$route['registrasi']                    = 'auth/registrasi';
+$route['logout']                        = 'auth/logout';
+$route['login']                         = 'auth/login';
+$route['verify_register/(:any)/(:any)'] = 'auth/verify_register/$1/$2';
+$route['forgotPassword']                = 'auth/forgotPassword';
+$route['newPassword/(:any)/(:any)']     = 'auth/newPassword/$1/$2';
 
 //ADMIN
 $route['admin'] = 'admin/dashboard';
@@ -51,6 +54,9 @@ $route['delete-pengalaman-kerja/(:any)'] = 'Pengalaman_kerja/deletePengalamanKer
 
 //COMPANY
 $route['company'] = 'company/index';
+$route['update-profile-company'] = 'company/updateProfileCompany'; //$1
+$route['detail-profile-company'] = 'company/detailProfileCompany'; //$1
 
 $route['create-lowongan-kerja'] = 'company/createLowonganKerja';
+$route['update-lowongan-kerja/(:any)'] = 'company/updateLowonganKerja/$1';
 $route['detail-lowongan-kerja/(:any)'] = 'company/detailLowonganKerja/$1';

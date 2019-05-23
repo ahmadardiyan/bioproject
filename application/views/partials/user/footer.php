@@ -78,7 +78,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="<?=base_url()?>login">Logout</a>
+                <a class="btn btn-primary" href="<?=base_url()?>logout">Logout</a>
             </div>
         </div>
     </div>
@@ -128,7 +128,7 @@
                     <div class="form-group">
                         <label for="tahun">Tahun</label>
                         <select class="form-control tahun" name="tahun" id="tahun"></select>
-                            <small class="form-text text-danger"><?=form_error('tahun')?></small>
+                        <small class="form-text text-danger"><?=form_error('tahun')?></small>
                     </div>
 
             </div>
@@ -168,7 +168,7 @@
                         <input type="text" class="form-control" id="gelar" name="gelar">
                         <small class="form-text text-danger"><?=form_error('gelar')?></small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="prodi">Program Studi</label>
                         <input type="text" class="form-control" id="prodi" name="prodi">
@@ -178,13 +178,13 @@
                     <div class="form-group">
                         <label for="tahun-mulai">Tahun Mulai</label>
                         <select class="form-control tahun tahun-mulai" name="tahun_mulai" id=""></select>
-                            <small class="form-text text-danger"><?=form_error('tahun-mulai')?></small>
+                        <small class="form-text text-danger"><?=form_error('tahun-mulai')?></small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="tahun-selesai">Tahun Selesai</label>
                         <select class="form-control tahun tahun-selesai" name="tahun_selesai" id=""></select>
-                            <small class="form-text text-danger"><?=form_error('tahun-selesai')?></small>
+                        <small class="form-text text-danger"><?=form_error('tahun-selesai')?></small>
                     </div>
 
             </div>
@@ -224,17 +224,17 @@
                         <input type="text" class="form-control" id="jabatan" name="jabatan">
                         <small class="form-text text-danger"><?=form_error('jabatan')?></small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="tahun-mulai">Tahun Mulai</label>
                         <select class="form-control tahun tahun-mulai" name="tahun_mulai" id=""></select>
-                            <small class="form-text text-danger"><?=form_error('tahun-mulai')?></small>
+                        <small class="form-text text-danger"><?=form_error('tahun-mulai')?></small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="tahun-selesai">Tahun Selesai</label>
                         <select class="form-control tahun tahun-selesai" name="tahun_selesai" id=""></select>
-                            <small class="form-text text-danger"><?=form_error('tahun-selesai')?></small>
+                        <small class="form-text text-danger"><?=form_error('tahun-selesai')?></small>
                     </div>
 
             </div>

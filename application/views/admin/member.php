@@ -46,18 +46,6 @@
                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Alamat: activate to sort column ascending" style="width: 48px;">
                           Alamat
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Kecamatan: activate to sort column ascending" style="width: 48px;">
-                          Kecamatan
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Kabupaten: activate to sort column ascending" style="width: 48px;">
-                          Kabupaten
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Provinsi: activate to sort column ascending" style="width: 48px;">
-                          Provinsi
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Foto: activate to sort column ascending" style="width: 48px;">
-                          Foto
-                        </th>
                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Deskripsi: activate to sort column ascending" style="width: 48px;">
                           Deskripsi
                         </th>
@@ -80,10 +68,6 @@
                             $tempat=$a['tempat_lahir'];
                             $tanggal=$a['tanggal_lahir'];
                             $alamat=$a['alamat'];
-                            $kec=$a['id_kec'];
-                            $kab=$a['id_kab'];
-                            $prov=$a['id_prov'];
-                            $foto=$a['foto'];
                             $deskripsi=$a['deskripsi_member'];
                             $ms=$a['modified_at']
                         ?>
@@ -95,10 +79,6 @@
                         <td><?= $tempat;?></td>
                         <td><?= $tanggal;?></td>
                         <td><?= $alamat;?></td>
-                        <td><?= $kec; ?></td>
-                        <td><?= $kab; ?></td>
-                        <td><?= $prov; ?></td>
-                        <td><img src="<?= base_url('assets/images/profile/').$foto;?>" class="img-profile rounded-circle" style="width:60px;"></td>
                         <td><?= $deskripsi;?></td>
                         <td><?= $ms;?></td>
                         <td>
@@ -170,40 +150,6 @@
                 <textarea type="text" cols="20" rows="3" class="form-control" id="alamat" name="alamat" placeholder="Alamat Member" required></textarea>
               </div>
             </div>
-            <div class="form-group row">
-              <label name="kecamatan" class="col-sm-2 col-form-label">Kecamatan</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label name="kabupaten" class="col-sm-2 col-form-label">Kabupaten</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="kabupaten" name="kabupaten"  placeholder="Kabupaten">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label name="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" required>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-2">Foto</div>
-              <div class="col-sm-10">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <img src="<?= base_url('assets/images/profile/')?>" class="img-thumbnail">
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" >
-                      <label class="custom-file-label">Choose File<label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -226,9 +172,6 @@
       $tanggal=$a['tanggal_lahir'];
       $deskripsi=$a['deskripsi_member'];
       $alamat=$a['alamat'];
-      $kec=$a['id_kec'];
-      $kab=$a['id_kab'];
-      $prov=$a['id_prov'];
       $foto=$a['foto'];
 ?>
 
@@ -281,40 +224,6 @@
                 <textarea type="text" cols="20" rows="3" class="form-control" id="alamat" name="alamat" placeholder="Alamat Member" required><?= $alamat; ?></textarea>
               </div>
             </div>
-            <div class="form-group row">
-              <label name="kecamatan" class="col-sm-2 col-form-label">Kecamatan</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="<?= $kec; ?>" placeholder="Kecamatan">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label name="kabupaten" class="col-sm-2 col-form-label">Kabupaten</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="kabupaten" name="kabupaten" value="<?= $kab; ?>" placeholder="Kabupaten">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label name="provinsi" class="col-sm-2 col-form-label">Provinsi</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="provinsi" name="provinsi" value="<?= $prov; ?>" placeholder="Provinsi" required>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-2">Foto</div>
-              <div class="col-sm-10">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <img src="<?= base_url('/assets/images/profile/'). $foto; ?>" class="img-thumbnail">
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" >
-                      <label class="custom-file-label" for="foto">Choose File<label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -340,9 +249,6 @@
         $tanggal=$a['tanggal_lahir'];
         $deskripsi=$a['deskripsi_member'];
         $alamat=$a['alamat'];
-        $kec=$a['id_kec'];
-        $kab=$a['id_kab'];
-        $prov=$a['id_prov'];
         $foto=$a['foto'];
   ?>
 	<!--Modal Hapus Member-->

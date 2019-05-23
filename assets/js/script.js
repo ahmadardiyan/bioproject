@@ -7,9 +7,18 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (result) {
 
-            idProv = result.member.id_prov;
-            idKab = result.member.id_kab;
-            idKec = result.member.id_kec;
+            console.log(result);
+
+            if (result == null) {
+                idProv = 0;
+                idKab = 0;
+                idKec = 0;
+            } else {
+                idProv = result.member.id_prov;
+                idKab = result.member.id_kab;
+                idKec = result.member.id_kec;
+            }
+            // console.log(result);
 
         }
     });
@@ -30,16 +39,20 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (result) {
             result.forEach(function (data) {
-
-                if (data.id_prov == idProv) {
-                    $("#provinsi").append('<option value="' + data.id_prov + '" selected>' + data.nama_prov + '</option>');
-
-                    $("#provinsi").change();
-                } else {
+                // console.log(idProv);
+                if (idProv = null) {
                     $("#provinsi").append('<option value="' + data.id_prov + '">' + data
                         .nama_prov + '</option>');
-                }
+                } else {
+                    if (data.id_prov == idProv) {
+                        $("#provinsi").append('<option value="' + data.id_prov + '" selected>' + data.nama_prov + '</option>');
 
+                        $("#provinsi").change();
+                    } else {
+                        $("#provinsi").append('<option value="' + data.id_prov + '">' + data
+                            .nama_prov + '</option>');
+                    }
+                }
             });
         }
     });
@@ -58,17 +71,21 @@ $("#provinsi").change(function () {
         type: 'GET',
         dataType: 'json',
         success: function (result) {
+            // console.log(result);
             result.forEach(function (data) {
-
-                if (data.id_kab == idKab) {
-                    $("#kabupaten").append('<option value="' + data.id_kab + '" selected >' + data.nama_kab + '</option>');
-
-                    $("#kabupaten").change();
+                // console.log(data);
+                if (idPKab = 0) {
+                $("#kabupaten").append('<option value="' + data.id_kab + '">' + data.nama_kab + '</option>');
                 } else {
-                    $("#kabupaten").append('<option value="' + data.id_kab + '">' + data
-                        .nama_kab + '</option>');
-                }
+                    if (data.id_kab == idKab) {
+                        $("#kabupaten").append('<option value="' + data.id_kab + '" selected >' + data.nama_kab + '</option>');
 
+                        $("#kabupaten").change();
+                    } else {
+                        $("#kabupaten").append('<option value="' + data.id_kab + '">' + data
+                            .nama_kab + '</option>');
+                    }
+                }
             });
         }
     });
@@ -87,11 +104,21 @@ $("#kabupaten").change(function () {
         success: function (result) {
             result.forEach(function (data) {
 
-                if (data.id_kec == idKec) {
-                    $("#kecamatan").append('<option value="' + data.id_kec + '" selected >' + data.nama_kec + '</option>');
-                } else {
+                if (idPKec = 0) {
                     $("#kecamatan").append('<option value="' + data.id_kec + '">' + data
                         .nama_kec + '</option>');
+                } else {
+                    if (idKec == null) {
+                        $("#kecamatan").append('<option value="' + data.id_kec + '">' + data
+                            .nama_kec + '</option>');
+                    } else {
+                        if (data.id_kec == idKec) {
+                            $("#kecamatan").append('<option value="' + data.id_kec + '" selected >' + data.nama_kec + '</option>');
+                        } else {
+                            $("#kecamatan").append('<option value="' + data.id_kec + '">' + data
+                                .nama_kec + '</option>');
+                        }
+                    }
                 }
 
             });
@@ -114,15 +141,15 @@ $(document).ready(function () {
     $('.tahun').append('<option value="">Pilih</option>');
     var d = new Date();
 
-    for (var i = d.getFullYear(); i > d.getFullYear()-50; i--) {
-        $('.tahun').append('<option value="'+i+'">'+i+'</option>');
+    for (var i = d.getFullYear(); i > d.getFullYear() - 50; i--) {
+        $('.tahun').append('<option value="' + i + '">' + i + '</option>');
     }
 });
 
 // Keahlian Member
 $(document).ready(function () {
 
-    var url = 'keahlian/getKeahlian/1';
+    var url = 'keahlian/getKeahlian';
     $.ajax({
         url: url,
         type: 'GET',
@@ -136,7 +163,6 @@ $(document).ready(function () {
 
 
                 $("#keahlian-member").append('<p class="label label-default" style="margin-right:10px; display:inline-block">' + data.nama_keahlian + '</p>');
-
                 $("#checkbox-keahlian-member").append('<div id="list-keahlian-' + data.id_keahlian + '" class="col-md-6 col-xs-6"><div class="checkbox-inline"><input type="checkbox"  name="keahlian[]"  value="' + data.id_keahlian + '" id="keahlian-' + data.id_keahlian + '" style="margin-right:10px;" checked>' + data.nama_keahlian + '</div></div>');
 
             });
@@ -173,6 +199,11 @@ $("#kategori-keahlian").change(function () {
         dataType: 'json',
         success: function (result) {
             result.forEach(function (data) {
+
+                //select list keahlian
+                $("#list-keahlian-select").html('');
+                $("#list-keahlian-select").append('<option value="' + data.id_keahlian + '">' + data.nama_keahlian + '</option>');
+
                 var x = false;
 
                 keahlianMember.forEach(function (keahlian) {
@@ -196,15 +227,21 @@ function tambahKeahlian(id_keahlian, nama_keahlian) {
     var status = $("#" + id_keahlian).is(":checked") ? "1" : "0";
 
     if (status === '1') {
-
         $("#checkbox-keahlian-member").append('<div id="list-keahlian-' + id_keahlian + '" class="col-md-6 col-xs-6"><label class="checkbox-inline"><input type="checkbox" class="skill"  name="keahlian[]"  id="' + nama_keahlian + '"  value="' + id_keahlian + '" style="margin-right:10px;" checked> ' + nama_keahlian + '</label><div>');
-
     } else {
 
         $("#list-keahlian-" + id_keahlian)[0].remove();
     }
 
 }
+
+// $(document).ready(function () {
+//     var status = $("#list-keahlian-" + id_keahlian).is(":checked") ? "1" : "0";
+
+//     if ($("#list-keahlian-" + id_keahlian).is(":unchecked")) {
+//         $("#list-keahlian-" + id_keahlian)[0].remove();
+//     }
+// }
 
 // Tambah Sertifikat
 $("#btn-create-sertifikat").on('click', function () {
@@ -331,8 +368,10 @@ $(".btn-update-pengalaman-kerja").on('click', function () {
 });
 
 $(document).ready(function () {
-    var ckeditor = CKEDITOR.replace('ckeditor',{height:'600px'});
+    var ckeditor = CKEDITOR.replace('ckeditor', {
+        height: '600px'
+    });
 
-    CKEDITOR.disableAutoInline =true;
+    CKEDITOR.disableAutoInline = true;
     CKEDITOR.inline('editable');
 });

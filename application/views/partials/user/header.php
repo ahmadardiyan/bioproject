@@ -28,9 +28,17 @@
 
   <link rel="stylesheet" href="<?= base_url() ?>assets/css/font-awesome.min.css">
 
-
   <!-- Custom stylesheet -->
   <link type="text/css" rel="stylesheet" href="<?= base_url() ?>assets/css/style.css" />
+
+  <!-- Custom fonts for this template-->
+  <!-- <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet"> -->
+
+  <!-- Custom styles for this template-->
+  <!-- <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet"> -->
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,26 +52,13 @@
 
   <?php $this->load->view('partials/user/navbar')?>
 
-  <div class="container">
-    <!-- FlashData Notifikasi Berhasil-->
-    <?php if ($this->session->flashdata('flash-message')): ?>
-    <div class="alert alert-success alert-dismissible show" role="alert" style="margin-top:15px; margin-bottom:-2px">
-      Pesanan <strong>berhasil</strong>
-      <?=$this->session->flashdata('flash-message');?>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <?php endif;?>
-
-    <!-- FlashData Notifikasi Gagal Cari-->
-    <?php if ($this->session->flashdata('cari-pesanan')): ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <?=$this->session->flashdata('cari-pesanan');?> <strong>kosong</strong>!
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <?php endif;?>
-
+  <!-- FlashData Notifikasi Berhasil-->
+  <!-- <?php if ($this->session->flashdata('flash')): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    Pesanan <strong>berhasil</strong>
+    <?=$this->session->flashdata('flash');?>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
+  <?php endif;?> -->

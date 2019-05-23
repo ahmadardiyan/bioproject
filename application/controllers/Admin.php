@@ -26,6 +26,72 @@ class Admin extends CI_Controller
 
     }
 
+    public function profile()
+    {
+
+        $data['title'] = "My Profile";
+        $data['user'] = $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $this->load->view('partials/admin/header', $data);
+        $this->load->view('partials/admin/sidebar', $data);
+        $this->load->view('partials/admin/topbar', $data);
+        $this->load->view('admin/myprofile', $data);
+        $this->load->view('partials/admin/footer');
+
+
+    }
+
+    public function edit_profile()
+    {
+        $data['title'] = "Edit My Profile";
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('firstname', 'First Name', 'required|trim');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('partials/admin/header', $data);
+            $this->load->view('partials/admin/sidebar', $data);
+            $this->load->view('partials/admin/topbar', $data);
+            $this->load->view('admin/edit-profile', $data);
+            $this->load->view('partials/admin/footer');
+        } else {
+            $firstname = $this->input->post('firstname');
+            $lastname = $this->input->post('lastname');
+            $email = $this->input->post('email');
+
+            $upload_image = $_FILES['image']['name'];
+
+            if ($upload_image) {
+                $config['allowed_types'] = 'gif|png|jpg';
+                $config['upload_path'] = './assets/images/profile/';
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('image')) {
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->set('image', $new_image);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+
+            $this->db->set('firstname', $firstname);
+            $this->db->set('lastname', $lastname);
+
+            $this->db->where('email', $email);
+            $this->db->update('user');
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Congratulation! Your profile has been updated.</div>');
+            redirect('admin/profile');
+
+        }
+    }
+
     public function members()
     {
         $data['title'] = 'Data Member';
@@ -44,6 +110,7 @@ class Admin extends CI_Controller
 
     public function simpan_member()
     {
+        // $foto = $this->upload->data()['file_name'];
         $data = [
         // "id_user" => $this->input->post('id_member', true),
           "nama_member" => $this->input->post('nama_member', true),
@@ -53,26 +120,25 @@ class Admin extends CI_Controller
           "deskripsi_member" => $this->input->post('deskripsi_member', true),
           // "phone_member" => $this->input->post('phone_member', true),
           "alamat" => $this->input->post('alamat', true),
-          "id_prov" => $this->input->post('provinsi', true),
-          "id_kab" => $this->input->post('kabupaten', true),
-          "id_kec" => $this->input->post('kecamatan', true)
-          // "foto" => $foto,
+          // "foto" => $foto
         ];
-        // $upload_image = $_FILES['foto']['nama_member'];
+        // $upload_image = $_FILES['foto']['name'];
         //
         // if ($upload_image) {
-        //   $config['allowed_types'] = 'gif|png|jpg';
-        //   $config['upload_path'] = './assets/images/profile/';
+        //     $config['allowed_types'] = 'gif|png|jpg';
+        //     $config['upload_path'] = './assets/images/profile/';
         //
-        //   $this->load->library('upload', $config);
+        //     $this->load->library('upload', $config);
         //
-        //   if ($this->upload->do_upload('foto')) {
-        //       $new_image = $this->upload->data('file_name');
-        //       $this->db->set('foto', $new_image);
-        //   } else {
-        //       echo $this->upload->display_errors();
-        //   }
+        //     if ($this->upload->do_upload('foto')) {
+        //         $new_image = $this->upload->data('file_name');
+        //         $this->db->set('image', $new_image);
+        //     } else {
+        //         echo $this->upload->display_errors();
+        //     }
         // }
+
+
 
       // var_dump($data);
       // die();
@@ -91,29 +157,17 @@ class Admin extends CI_Controller
             "gender_member" => $this->input->post('gender_member', true),
             "deskripsi_member" => $this->input->post('deskripsi_member', true),
             "tempat_lahir" => $this->input->post('tempat_lahir', true),
-            // // "tanggal_lahir" => $tanggalLahir,
+            "tanggal_lahir" => $this->input->post('tanggal_lahir', true),
             "alamat" => $this->input->post('alamat', true),
-            "id_prov" => $this->input->post('provinsi', true),
-            "id_kab" => $this->input->post('kabupaten', true),
-            "id_kec" => $this->input->post('kecamatan', true)
+            // "id_prov" => $this->input->post('provinsi', true),
+            // "id_kab" => $this->input->post('kabupaten', true),
+            // "id_kec" => $this->input->post('kecamatan', true)
             // "foto" => $foto,
 
         ];
-        // $upload_image = $_FILES['foto']['name'];
-        //
-        // if ($upload_image) {
-        //     $config['allowed_types'] = 'gif|png|jpg';
-        //     $config['upload_path'] = './assets/images/profile/';
-        //
-        //     $this->load->library('upload', $config);
-        //
-        //     if ($this->upload->do_upload('image')) {
-        //         $new_image = $this->upload->data('file_name');
-        //         $this->db->set('foto', $new_image);
-        //     } else {
-        //         echo $this->upload->display_errors();
-        //     }
-        // }
+
+
+
         $this->Member_model->update('member', 'id_user', $id, $data);
         // $this->Admin_model->edit_member($id,$nama_member);
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
@@ -252,9 +306,11 @@ class Admin extends CI_Controller
         redirect('admin/services');
     }
 
-    public function porotofolios(){
-        $data['title'] = 'Data Portofolios';
-        $data['portofolio'] = $this->Admin_model->getAllPortofolio();
+    public function portofolios()
+    {
+        $data['title'] = 'Data Portofolio';
+        $data['portofolio'] = $this->Admin_model->getAllPortofolioo();
+        $data['member'] = $this->Member_model->getAllMember();
         $data['user'] = $this->db->get_where('user',['email' =>
         $this->session->userdata('email')])->row_array();
 
@@ -266,6 +322,131 @@ class Admin extends CI_Controller
         $this->load->view('admin/portofolio', $data);
         $this->load->view('partials/admin/footer');
 
+    }
+
+    public function hapus_portofolio()
+    {
+        $id=$this->input->post('kode');
+        $this->Admin_model->delete('portofolio', 'id_portofolio', $id);
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
+        Portofolio deleted!</div>');
+        redirect('admin/portofolios');
+    }
+
+    public function educations(){
+        $data['title'] = 'Data Pendidikan';
+        $data['pendidikan'] = $this->Admin_model->getAllEducations();
+        $data['member'] = $this->Member_model->getAllMember();
+        $data['user'] = $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // var_dump($data['member']);
+        // die();
+        $this->load->view('partials/admin/header', $data);
+        $this->load->view('partials/admin/sidebar', $data);
+        $this->load->view('partials/admin/topbar', $data);
+        $this->load->view('admin/education', $data);
+        $this->load->view('partials/admin/footer');
+
+    }
+
+    public function simpan_education()
+    {
+        $data = [
+            "id_user" => $this->input->post('id_user', true),
+            "nama_univ" => $this->input->post('nama_univ', true),
+            "gelar" => $this->input->post('gelar', true),
+            "prodi" => $this->input->post('prodi', true),
+            "tahun_mulai" => $this->input->post('tahun_mulai', true),
+            "tahun_selesai" => $this->input->post('tahun_selesai', true)
+        ];
+        // var_dump($data);
+        // die();
+        $this->Admin_model->create('pendidikan', $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        New Education Added</div>');
+        redirect('admin/educations');
+    }
+
+    public function update_education()
+    {
+        $id=$this->input->post('kode');
+        $data = [
+            "id_user" => $this->input->post('id_user', true),
+            "nama_univ" => $this->input->post('nama_univ', true),
+            "gelar" => $this->input->post('gelar', true),
+            "prodi" => $this->input->post('prodi', true),
+            "tahun_mulai" => $this->input->post('tahun_mulai', true),
+            "tahun_selesai" => $this->input->post('tahun_selesai', true)
+        ];
+        $this->Admin_model->update('pendidikan', 'id_pendidikan', $id, $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        Education updated!</div>');
+        redirect('admin/educations');
+    }
+
+    public function hapus_education()
+    {
+        $id=$this->input->post('kode');
+        $this->Admin_model->delete('pendidikan', 'id_pendidikan', $id);
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
+        Pendidikan deleted!</div>');
+        redirect('admin/educations');
+    }
+
+    public function certificates(){
+        $data['title'] = 'Data Sertifikat';
+        $data['sertifikat'] = $this->Admin_model->getAllCertificates();
+        $data['member'] = $this->Member_model->getAllMember();
+        $data['user'] = $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // var_dump($data['member']);
+        // die();
+        $this->load->view('partials/admin/header', $data);
+        $this->load->view('partials/admin/sidebar', $data);
+        $this->load->view('partials/admin/topbar', $data);
+        $this->load->view('admin/certificate', $data);
+        $this->load->view('partials/admin/footer');
+
+    }
+
+    public function simpan_certificate()
+    {
+        $data = [
+          "id_user" => $this->input->post('id_user', true),
+          "nama_sertifikat" => $this->input->post('nama_sertifikat', true),
+          "tahun" => $this->input->post('tahun', true)
+        ];
+        // var_dump($data);
+        // die();
+        $this->Admin_model->create('sertifikat', $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        New Certificate Added</div>');
+        redirect('admin/certificates');
+    }
+
+    public function update_certificate()
+    {
+        $id=$this->input->post('kode');
+        $data = [
+            "id_user" => $this->input->post('id_user', true),
+            "nama_sertifikat" => $this->input->post('nama_sertifikat', true),
+            "tahun" => $this->input->post('tahun', true)
+        ];
+        $this->Admin_model->update('sertifikat', 'id_sertifikat', $id, $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        Certificate updated!</div>');
+        redirect('admin/certificates');
+    }
+
+    public function hapus_certificate()
+    {
+        $id=$this->input->post('kode');
+        $this->Admin_model->delete('sertifikat', 'id_sertifikat', $id);
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
+        Sertifikat deleted!</div>');
+        redirect('admin/certificates');
     }
 
     public function categories()
@@ -322,10 +503,11 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Data List Keahlian';
         $data['list_keahlian'] = $this->Admin_model->getAllSkills();
+        $data['kategori_keahlian'] = $this->Admin_model->getAllCategory();
         $data['user'] = $this->db->get_where('user',['email' =>
         $this->session->userdata('email')])->row_array();
 
-        // var_dump($data['member']);
+        // var_dump($data['list_keahlian']);
         // die();
         $this->load->view('partials/admin/header', $data);
         $this->load->view('partials/admin/sidebar', $data);
@@ -372,12 +554,14 @@ class Admin extends CI_Controller
 
     public function projects()
     {
-        $data['title'] = 'Data List Keahlian';
-        $data['project'] = $this->Admin_model->getAllProjects();
+        $data['title'] = 'Data Project';
+        $data['lowongan_kerja'] = $this->Admin_model->getAllProjects();
+        $data['list_lowongan_kerja'] = $this->Admin_model->getAllListProjects();
+        $data['list_keahlian'] = $this->Admin_model->getAllSkills();
         $data['user'] = $this->db->get_where('user',['email' =>
         $this->session->userdata('email')])->row_array();
 
-        // var_dump($data['member']);
+        // var_dump($data['lowongan_kerja']);
         // die();
         $this->load->view('partials/admin/header', $data);
         $this->load->view('partials/admin/sidebar', $data);
@@ -386,28 +570,32 @@ class Admin extends CI_Controller
         $this->load->view('partials/admin/footer');
     }
 
-    public function simpan_project()
+    public function simpan_projectt()
     {
         $data = [
-            "id_project" => $this->input->post('id_project', true),
+            "id_lowongan_kerja" => $this->input->post('id_lowongan_kerja', true),
+            "judul" => $this->input->post('judul',true),
             "id_keahlian" => $this->input->post('id_keahlian', true)
         ];
         // var_dump($data);
         // die();
-        $this->Admin_model->create('project', $data);
+        $this->Admin_model->create('lowongan_kerja', 'id', $id, $data);
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
-        New Project Added</div>');
+        New List Project Added</div>');
         redirect('admin/projects');
     }
 
-    public function update_project()
+    public function update_projectt()
     {
-        $i_d=$this->input->post('kode');
+        $id=$this->input->post('kode');
         $data = [
-            "id_project" => $this->input->post('id_project', true),
+            "id_lowongan_kerja" => $this->input->post('id_lowongan_kerja', true),
+            // "judul" => $this->input->post('judul',true),
             "id_keahlian" => $this->input->post('id_keahlian', true)
         ];
-        $this->Admin_model->update('project', 'id_project', $i_d, $data);
+        // var_dump($data);
+        // die();
+        $this->Admin_model->update('lowongan_kerja', 'id_lowongan_kerja', $id, $data);
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
         Project updated!</div>');
         redirect('admin/projects');
@@ -415,10 +603,143 @@ class Admin extends CI_Controller
 
     public function hapus_project()
     {
-        $i_d=$this->input->post('kode');
-        $this->Admin_model->delete('project', 'id_project', $i_d);
+        $id=$this->input->post('kode');
+        $this->Admin_model->delete('lowongan_kerja', 'id_lowongan_kerja', $id);
         $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
         Project deleted!</div>');
         redirect('admin/projects');
     }
+
+    public function list_projects()
+    {
+        $data['title'] = 'Data List Project';
+        $data['list_lowongan_kerja'] = $this->Admin_model->getAllListProjects();
+        $data['member'] = $this->Member_model->getAllMember();
+        $data['perusahaan'] = $this->Company_model->getAllCompany();
+        $data['user'] = $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // var_dump($data['member']);
+        // die();
+        $this->load->view('partials/admin/header', $data);
+        $this->load->view('partials/admin/sidebar', $data);
+        $this->load->view('partials/admin/topbar', $data);
+        $this->load->view('admin/list-project', $data);
+        $this->load->view('partials/admin/footer');
+    }
+
+    public function simpan_list_project()
+    {
+        $data = [
+            "id_lowongan_kerja" => $this->input->post('id_lowongan_kerja', true),
+            "id_user" => $this->input->post('id_user', true),
+            "judul" => $this->input->post('judul', true),
+            "gender" => $this->input->post('gender', true),
+            "deskripsi" => $this->input->post('deskripsi', true),
+            "tanggal_penutupan" => $this->input->post('tanggal_penutupan', true),
+            "tipe_kerja" => $this->input->post('tipe_kerja', true),
+            "detail_lowongan_kerja" => $this->input->post('detail_lowongan_kerja', true)
+        ];
+        var_dump($data);
+        die();
+        $this->Admin_model->create('list_lowongan_kerja', 'id_lowongan_kerja', $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        New List Project Added</div>');
+        redirect('admin/list_projects');
+    }
+
+    public function update_list_project()
+    {
+        $id=$this->input->post('kode');
+        $data = [
+            "id_user" => $this->input->post('id_user', true),
+            "judul" => $this->input->post('judul', true),
+            "gender" => $this->input->post('gender', true),
+            "deskripsi" => $this->input->post('deskripsi', true),
+            "usia_min" => $this->input->post('usia_min', true),
+            "usia_maks" => $this->input->post('usia_maks', true),
+            "tanggal_penutupan" => $this->input->post('tanggal_penutupan', true),
+            "tipe_kerja" => $this->input->post('tipe_kerja', true),
+            "detail_lowongan_kerja" => $this->input->post('detail_lowongan_kerja', true)
+        ];
+        $this->Admin_model->update('list_lowongan_kerja', 'id_lowongan_kerja', $id, $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        List Project updated!</div>');
+        redirect('admin/list_projects');
+    }
+
+    public function hapus_list_project()
+    {
+        $id=$this->input->post('kode');
+        $this->Admin_model->delete('list_lowongan_kerja', 'id_lowongan_kerja', $id);
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
+        Project deleted!</div>');
+        redirect('admin/list_projects');
+    }
+
+    public function pengalaman_kerjas()
+    {
+        $data['title'] = 'Data Pengalaman Kerja';
+        $data['pengalaman_kerja'] = $this->Admin_model->getAllPengalamanKerja();
+        $data['user'] = $this->db->get_where('user',['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        // var_dump($data['list_keahlian']);
+        // die();
+        $this->load->view('partials/admin/header', $data);
+        $this->load->view('partials/admin/sidebar', $data);
+        $this->load->view('partials/admin/topbar', $data);
+        $this->load->view('admin/pengalaman_kerja', $data);
+        $this->load->view('partials/admin/footer');
+    }
+
+    public function simpan_pengalaman_kerja()
+    {
+        $data = [
+            "id_user" => $this->input->post('id_user', true),
+            "nama_perusahaan" => $this->input->post('nama_perusahaan', true),
+            "jabatan" => $this->input->post('jabatan', true),
+            "lokasi" => $this->input->post('lokasi', true),
+            "bulan_mulai" => $this->input->post('bulan_mulai', true),
+            "tahun_mulai" => $this->input->post('tahun_mulai', true),
+            "bulan_selesai" => $this->input->post('bulan_selesai', true),
+            "tahun_selesai" => $this->input->post('tahun_selesai', true)
+        ];
+        // var_dump($data);
+        // die();
+        $this->Admin_model->create('pengalaman_kerja', $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        Pengalaman Kerja Added</div>');
+        redirect('admin/pengalaman_kerjas');
+    }
+
+    public function update_pengalaman_kerja()
+    {
+        $id=$this->input->post('kode');
+        $data = [
+            "id_user" => $this->input->post('id_user', true),
+            "nama_perusahaan" => $this->input->post('nama_perusahaan', true),
+            "jabatan" => $this->input->post('jabatan', true),
+            "lokasi" => $this->input->post('lokasi', true),
+            "bulan_mulai" => $this->input->post('bulan_mulai', true),
+            "tahun_mulai" => $this->input->post('tahun_mulai', true),
+            "bulan_selesai" => $this->input->post('bulan_selesai', true),
+            "tahun_selesai" => $this->input->post('tahun_selesai', true)
+        ];
+        $this->Admin_model->update('pengalaman_kerja', 'id_pengalaman', $id, $data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+        Pengalaman Kerja updated!</div>');
+        redirect('admin/pengalaman_kerjas');
+    }
+
+    public function hapus_pengalaman_kerja()
+    {
+        $id=$this->input->post('kode');
+        $this->Admin_model->delete('pengalaman_kerja', 'id_pengalaman', $id);
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
+        Pengalaman Kerja deleted!</div>');
+        redirect('admin/pengalaman_kerjas');
+    }
+
+
 }

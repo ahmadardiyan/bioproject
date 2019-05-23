@@ -4,47 +4,39 @@
             <div class="col-md-12 col-xs-12 text-center" style="margin-bottom:0px">
                 <div class="content">
                     <form class="form-inline">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input class="form-control" type="search" placeholder="Search"
+                                            aria-label="Search" name=keyword width="100%">
+                                        <!-- <button class="btn btn-primary" type="submit">Search</button> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" >
+                                        <select class="form-control" id="sel1" name="tipe_kerja" width="100%" >
+                                            <option value="">Tipe Kerja</option>
+                                            <option value="Full Time">Full Time
+                                            <option>
+                                            <option value="Part Time">Part Time
+                                            <option>
+                                            <option value="Remote">Remote
+                                            <option>
 
-                        <div class="form-group">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-control" name="kategori-keahlian"
+                                        id="kategori-keahlian" width="100%"></select>
+                                </div>
+                                <div class="col-md-3" >
+                                    <select class="form-control" name="list-keahlian-select"
+                                        id="list-keahlian-select" width="100%"></select>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <select class="form-control" id="sel1">
-                                <option>Tipe Kerja</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="form-control" id="sel1">
-                                <option>Lokasi</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="form-control" id="sel1">
-                                <option>Kategori Keahlian</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <select class="form-control" id="sel1">
-                                <option>Keahlian</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-                        <!-- <button class="btn btn-primary" type="submit">Search</button> -->
                     </form>
                 </div>
             </div>

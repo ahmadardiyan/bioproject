@@ -19,8 +19,9 @@ class Pendidikan extends CI_Controller
     }
 
 
-    public function getAllPendidikan($id_user = '1')
+    public function getAllPendidikan()
     {
+        $id_user = $_SESSION['id_user'];
         $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
         $data['pendidikan'] = $this->Member_model->getAllDataWhere('pendidikan', 'id_user', $id_user);
@@ -34,8 +35,9 @@ class Pendidikan extends CI_Controller
     }
 
     //Membuat Pendidikan
-    public function createPendidikan($id_user = '1')
+    public function createPendidikan()
     {
+        $id_user = $_SESSION['id_user'];
         $this->form_validation->set_rules('nama_univ', 'Nama Universitas', 'required');
         $this->form_validation->set_rules('gelar', 'Gelar', 'required');
         $this->form_validation->set_rules('prodi', 'Program Studi', 'required');

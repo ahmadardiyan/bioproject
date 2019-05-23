@@ -14,6 +14,7 @@ class Portofolio extends CI_Controller
 // membuat portofolio
     public function createPortofolio($id_user = '1')
     {
+        $id_user = $_SESSION['id_user'];
         $data['title'] = 'Tambah Portofolio';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
 
@@ -58,8 +59,9 @@ class Portofolio extends CI_Controller
     // memperbarui portofolio
     public function updatePortofolio($idPortofolio)
     {
+        $id_user = $_SESSION['id_user'];
         $data['title'] = 'Bio Project';
-        $data['member'] = $this->Member_model->getMember('id_user', '1');
+        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
         $data['portofolio'] = $this->Portofolio_model->getPortofolio('id_portofolio', $idPortofolio);
 
         $this->form_validation->set_rules('id_portofolio', 'ID Portofolio', 'required');
@@ -96,8 +98,9 @@ class Portofolio extends CI_Controller
     // melihat detail portofolio
     public function getPortofolio($idPortofolio)
     {
+        $id_user = $_SESSION['id_user'];
         $data['title'] = 'Bio Project';
-        $data['member'] = $this->Member_model->getMember('id_user', '1');
+        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
         $data['portofolio'] = $this->Portofolio_model->getPortofolio('id_portofolio', $idPortofolio);
 
         $this->load->view('partials/user/header', $data);

@@ -49,13 +49,13 @@
                             $no++;
                             $id=$a['id_keahlian'];
                             $nama=$a['nama_keahlian'];
-                            $kategori=$a['id_kategori'];
+                            $nama_keahlian=$a['nama_kategori_keahlian'];
                         ?>
                       <tr role="row" class="odd">
                         <td><?= $no;?></td>
                         <td><?= $id;?></td>
                         <td><?= $nama;?></td>
-                        <td><?= $kategori?></td>
+                        <td><?= $nama_keahlian;?></td>
                         <td>
                           <a class="btn btn-primary btn-sm" href="" data-toggle="modal" data-target="#UpdateSkill<?= $id;?>"><i class="fas fa-edit"></i></a>
                           <a class="btn btn-danger btn-sm btn-hapus" href="" data-toggle="modal" data-target="#HapusSkill<?= $id;?>"><i class="fas fa-trash"></i></a>
@@ -81,7 +81,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="newModalModalLabel">Add New List Keahlian</h5>
+        <h5 class="modal-title" id="newSkillModalLabel">Add New List Keahlian</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -98,7 +98,16 @@
             <div class="form-group row">
               <label name="id_kategori" class="col-sm-2 col-form-label">Kategori</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_kategori" name="id_kategori" placeholder="Kategori" required>
+                <select name="id_kategori" class="form-control" required>
+                  <option value="">-PILIH-</option>
+                    <?php foreach($kategori_keahlian as $k):
+                      $id=$k['id_kategori'];
+                      $nama_k=$k['nama_kategori_keahlian'];
+                    ?>
+                    <option value="<?= $id;?>"><?= $id.". ".$nama_k;?></option>
+                  <?php endforeach;?>
+                </select>
+                <!-- <input type="text" class="form-control" id="id_kategori" name="id_kategori" placeholder="Kategori" required> -->
               </div>
             </div>
           </div>
@@ -122,11 +131,11 @@
   ?>
 
 <!-- ============ MODAL UPDATE SKILL=============== -->
-<div class="modal fade" id="UpdateSkill <?= $id;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+<div class="modal fade" id="UpdateSkill<?= $id;?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="UpdateSkill">Update List Keahlian</h5>
+        <h5 class="modal-title" id="UpdateSkill">Update Skill</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -143,7 +152,15 @@
             <div class="form-group row">
               <label name="id_kategori" class="col-sm-2 col-form-label">Kategori</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_kategori" name="id_kategori" value="<?= $kategori; ?>" placeholder="Katgori" required>
+                <select name="id_kategori" class="form-control" value="<?= $kategori; ?>"required>
+                  <option value="">-PILIH-</option>
+                    <?php foreach($kategori_keahlian as $k):
+                      $id_k=$k['id_kategori'];
+                      $nama_k=$k['nama_kategori_keahlian'];
+                    ?>
+                    <option value="<?= $id_k;?>"><?= $id_k.". ".$nama_k;?></option>
+                  <?php endforeach;?>
+                </select>
               </div>
             </div>
           </div>
@@ -155,8 +172,9 @@
         </div>
     </form>
     </div>
-    </div>
+  </div>
 </div>
+
 
 <?php endforeach;?>
 
@@ -182,7 +200,7 @@
                     <form class="form-horizontal" action="<?= base_url().'admin/hapus_skill'?>" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
 							       <input type="hidden" name="kode" value="<?= $id;?>"/>
-                          <p>Apakah Anda yakin mau menghapus service <b><?= $title;?></b> ?</p>
+                          <p>Apakah Anda yakin mau menghapus skill <b><?= $nama;?></b> ?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-flat" data-dismiss="modal">Close</button>

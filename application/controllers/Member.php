@@ -7,19 +7,30 @@ class Member extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Auth_model');
         $this->load->model('Member_model');
         $this->load->model('Portofolio_model');
+
+        if (!$this->Auth_model->is_login()) {
+            redirect('login', 'refresh');
+        }
     }
 
     // index
-    public function index($id_user = '1')
+    public function index($id_user = null)
     {
+
+       $id_user = $_SESSION['id_user'];
+        
+
         $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
         $data['portofolio'] = $this->Portofolio_model->getAllPortofolio('id_user', $id_user);
         $data['sertifikat'] = $this->Member_model->getAllDataWhere('sertifikat', 'id_user', $id_user);
         $data['pendidikan'] = $this->Member_model->getAllDataWhere('pendidikan', 'id_user', $id_user);
         $data['pengalaman_kerja'] = $this->Member_model->getAllDataWhere('pengalaman_kerja', 'id_user', $id_user);
+        // var_dump($id_user);
+        // die();
 
         $this->load->view('partials/user/header', $data);
         $this->load->view('member/index', $data);
@@ -27,15 +38,22 @@ class Member extends CI_Controller
     }
 
     // data member json
-    public function get($id_user = '1')
+    public function get()
     {
-        $data['member'] = $this->Member_model->getMember('id_user', $id_user);
+        $id_user = $_SESSION['id_user'];
+        if ($_SESSION['level'] == 'member') {
+            $data['member`'] = $this->Member_model->getUser('member','id_user', $id_user); 
+        } else {
+            $data['member'] = $this->Member_model->getUser('perusahaan','id_user', $id_user); 
+        }  
+        // var_dump($data);
         echo json_encode($data);
     }
 
     //about member
     public function detailProfile($id_user = '1')
     {
+        $id_user = $_SESSION['id_user'];
         $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
         // $data['skills'] = $this->Member_model->getSkillsMember('id_user', $id_user);
@@ -48,6 +66,7 @@ class Member extends CI_Controller
     // memperbarui profile
     public function updateProfile($id_user = '1')
     {
+        $id_user = $_SESSION['id_user'];
         $data['title'] = 'Bio Project';
 
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);

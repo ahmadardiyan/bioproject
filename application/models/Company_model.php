@@ -19,7 +19,7 @@ class Company_model extends CI_Model
         $this->db->where($key, $value);
         $this->db->delete($table);
     }
-    
+
     public function getDataWhere($table, $key, $value)
     {
         $query = $this->db->get_where($table, [$key => $value]);
@@ -33,12 +33,35 @@ class Company_model extends CI_Model
         return $query->result_array();
     }
 
+    public function getCompany($key, $value)
+    {
+        $this->db->where([$key => $value]);
+        $this->db->from('perusahaan');
+
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function getDataCompany($key, $value)
+    {
+        $this->db->where([$key => $value]);
+        // $this->db->select('perusahaan.*, users.id_user AS id_user, users.email');
+        // $this->db->join('users', 'users.id_user = perusahaan.id_user');
+        $this->db->join('kecamatan', 'kecamatan.id_kec = perusahaan.id_kec');
+        $this->db->join('kabupaten', 'kabupaten.id_kab = perusahaan.id_kab');
+        $this->db->join('provinsi', 'provinsi.id_prov = perusahaan.id_prov');
+        $this->db->from('perusahaan');
+
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     public function getLowonganKerjaWhere($key, $value)
     {
         $this->db->where([$key => $value]);
         $this->db->join('kabupaten', 'kabupaten.id_kab = list_lowongan_kerja.id_kab');
         $this->db->join('provinsi', 'provinsi.id_prov = list_lowongan_kerja.id_prov');
-        
+
         $query = $this->db->get('list_lowongan_kerja');
         return $query->row_array();
     }
@@ -48,6 +71,17 @@ class Company_model extends CI_Model
         $this->db->where([$key => $value]);
         $this->db->join('list_keahlian', 'list_keahlian.id_keahlian = lowongan_kerja.id_keahlian');
         $query = $this->db->get('lowongan_kerja');
+        return $query->result_array();
+    }
+
+    public function getAllCompany()
+    {
+        // $this->db->join('kecamatan', 'kecamatan.id_kec = member.id_kec');
+        // $this->db->join('kabupaten', 'kabupaten.id_kab = member.id_kab');
+        // $this->db->join('provinsi', 'provinsi.id_prov = member.id_prov');
+        $this->db->from('perusahaan');
+
+        $query = $this->db->get();
         return $query->result_array();
     }
 

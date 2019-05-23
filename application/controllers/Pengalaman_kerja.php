@@ -18,8 +18,9 @@ class Pengalaman_kerja extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getAllPengalamanKerja($id_user = '1')
+    public function getAllPengalamanKerja()
     {
+        $id_user = $_SESSION['id_user'];
         $data['title'] = 'Bio Project';
         $data['member'] = $this->Member_model->getMember('id_user', $id_user);
         $data['pengalaman_kerja'] = $this->Member_model->getAllDataWhere('pengalaman_kerja', 'id_user', $id_user);
@@ -30,8 +31,9 @@ class Pengalaman_kerja extends CI_Controller
     }
 
      //Membuat Pengalaman Kerja
-     public function createPengalamanKerja($id_user = '1')
+     public function createPengalamanKerja()
      {
+        $id_user = $_SESSION['id_user'];
          $this->form_validation->set_rules('nama_perusahaan', 'Nama Perusahaan', 'required');
          $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
          $this->form_validation->set_rules('tahun_mulai', 'Tahun mulai', 'required|numeric');
